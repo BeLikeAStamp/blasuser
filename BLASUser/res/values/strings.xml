@@ -49,7 +49,7 @@
         <item>Réalisation en cours</item>
         <item>Réalisation finie</item>
     </string-array>
-    <string-array name="cardtypes">
+    <string-array name="type_arrays">
         <item>Save The Date</item>
         <item>Remerciements</item>
         <item>Fêtes</item>
@@ -70,8 +70,11 @@
 
     <!-- FORMULAIRE -->
     <string name="project_explane">Helllooo ! Nous avons besoin de quelques précisions pour bien définir le projet : type de cartes, thème, couleurs, délais, personnalisation &#8230;</string>
+    <string name="project_name">Nom du projet</string>
     <string name="card_type">Type de cartes</string>
     <string name="card_theme">Thématique</string>
-    <string name="theme_prompt">Choisir un thème</string>
-
+    <string name="card_style">Style</string>
+    <string name="project_order">Livraison</string>
+    <string name="how_many_cards">Combien de cartes</string>
+    <string name="for_when">Pour quand ?</string>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,53 +8,165 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        style="@style/MediumGreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:text="@string/project_explane" />
-
-    <TextView
-        style="@style/MediumPink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:text="@string/card_type" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#DE3764" />
-
-    <Spinner
-        android:id="@+id/card_type_spinner"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        style="@style/MediumGray" />
-    
-    
-    <TextView
-        style="@style/MediumPink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:text="@string/card_theme" />
+        android:orientation="vertical" >
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#DE3764" />
+        <TextView
+            style="@style/MediumGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:text="@string/project_explane" />
 
-    <Spinner
-        android:id="@+id/card_theme_spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"
-        style="@style/MediumGray" />
-    
-    
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp" >
 
-</LinearLayout>
+            <TextView
+                style="@style/MediumPink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text="@string/project_name" />
+
+            <EditText
+                android:id="@+id/project_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="15" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/MediumPink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="@string/card_type" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#DE3764" />
+
+        <Spinner
+            android:id="@+id/card_type_spinner"
+            style="@style/MediumGray"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            style="@style/MediumPink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="@string/card_theme" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#DE3764" />
+
+        <Spinner
+            android:id="@+id/card_theme_spinner"
+            style="@style/MediumGray"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+        <EditText
+            android:id="@+id/other_theme"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:inputType="text"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/MediumPink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="@string/card_style" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#DE3764" />
+
+        <Spinner
+            android:id="@+id/card_style_spinner"
+            style="@style/MediumGray"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+        <EditText
+            android:id="@+id/other_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:inputType="text"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/MediumPink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="@string/project_order" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#DE3764" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp" >
+
+            <TextView
+                style="@style/MediumGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text="@string/how_many_cards" />
+
+            <EditText
+                android:id="@+id/card_num"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="15" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp" >
+
+            <TextView
+                style="@style/MediumGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text="@string/for_when" />
+
+            <Button
+                android:id="@+id/select_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@style/MediumGray" >
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
