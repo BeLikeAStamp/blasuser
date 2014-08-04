@@ -1,5 +1,7 @@
 package com.belikeastamp.blasuser.util;
 
+import java.util.Arrays;
+
 import android.app.Application;
 import android.util.SparseArray;
 
@@ -103,9 +105,18 @@ public class ProjectData extends Application {
 	public void setProjectStyle(String projectStyle) {
 		this.projectStyle = projectStyle;
 	}
+	@Override
+	public String toString() {
+		return "ProjectData [projectTheme=" + projectTheme + ", projectType="
+				+ projectType + ", projectStyle=" + projectStyle
+				+ ", projectName=" + projectName + ", numberOfCards="
+				+ numberOfCards + ", submitDate=" + submitDate + ", orderDate="
+				+ orderDate + ", colorPanel=" + Arrays.toString(colorPanel)
+				+ ", perso=" + perso + "]";
+	}
 
 	private void fillMap() {
-		
+
 		colorName = new SparseArray<String>();
 		// tendances
 		colorName.put(R.color.rasberry_ripple,"rasberry_ripple");

@@ -20,12 +20,11 @@ import android.widget.ListView;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.adapter.NavDrawerListAdapter;
-import com.belikeastamp.blasuser.fragments.ProjectSubmissionFragment;
+import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageOneFragment;
 import com.belikeastamp.blasuser.fragments.WorkshopFragment;
 import com.belikeastamp.blasuser.fragments.FindPeopleFragment;
 import com.belikeastamp.blasuser.fragments.HomeFragment;
 import com.belikeastamp.blasuser.fragments.TutorialFragment;
-import com.belikeastamp.blasuser.fragments.SubmitProjectsFragment;
 import com.belikeastamp.blasuser.fragments.JoinMeFragment;
 import com.belikeastamp.blasuser.model.NavDrawerItem;
 
@@ -181,7 +180,7 @@ public class MainActivity extends Activity {
 			fragment = new HomeFragment();
 			break;
 		case 1:
-			fragment = new ProjectSubmissionFragment();
+			fragment = new ProjectSubmissionPageOneFragment();
 			break;
 		case 2:
 			fragment = new TutorialFragment();

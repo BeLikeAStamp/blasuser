@@ -41,10 +41,30 @@
     <style name="MediumGray" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#FF909090</item>
+        <item name="android:textColor">#909090</item>
         <item name="android:typeface">serif</item>
     </style>
 
+    <style name="MediumHGray" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#3A3A3A</item>
+        <item name="android:typeface">serif</item>
+    </style>
+    
+     <style name="btnStyleActionPink" parent="@android:style/Widget.Button">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/btn_pink_inv</item>
+        <item name="android:gravity">center</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+        <item name="android:background">@drawable/btn_action_pink</item>
+        <item name="android:padding">10dip</item>
+    </style>
+    
+    
     <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem"/>
 
     <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem"/>

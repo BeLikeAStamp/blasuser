@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+           android:color="@color/pool_party" /> <!-- pressed -->
+     <item android:state_focused="true"
+           android:color="@color/island_indigo" /> <!-- focused -->
+     <item android:color="@color/island_indigo" /> <!-- default -->
+</selector>

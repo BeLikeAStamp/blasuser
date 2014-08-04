@@ -38,7 +38,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLength="15" />
+                android:maxLength="24" />
         </LinearLayout>
 
         <TextView
@@ -55,7 +55,6 @@
 
         <Spinner
             android:id="@+id/card_type_spinner"
-            style="@style/MediumGray"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp" />
@@ -74,7 +73,6 @@
 
         <Spinner
             android:id="@+id/card_theme_spinner"
-            style="@style/MediumGray"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp" />
@@ -83,7 +81,6 @@
             android:id="@+id/other_theme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:inputType="text"
             android:visibility="gone" />
 
@@ -110,7 +107,6 @@
             android:id="@+id/other_style"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:inputType="text"
             android:visibility="gone" />
 
@@ -144,6 +140,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
+                style="@style/MediumHGray"
+                android:text="@string/un"
                 android:maxLength="15" />
         </LinearLayout>
 
@@ -151,22 +149,31 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="5dp" >
+            android:layout_gravity="center" >
 
             <TextView
                 style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
                 android:text="@string/for_when" />
 
             <Button
                 android:id="@+id/select_date"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@style/MediumGray" >
-            </Button>
+                style="@style/MediumHGray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_continue"
+            style="@style/btnStyleActionPink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:text="@string/continu" />
+
     </LinearLayout>
 
 </ScrollView>
