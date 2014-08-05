@@ -99,10 +99,16 @@
     <string name="age">Âge</string>
     <string name="year">ans</string>
     <string name="validate">Valider</string>
+    <string name="nocolor_warning">Merci de choisir au moins une couleur</string>
     
     <!-- Submission Dialog -->
-    <string name="alert_dialog_two_buttons_title">Vox clamantis in deserto</string>
-    <string name="alert_dialog_ok">OK</string>
-    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="alert_check">Ultime check !</string>
+    <string name="alert_dialog_send">Je valide !</string>
+    <string name="alert_dialog_rec">Enregister</string>
+    <string name="alert_dialog_cancel">Oops ! </string>
+    <string name="your_project">Ton projet</string>
+    <string name="infos">Infos complémentaires</string>
+     <string name="confirm_email">Email contact</string>
+    
     
 </resources>

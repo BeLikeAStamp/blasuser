@@ -44,12 +44,12 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 	private LinearLayout layout2;
 	boolean anonymous = true;
 	private PersoSubject perso = new PersoSubject();
-	
+	ProjectData globalVariable;
 	private boolean[] selectedColors = new boolean[3];
 	private ArrayList<ImageView> selectedColorsList = new ArrayList<ImageView>();
-	
+
 	private ArrayList<ColorPicker> colorPickerArray1;
-	
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,20 +63,20 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		final ProjectData globalVariable = (ProjectData) getActivity().getApplicationContext();
+		globalVariable = (ProjectData) getActivity().getApplicationContext();
 
 		gridView1 = (GridView)getView().findViewById(R.id.color_grid1);
 		color1 = (ImageView) getView().findViewById(R.id.selected_color1);
 		color2 = (ImageView) getView().findViewById(R.id.selected_color2);
 		color3 = (ImageView) getView().findViewById(R.id.selected_color3);
-		
+
 		firstname = (EditText) getView().findViewById(R.id.firstname);
 		age = (EditText) getView().findViewById(R.id.age);
 		gender = (RadioGroup) getView().findViewById(R.id.sexechoice);
 		namedCard = (RadioGroup) getView().findViewById(R.id.nominalchoice);
 		layout2 = (LinearLayout) getView().findViewById(R.id.layout2);
 		valider = (Button) getView().findViewById(R.id.btn_continue);
-		
+
 		color1.setOnClickListener(new RazOnClickListener());
 		color2.setOnClickListener(new RazOnClickListener());
 		color3.setOnClickListener(new RazOnClickListener());
@@ -116,8 +116,8 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 			}
 
 		});
-		
-		
+
+
 		namedCard.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -190,7 +190,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 				// TODO Auto-generated method stub
 				if(checkedId == R.id.male) {
 					perso.setSexe("M");
-					
+
 				}
 				else
 				{
@@ -198,50 +198,64 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 				}
 			}
 		});
-		
-		
+
+
 		valider.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				if (!anonymous)
-				{
-					if (perso.getAge().isEmpty() 
-							&& perso.getName().isEmpty() 
-							&& perso.getSexe().isEmpty()) {
-						Toast.makeText(getActivity().getApplicationContext(), getResources().getText(R.string.infos_manquantes), Toast.LENGTH_LONG).show();
-					}
-					else
+				if(selectedColors[2] || selectedColors[1] || selectedColors[0]) { // au moins 1 couleur
+
+					if(selectedColors[0] == false)globalVariable.setColor1(-1);
+					if(selectedColors[1] == false)globalVariable.setColor2(-1);
+					if(selectedColors[2] == false)globalVariable.setColor3(-1);
+
+
+					if (!anonymous)
 					{
-						globalVariable.setPerso(perso);
+						if (perso.getAge().isEmpty() 
+								&& perso.getName().isEmpty() 
+								&& perso.getSexe().isEmpty()) {
+							Toast.makeText(getActivity().getApplicationContext(), getResources().getText(R.string.infos_manquantes), Toast.LENGTH_LONG).show();
+						}
+						else
+						{
+							globalVariable.setPerso(perso);
+							//Intent intent = new Intent(PersonnalizationActivity.this,SubmissionActivity.class);
+							//startActivity(intent);
+							showDialog();
+						}
+					}
+					else {
+
 						//Intent intent = new Intent(PersonnalizationActivity.this,SubmissionActivity.class);
 						//startActivity(intent);
-						 showDialog();
+						showDialog();
 					}
-				}
-				else {
 
-					//Intent intent = new Intent(PersonnalizationActivity.this,SubmissionActivity.class);
-					//startActivity(intent);
-					 showDialog();
 				}
-				
+				else
+				{
+					Toast.makeText(getActivity().getApplicationContext(), R.string.nocolor_warning, Toast.LENGTH_SHORT).show();
+				}
+
+
 				Log.i("PROJET","=>"+globalVariable.toString());
 			}
 		});
-		
+
 
 	}
-	
+
 	void showDialog() {
 		DialogFragment newFragment = SubmissionDialogFragment
-				.newInstance(R.string.alert_dialog_two_buttons_title);
+				.newInstance(R.string.alert_check, globalVariable);
 		newFragment.show(getFragmentManager(), "dialog");
 	}
-	
-	
+
+
 	public ArrayList<ColorPicker> getColorCat1() {
 		ArrayList<ColorPicker> list = new ArrayList<ColorPicker>();
 		// tendances
@@ -324,14 +338,14 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 			}
 		}
 	}
-	
+
 	private int validSubmission() {
 		int ret = 0;
-		
-		
-		
-		
-		
+
+
+
+
+
 		return ret;
 	}
 }

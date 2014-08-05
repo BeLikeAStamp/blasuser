@@ -20,7 +20,9 @@ public class ProjectData extends Application {
 	private String orderDate;
 	private int[] colorPanel;
 	private PersoSubject perso;
-
+	private String infos;
+	
+	
 	public ProjectData() {
 		super();
 		projectTheme = "";
@@ -104,6 +106,12 @@ public class ProjectData extends Application {
 	}
 	public void setProjectStyle(String projectStyle) {
 		this.projectStyle = projectStyle;
+	}
+	public String getInfos() {
+		return infos;
+	}
+	public void setInfos(String infos) {
+		this.infos = infos;
 	}
 	@Override
 	public String toString() {

@@ -7,27 +7,37 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageOneFragment;
 import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageTwoFragment;
+import com.belikeastamp.blasuser.util.ProjectData;
 
 public class ProjectSubmissionPageTwo extends Activity {
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
-
+	ProjectData globalVariable;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_submission_page2);
-		//final ProjectData globalVariable = (ProjectData) getApplicationContext();
+		globalVariable = (ProjectData) getApplicationContext();
 
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -89,11 +99,21 @@ public class ProjectSubmissionPageTwo extends Activity {
 		// Do stuff here.
 		Log.i("FragmentAlertDialog", "Negative click!");
 	}
+	
+	public void doNeutralClick() {
+		// Do stuff here.
+		Log.i("FragmentAlertDialog", "Positive click!");
+	}
+
 
 	public static class SubmissionDialogFragment extends DialogFragment {
-		public static SubmissionDialogFragment newInstance(int title) {
+		
+		public static ProjectData data;
+		
+		public static SubmissionDialogFragment newInstance(int title, ProjectData globalVariable) {
 			SubmissionDialogFragment frag = new SubmissionDialogFragment();
 			Bundle args = new Bundle();
+			SubmissionDialogFragment.data = globalVariable;
 			args.putInt("title", title);
 			frag.setArguments(args);
 			return frag;
@@ -103,15 +123,45 @@ public class ProjectSubmissionPageTwo extends Activity {
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			int title = getArguments().getInt("title");
 
-			return new AlertDialog.Builder(getActivity())
-			.setIcon(R.drawable.rachou)
+			/*final Dialog dialog = new Dialog(getActivity());  
+			dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);  
+			dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+					WindowManager.LayoutParams.FLAG_FULLSCREEN);  
+			dialog.setContentView(R.layout.custom_dialogfragment);
+			
+			dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+			dialog.show();
+			
+			return dialog;*/
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			
+			LinearLayout layout = new LinearLayout(getActivity());
+			layout.setOrientation(LinearLayout.VERTICAL);
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+				     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+			layoutParams.setMargins(30, 20, 30, 0);
+			
+			TextView projectName = new TextView(getActivity());
+			projectName.setText(getResources().getString(R.string.project_name)+" : "+data.getProjectName());
+			layout.addView(projectName, layoutParams);
+			builder.setView(layout);
+			
+			builder
 			.setTitle(title)
-			.setPositiveButton(R.string.alert_dialog_ok,
+			.setPositiveButton(R.string.alert_dialog_send,
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 					((ProjectSubmissionPageTwo) getActivity())
 					.doPositiveClick();
+				}
+			})
+			.setNeutralButton(R.string.alert_dialog_rec,
+					new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,
+						int whichButton) {
+					((ProjectSubmissionPageTwo) getActivity())
+					.doNeutralClick();
 				}
 			})
 			.setNegativeButton(R.string.alert_dialog_cancel,
@@ -121,7 +171,17 @@ public class ProjectSubmissionPageTwo extends Activity {
 					((ProjectSubmissionPageTwo) getActivity())
 					.doNegativeClick();
 				}
-			}).create();
+			}).setNegativeButton(R.string.alert_dialog_cancel,
+					new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,
+						int whichButton) {
+					((ProjectSubmissionPageTwo) getActivity())
+					.doNegativeClick();
+				}
+			});
+			
+			return builder.create();
+			
 		}
 	}
 }
