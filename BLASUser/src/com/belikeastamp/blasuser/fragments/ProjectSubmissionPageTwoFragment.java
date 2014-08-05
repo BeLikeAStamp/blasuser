@@ -3,21 +3,31 @@ package com.belikeastamp.blasuser.fragments;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
+import com.belikeastamp.blasuser.activities.ProjectSubmissionPageTwo.SubmissionDialogFragment;
 import com.belikeastamp.blasuser.util.ColorPicker;
 import com.belikeastamp.blasuser.util.ColorPickerAdapter;
+import com.belikeastamp.blasuser.util.PersoSubject;
 import com.belikeastamp.blasuser.util.ProjectData;
 
 public class ProjectSubmissionPageTwoFragment extends Fragment {
@@ -26,8 +36,14 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 	private ImageView color1;
 	private ImageView color2;
 	private ImageView color3;
-	private Button sauvegarde;
-	private Button envoie;
+	private Button valider;
+	private EditText firstname;
+	private EditText age;
+	private RadioGroup gender;
+	private RadioGroup namedCard;
+	private LinearLayout layout2;
+	boolean anonymous = true;
+	private PersoSubject perso = new PersoSubject();
 	
 	private boolean[] selectedColors = new boolean[3];
 	private ArrayList<ImageView> selectedColorsList = new ArrayList<ImageView>();
@@ -53,6 +69,13 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 		color1 = (ImageView) getView().findViewById(R.id.selected_color1);
 		color2 = (ImageView) getView().findViewById(R.id.selected_color2);
 		color3 = (ImageView) getView().findViewById(R.id.selected_color3);
+		
+		firstname = (EditText) getView().findViewById(R.id.firstname);
+		age = (EditText) getView().findViewById(R.id.age);
+		gender = (RadioGroup) getView().findViewById(R.id.sexechoice);
+		namedCard = (RadioGroup) getView().findViewById(R.id.nominalchoice);
+		layout2 = (LinearLayout) getView().findViewById(R.id.layout2);
+		valider = (Button) getView().findViewById(R.id.btn_continue);
 		
 		color1.setOnClickListener(new RazOnClickListener());
 		color2.setOnClickListener(new RazOnClickListener());
@@ -93,8 +116,132 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 			}
 
 		});
+		
+		
+		namedCard.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				// TODO Auto-generated method stub
+				if(checkedId == R.id.not_anonyme) {
+					layout2.setVisibility(View.VISIBLE);
+					anonymous = false;
+				}
+				else
+				{
+					layout2.setVisibility(View.INVISIBLE);
+					anonymous = true;
+					perso.setAge("");perso.setName("");perso.setSexe("");
+				}
+			}
+		});
+
+
+		firstname.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				perso.setName(s.toString());
+			}
+		});
+
+
+		age.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				perso.setAge(s.toString());
+			}
+		});
+
+
+		gender.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				// TODO Auto-generated method stub
+				if(checkedId == R.id.male) {
+					perso.setSexe("M");
+					
+				}
+				else
+				{
+					perso.setSexe("F");
+				}
+			}
+		});
+		
+		
+		valider.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				if (!anonymous)
+				{
+					if (perso.getAge().isEmpty() 
+							&& perso.getName().isEmpty() 
+							&& perso.getSexe().isEmpty()) {
+						Toast.makeText(getActivity().getApplicationContext(), getResources().getText(R.string.infos_manquantes), Toast.LENGTH_LONG).show();
+					}
+					else
+					{
+						globalVariable.setPerso(perso);
+						//Intent intent = new Intent(PersonnalizationActivity.this,SubmissionActivity.class);
+						//startActivity(intent);
+						 showDialog();
+					}
+				}
+				else {
+
+					//Intent intent = new Intent(PersonnalizationActivity.this,SubmissionActivity.class);
+					//startActivity(intent);
+					 showDialog();
+				}
+				
+				Log.i("PROJET","=>"+globalVariable.toString());
+			}
+		});
+		
 
 	}
+	
+	void showDialog() {
+		DialogFragment newFragment = SubmissionDialogFragment
+				.newInstance(R.string.alert_dialog_two_buttons_title);
+		newFragment.show(getFragmentManager(), "dialog");
+	}
+	
+	
 	public ArrayList<ColorPicker> getColorCat1() {
 		ArrayList<ColorPicker> list = new ArrayList<ColorPicker>();
 		// tendances
@@ -176,5 +323,15 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 				break;
 			}
 		}
+	}
+	
+	private int validSubmission() {
+		int ret = 0;
+		
+		
+		
+		
+		
+		return ret;
 	}
 }

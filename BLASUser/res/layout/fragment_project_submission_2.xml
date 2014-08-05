@@ -46,14 +46,16 @@
             style="@style/MediumGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:text="@string/selected_colors" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FAFAFA"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
             android:paddingTop="20dp" >
 
             <ImageView
@@ -83,7 +85,7 @@
             style="@style/MediumPink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
             android:text="@string/personnalisation" />
 
         <View
@@ -100,7 +102,7 @@
 
             <RadioButton
                 android:id="@+id/anonyme"
-                style="@style/MediumPink"
+                style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/rb_pink"
@@ -110,7 +112,7 @@
 
             <RadioButton
                 android:id="@+id/not_anonyme"
-                style="@style/MediumPink"
+                style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/rb_pink"
@@ -122,7 +124,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible" >
+            android:visibility="gone" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -166,7 +168,7 @@
 
                     <RadioButton
                         android:id="@+id/male"
-                        style="@style/MediumPink"
+                        style="@style/MediumGray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/rb_pink"
@@ -175,7 +177,7 @@
 
                     <RadioButton
                         android:id="@+id/female"
-                        style="@style/MediumPink"
+                        style="@style/MediumGray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/rb_pink"
@@ -201,19 +203,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number" />
-                
+
+                <TextView
+                    style="@style/MediumGray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="@string/year" />
             </LinearLayout>
         </LinearLayout>
-        
-         <Button
+
+        <Button
             android:id="@+id/btn_continue"
             style="@style/btnStyleActionPink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            android:text="@string/continu" />
-        
+            android:layout_marginTop="10dp"
+            android:text="@string/validate" />
     </LinearLayout>
 
 </ScrollView>
