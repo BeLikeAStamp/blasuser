@@ -32,6 +32,7 @@ public class ProjectData extends Application {
 		numberOfCards = "";
 		submitDate = "";
 		orderDate = "";
+		infos = "";
 		colorPanel = new int[]{-1,-1,-1};
 		fillMap();
 	}

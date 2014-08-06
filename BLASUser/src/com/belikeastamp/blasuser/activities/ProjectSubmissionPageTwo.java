@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -90,19 +91,19 @@ public class ProjectSubmissionPageTwo extends Activity {
 		return false;
 	}
 
-	public void doPositiveClick() {
+	public void doSubmissionClick() {
 		// Do stuff here.
-		Log.i("FragmentAlertDialog", "Positive click!");
+		Log.i("FragmentAlertDialog", "SUBMISSION click!");
 	}
 
-	public void doNegativeClick() {
+	public void doCancelClick() {
 		// Do stuff here.
-		Log.i("FragmentAlertDialog", "Negative click!");
+		Log.i("FragmentAlertDialog", "CANCEL click!");
 	}
 	
 	public void doNeutralClick() {
 		// Do stuff here.
-		Log.i("FragmentAlertDialog", "Positive click!");
+		Log.i("FragmentAlertDialog", "LOCAL REGISTRATION click!");
 	}
 
 
@@ -123,27 +124,81 @@ public class ProjectSubmissionPageTwo extends Activity {
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			int title = getArguments().getInt("title");
 
-			/*final Dialog dialog = new Dialog(getActivity());  
-			dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);  
-			dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-					WindowManager.LayoutParams.FLAG_FULLSCREEN);  
-			dialog.setContentView(R.layout.custom_dialogfragment);
-			
-			dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-			dialog.show();
-			
-			return dialog;*/
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			
 			LinearLayout layout = new LinearLayout(getActivity());
 			layout.setOrientation(LinearLayout.VERTICAL);
 			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-			layoutParams.setMargins(30, 20, 30, 0);
+			layoutParams.setMargins(30, 20, 30, 30);
 			
 			TextView projectName = new TextView(getActivity());
+			TextView cardTheme = new TextView(getActivity());
+			TextView cardType = new TextView(getActivity());
+			TextView cardStyle = new TextView(getActivity());
+			TextView nbrCards = new TextView(getActivity());
+			TextView delay = new TextView(getActivity());
+			TextView colors = new TextView(getActivity());
+			TextView perso = new TextView(getActivity());
+			TextView infos = new TextView(getActivity());
+			
+			LinearLayout colorlayout = new LinearLayout(getActivity());
+			colorlayout.setOrientation(LinearLayout.HORIZONTAL);
+			LinearLayout.LayoutParams colorLayoutParams = new LinearLayout.LayoutParams(
+				     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+			colorLayoutParams.setMargins(30, 20, 30, 30);
+			
+			ImageView color1 = new ImageView(getActivity());
+			ImageView color2 = new ImageView(getActivity());
+			ImageView color3 = new ImageView(getActivity());
+			
+			int width = 50;
+			int height = 50;
+			LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
+			
+			
+			int color = data.getColor1();
+			if (color != -1) {
+				color1.setBackgroundResource(color);
+				color1.setLayoutParams(parms);
+			}
+
+			color = data.getColor2();
+			if (color != -1) {
+				color2.setBackgroundResource(color);
+				color2.setLayoutParams(parms);
+			}
+
+			color = data.getColor3();
+			if (color != -1) {
+				color3.setBackgroundResource(color);
+				color3.setLayoutParams(parms);
+			}
+			
 			projectName.setText(getResources().getString(R.string.project_name)+" : "+data.getProjectName());
+			cardTheme.setText(getResources().getString(R.string.card_theme)+" : "+data.getProjectTheme());
+			cardType.setText(getResources().getString(R.string.card_type)+" : "+data.getProjectType());
+			cardStyle.setText(getResources().getString(R.string.card_style)+" : "+data.getProjectStyle());
+			nbrCards.setText(getResources().getString(R.string.how_many_cards)+" : "+data.getNumberOfCards());
+			delay.setText(getResources().getString(R.string.for_when)+" : "+data.getOrderDate());
+			colors.setText(getResources().getString(R.string.color_set)+" : ");
+			perso.setText(getResources().getString(R.string.personnalisation)+" : "+data.getPerso());
+			infos.setText(getResources().getString(R.string.infos)+" : "+data.getInfos());
+		
+			
 			layout.addView(projectName, layoutParams);
+			layout.addView(cardTheme, layoutParams);
+			layout.addView(cardType, layoutParams);
+			layout.addView(cardStyle, layoutParams);
+			layout.addView(nbrCards, layoutParams);
+			layout.addView(delay, layoutParams);
+			layout.addView(colors, layoutParams);
+			colorlayout.addView(color1);
+			colorlayout.addView(color2);
+			colorlayout.addView(color3);
+			layout.addView(colorlayout, layoutParams);
+			layout.addView(infos, layoutParams);
+
 			builder.setView(layout);
 			
 			builder
@@ -153,7 +208,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 					((ProjectSubmissionPageTwo) getActivity())
-					.doPositiveClick();
+					.doSubmissionClick();
 				}
 			})
 			.setNeutralButton(R.string.alert_dialog_rec,
@@ -169,14 +224,14 @@ public class ProjectSubmissionPageTwo extends Activity {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 					((ProjectSubmissionPageTwo) getActivity())
-					.doNegativeClick();
+					.doCancelClick();
 				}
 			}).setNegativeButton(R.string.alert_dialog_cancel,
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 					((ProjectSubmissionPageTwo) getActivity())
-					.doNegativeClick();
+					.doCancelClick();
 				}
 			});
 			

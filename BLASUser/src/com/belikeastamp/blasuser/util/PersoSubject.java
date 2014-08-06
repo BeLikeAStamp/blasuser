@@ -6,9 +6,9 @@ public class PersoSubject {
 	private String age;
 
 	public PersoSubject() {
-		name = "";
-		sexe = "";
-		age = "";
+		name = "X";
+		sexe = "X";
+		age = "X";
 	}
 	
 	public String getName() {

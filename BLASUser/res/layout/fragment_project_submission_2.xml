@@ -13,6 +13,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="0px"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
         <TextView
             style="@style/MediumPink"
             android:layout_width="wrap_content"
@@ -54,9 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FAFAFA"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="20dp" >
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/selected_color1"
@@ -224,19 +229,17 @@
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:background="#DE3764" />
-        
+
         <EditText
             android:id="@+id/infos"
             android:layout_width="match_parent"
             android:layout_height="@dimen/infos_height"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
             android:gravity="left|top"
             android:hint="@string/infos"
             android:inputType="textMultiLine" >
         </EditText>
-        
+
         <Button
             android:id="@+id/btn_continue"
             style="@style/btnStyleActionPink"

@@ -42,6 +42,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 	private RadioGroup gender;
 	private RadioGroup namedCard;
 	private LinearLayout layout2;
+	private EditText infos;
 	boolean anonymous = true;
 	private PersoSubject perso = new PersoSubject();
 	ProjectData globalVariable;
@@ -76,7 +77,9 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 		namedCard = (RadioGroup) getView().findViewById(R.id.nominalchoice);
 		layout2 = (LinearLayout) getView().findViewById(R.id.layout2);
 		valider = (Button) getView().findViewById(R.id.btn_continue);
-
+		infos = (EditText) getView().findViewById(R.id.infos);
+		
+		
 		color1.setOnClickListener(new RazOnClickListener());
 		color2.setOnClickListener(new RazOnClickListener());
 		color3.setOnClickListener(new RazOnClickListener());
@@ -206,6 +209,9 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
+				if(!(infos.getText().toString().isEmpty()))
+					globalVariable.setInfos(infos.getText().toString());
+					
 				if(selectedColors[2] || selectedColors[1] || selectedColors[0]) { // au moins 1 couleur
 
 					if(selectedColors[0] == false)globalVariable.setColor1(-1);
