@@ -43,9 +43,9 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 	private RadioGroup namedCard;
 	private LinearLayout layout2;
 	private EditText infos;
-	boolean anonymous = true;
+	private boolean anonymous = true;
 	private PersoSubject perso = new PersoSubject();
-	ProjectData globalVariable;
+	private ProjectData globalVariable;
 	private boolean[] selectedColors = new boolean[3];
 	private ArrayList<ImageView> selectedColorsList = new ArrayList<ImageView>();
 

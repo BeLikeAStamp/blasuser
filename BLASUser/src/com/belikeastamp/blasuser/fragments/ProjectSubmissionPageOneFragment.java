@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.activities.ProjectSubmissionPageTwo;
+import com.belikeastamp.blasuser.db.dao.ProjectsData;
 import com.belikeastamp.blasuser.util.DatePickerDialogFragment;
 import com.belikeastamp.blasuser.util.ProjectData;
 
@@ -57,7 +58,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	private static final int ENTRY_OK = 0;
 	private static final int ILLEGAL_CHAR = 1;
 	private static final int EMPTY = 2;
-
+	private static final int NOT_UNIQ = 3;
 
 	final static long WEEK = 604800000L;
 	private long today = System.currentTimeMillis();
@@ -329,13 +330,17 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		switch (ret) {
 		case EMPTY:
-			msg = "Merci d'indiquer le nom du projet";
+			msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_project);
 			project_name.setError(msg);
 			break;
 		case ILLEGAL_CHAR:
-			msg = "Quelques caractères farfelue dans le nom de projet ...";
+			msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_char);
 			project_name.setError(msg);
 			break;
+		case NOT_UNIQ:
+			msg = getActivity().getApplicationContext().getResources().getString(R.string.err_not_uniq);
+			project_name.setError(msg);
+			break;	
 		default:
 			globalVariable.setProjectName(project_name.getText().toString());
 			break;
@@ -352,11 +357,11 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			switch (ret) {
 			case EMPTY:
-				msg = "Merci d'indiquer le nom du projet";
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_theme);
 				other_theme.setError(msg);
 				break;
 			case ILLEGAL_CHAR:
-				msg = "Quelques caractères farfelue dans le nom de projet ...";
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_char);
 				other_theme.setError(msg);
 				break;
 			default:
@@ -375,11 +380,11 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			switch (ret) {
 			case EMPTY:
-				msg = "Merci d'indiquer le nom du projet";
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_style);
 				other_style.setError(msg);
 				break;
 			case ILLEGAL_CHAR:
-				msg = "Quelques caractères farfelue dans le nom de projet ...";
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_char);
 				other_style.setError(msg);
 				break;
 			default:
@@ -387,7 +392,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				break;
 			}
 		}
-		
+
 		Log.i("checkEntries", "card num = "+everythin_good);
 
 		if(Integer.valueOf(card_num.getText().toString()) == 0)
@@ -401,7 +406,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			globalVariable.setNumberOfCards(card_num.getText().toString());
 		}
 
-		
+
 
 		switch (isFaisable()) {
 
@@ -428,16 +433,31 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		}
 
 		Log.i("checkEntries", "faisable = "+everythin_good);
-		
+
 		return everythin_good;
 	}
 
 
 	private int checkEntry(String s) {
 		int ret = ENTRY_OK;
-		if(!(s.matches("[a-zA-Z0-9_]*"))) ret = ILLEGAL_CHAR;
-		if (s.length() == 0) ret = EMPTY;
+		if((ret = checkUnicity(s)) == ENTRY_OK) {
+			if(!(s.matches("[a-zA-Z0-9_]*"))) ret = ILLEGAL_CHAR;
+			if (s.length() == 0) ret = EMPTY;
+		}
+
 		return ret;		
 	}
 
+	private int checkUnicity(String s) {
+		int ret = ENTRY_OK;
+		ProjectsData datasource = new ProjectsData(getActivity().getApplicationContext());
+
+		datasource.open();
+
+		if (!(datasource.checkUnicity(s))) {			
+			ret = NOT_UNIQ;
+		}
+
+		return ret;
+	}
 }

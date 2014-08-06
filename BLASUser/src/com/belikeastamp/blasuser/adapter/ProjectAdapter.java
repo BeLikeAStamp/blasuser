@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.belikeastamp.blasuser.R;
-import com.belikeastamp.blasuser.model.Project;
+import com.belikeastamp.blasuser.db.model.Project;
 
 public class ProjectAdapter extends BaseAdapter {
 

@@ -1,4 +1,4 @@
-package com.belikeastamp.blasuser.model;
+package com.belikeastamp.blasuser.db.model;
 
 import java.io.Serializable;
 

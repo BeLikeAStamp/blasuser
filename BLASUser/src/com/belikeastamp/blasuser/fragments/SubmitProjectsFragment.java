@@ -2,9 +2,10 @@ package com.belikeastamp.blasuser.fragments;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import com.belikeastamp.blasuser.R;
+import com.belikeastamp.blasuser.adapter.ProjectAdapter;
+import com.belikeastamp.blasuser.db.model.Project;
 
 import android.app.ListFragment;
 import android.net.Uri;
@@ -14,9 +15,6 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.belikeastamp.blasuser.R;
-import com.belikeastamp.blasuser.adapter.ProjectAdapter;
-import com.belikeastamp.blasuser.model.Project;
 
 public class SubmitProjectsFragment extends ListFragment {
 	
