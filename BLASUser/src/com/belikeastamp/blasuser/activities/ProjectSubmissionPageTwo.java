@@ -1,5 +1,10 @@
 package com.belikeastamp.blasuser.activities;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
@@ -8,23 +13,22 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore.MediaColumns;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -156,7 +160,6 @@ public class ProjectSubmissionPageTwo extends Activity {
 			TextView delay = new TextView(getActivity());
 			TextView colors = new TextView(getActivity());
 			TextView perso = new TextView(getActivity());
-			TextView infos = new TextView(getActivity());
 
 			LinearLayout colorlayout = new LinearLayout(getActivity());
 			colorlayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -210,7 +213,6 @@ public class ProjectSubmissionPageTwo extends Activity {
 			delay.setText(getResources().getString(R.string.for_when)+" : "+data.getOrderDate());
 			colors.setText(getResources().getString(R.string.color_set)+" : ");
 			perso.setText(getResources().getString(R.string.personnalisation)+" : "+data.getPerso());
-			infos.setText(getResources().getString(R.string.infos)+" : "+data.getInfos());
 
 
 			layout.addView(projectName, layoutParams);
@@ -224,7 +226,6 @@ public class ProjectSubmissionPageTwo extends Activity {
 			colorlayout.addView(color2);
 			colorlayout.addView(color3);
 			layout.addView(colorlayout, layoutParams);
-			layout.addView(infos, layoutParams);
 
 			builder.setView(layout);
 
@@ -421,9 +422,5 @@ public class ProjectSubmissionPageTwo extends Activity {
 			return pid;
 		}
 	}
-
-
-
-
 }
 

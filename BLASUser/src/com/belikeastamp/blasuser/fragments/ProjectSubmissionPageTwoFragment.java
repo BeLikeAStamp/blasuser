@@ -1,14 +1,31 @@
 package com.belikeastamp.blasuser.fragments;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.MediaStore.MediaColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +48,15 @@ import com.belikeastamp.blasuser.util.PersoSubject;
 import com.belikeastamp.blasuser.util.ProjectData;
 
 public class ProjectSubmissionPageTwoFragment extends Fragment {
+	
+	final public static int REQUEST_CAMERA = 0;
+	final public static int SELECT_FILE = 1;
+	
 	private GridView gridView1;
-
 	private ImageView color1;
 	private ImageView color2;
 	private ImageView color3;
+	private ImageView file;
 	private Button valider;
 	private EditText firstname;
 	private EditText age;
@@ -79,11 +100,21 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 		valider = (Button) getView().findViewById(R.id.btn_continue);
 		infos = (EditText) getView().findViewById(R.id.infos);
 		
-		
+		file =(ImageView) getView().findViewById(R.id.file);
+				
 		color1.setOnClickListener(new RazOnClickListener());
 		color2.setOnClickListener(new RazOnClickListener());
 		color3.setOnClickListener(new RazOnClickListener());
 
+		file.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				selectImage();
+			}
+		});
+		
 		Arrays.fill(selectedColors, false);
 		selectedColorsList.add(color1);
 		selectedColorsList.add(color2);
@@ -354,4 +385,118 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 
 		return ret;
 	}
+	
+	
+	private void selectImage() {
+		final CharSequence[] items = { "Take Photo", "Choose from Library",
+				"Cancel" };
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle("Add Photo!");
+		builder.setItems(items, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int item) {
+				if (items[item].equals("Take Photo")) {
+					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					File f = new File(android.os.Environment
+							.getExternalStorageDirectory(), "temp.jpg");
+					intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+					startActivityForResult(intent, REQUEST_CAMERA);
+				} else if (items[item].equals("Choose from Library")) {
+					Intent intent = new Intent(
+							Intent.ACTION_PICK,
+							android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+					intent.setType("image/*");
+					startActivityForResult(
+							Intent.createChooser(intent, "Select File"),
+							SELECT_FILE);
+				} else if (items[item].equals("Cancel")) {
+					dialog.dismiss();
+				}
+			}
+		});
+		builder.show();
+	}
+	
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        
+        Log.d("RESULT CODE", ""+resultCode);
+        
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == ProjectSubmissionPageTwoFragment.REQUEST_CAMERA) {
+                File f = new File(Environment.getExternalStorageDirectory()
+                        .toString());
+                for (File temp : f.listFiles()) {
+                    if (temp.getName().equals("temp.jpg")) {
+                        f = temp;
+                        break;
+                    }
+                }
+                try {
+                    Bitmap bm;
+                    BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
+ 
+                    bm = BitmapFactory.decodeFile(f.getAbsolutePath(),
+                            btmapOptions);
+ 
+                   // bm = Bitmap.createScaledBitmap(bm, 70, 70, true);
+                    int width = 300;
+        			int height = 300;
+        			LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
+        			parms.gravity = Gravity.CENTER;
+        			file.setLayoutParams(parms);
+                    file.setImageBitmap(bm);
+                   
+                    
+                    String path = android.os.Environment
+                            .getExternalStorageDirectory()
+                            + File.separator
+                            + "Phoenix" + File.separator + "default";
+                    f.delete();
+                    OutputStream fOut = null;
+                    File file = new File(path, String.valueOf(System
+                            .currentTimeMillis()) + ".jpg");
+                    try {
+                        fOut = new FileOutputStream(file);
+                        bm.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+                        fOut.flush();
+                        fOut.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (requestCode == ProjectSubmissionPageTwoFragment.SELECT_FILE) {
+                Uri selectedImageUri = data.getData();
+ 
+                String tempPath = getPath(selectedImageUri, getActivity());
+                Bitmap bm;
+                BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
+                bm = BitmapFactory.decodeFile(tempPath, btmapOptions);
+                int width = 300;
+    			int height = 300;
+    			LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
+    			parms.gravity = Gravity.CENTER;
+    			file.setLayoutParams(parms);
+                file.setImageBitmap(bm);
+            }
+        }
+    }
+
+	public String getPath(Uri uri, Activity activity) {
+        String[] projection = { MediaColumns.DATA };
+        Cursor cursor =  activity.getContentResolver().query(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaColumns.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+	
 }

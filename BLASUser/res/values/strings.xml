@@ -99,6 +99,7 @@
     <string name="age">Âge</string>
     <string name="year">ans</string>
     <string name="validate">Valider</string>
+    <string name="file">Joindre un fichier</string>
     <string name="nocolor_warning">Merci de choisir au moins une couleur</string>
     <string name="err_not_uniq">"Ce nom de projet existe déjà ! Il faut innover ;-)"</string>
     <string name="err_no_project">"Merci d'indiquer le nom du projet"</string>
@@ -109,8 +110,8 @@
     
     <!-- Submission Dialog -->
     <string name="alert_check">Ultime check !</string>
-    <string name="alert_dialog_send">Je valide !</string>
-    <string name="alert_dialog_rec">Enregister</string>
+    <string name="alert_dialog_send">Soumission</string>
+    <string name="alert_dialog_rec">Sauvegarder</string>
     <string name="alert_dialog_cancel">Oops ! </string>
     <string name="your_project">Ton projet</string>
     <string name="infos">Infos complémentaires</string>
