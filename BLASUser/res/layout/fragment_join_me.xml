@@ -33,65 +33,55 @@
             android:layout_height="wrap_content"
             android:text="@string/stampingup1" />
 
-        <TextView
-            style="@style/MediumHGray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stampingup4" />
-
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
+            android:layout_margin="10dp"
             android:background="#DE3764" />
 
         <TextView
-            style="@style/MediumLblue"
+            style="@style/MediumPink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/stampingup5" />
-
-        <TextView
-            style="@style/MediumHGray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/name" />
+            android:layout_marginBottom="10dp"
+            android:text="@string/join_my_team" />
 
         <EditText
             android:id="@+id/name"
+            style="@style/MediumHGray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
-
-        <TextView
-            style="@style/MediumHGray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/email" />
+            android:layout_marginBottom="10dp"
+            android:background="#E9E9E9"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:padding="10dp" />
 
         <EditText
             android:id="@+id/email"
+            style="@style/MediumHGray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
-
-        <TextView
-            style="@style/MediumHGray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/message" />
+            android:layout_marginBottom="10dp"
+            android:background="#E9E9E9"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"  />
 
         <EditText
             android:id="@+id/message"
+            style="@style/MediumHGray"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/infos_height"
+            android:layout_height="@dimen/message_height"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
+            android:background="#E9E9E9"
             android:gravity="left|top"
-            android:inputType="textShortMessage" />
+            android:hint="@string/message"
+            android:inputType="textMultiLine"
+            android:padding="10dp" />
 
         <Button
-            android:id="@+id/btn_continue"
+            android:id="@+id/envoyer"
             style="@style/btnStyleActionPink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
