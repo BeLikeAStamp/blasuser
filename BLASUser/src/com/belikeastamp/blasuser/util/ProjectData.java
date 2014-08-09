@@ -1,8 +1,11 @@
 package com.belikeastamp.blasuser.util;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Application;
+import android.net.Uri;
 import android.util.SparseArray;
 
 import com.belikeastamp.blasuser.R;
@@ -10,7 +13,8 @@ import com.belikeastamp.blasuser.R;
 public class ProjectData extends Application {
 
 	public static SparseArray<String> colorName;
-
+	public static Map<String,Integer> reverseColorMap;
+	
 	private String projectTheme;
 	private String projectType;
 	private String projectStyle;
@@ -20,6 +24,7 @@ public class ProjectData extends Application {
 	private String orderDate;
 	private int[] colorPanel;
 	private PersoSubject perso;
+	private Uri trackFile;
 	private String infos;
 	
 	
@@ -114,6 +119,12 @@ public class ProjectData extends Application {
 	public void setInfos(String infos) {
 		this.infos = infos;
 	}
+	public Uri getTrackFile() {
+		return trackFile;
+	}
+	public void setTrackFile(Uri trackFile) {
+		this.trackFile = trackFile;
+	}
 	@Override
 	public String toString() {
 		return "ProjectData [projectTheme=" + projectTheme + ", projectType="
@@ -182,5 +193,67 @@ public class ProjectData extends Application {
 		colorName.put(R.color.smoky_slate,"smoky_slate");
 		colorName.put(R.color.soft_suede,"soft_suede");
 		colorName.put(R.color.very_vanilla,"very_vanilla");
+		
+		reverseColorMap = new HashMap<String, Integer>();
+		
+		reverseColorMap.put("rasberry_ripple",R.color.rasberry_ripple);
+		reverseColorMap.put("summer_starfruit",R.color.summer_starfruit);
+		reverseColorMap.put("midnight_muse",R.color.midnight_muse);
+		reverseColorMap.put("primrose_petals",R.color.primrose_petals);
+		reverseColorMap.put("gumball_green",R.color.gumball_green);
+		reverseColorMap.put("baked_brown_sugar",R.color.baked_brown_sugar);
+		reverseColorMap.put("coastal_cabana",R.color.coastal_cabana);
+		reverseColorMap.put("crisp_cantaloupe",R.color.crisp_cantaloupe);
+		reverseColorMap.put("strawberry_slush",R.color.strawberry_slush);
+		reverseColorMap.put("pistachio_pudding",R.color.pistachio_pudding);
+		// eclatantes
+		reverseColorMap.put("bermuda_bay",R.color.bermuda_bay);
+		reverseColorMap.put("daffodil_delight",R.color.daffodil_delight);
+		reverseColorMap.put("melon_mambo",R.color.melon_mambo);
+		reverseColorMap.put("old_olive",R.color.old_olive);
+		reverseColorMap.put("pacific_point",R.color.pacific_point);
+		reverseColorMap.put("pumpkin_pie",R.color.pumpkin_pie);
+		reverseColorMap.put("real_red",R.color.real_red);
+		reverseColorMap.put("rich_razzleberry",R.color.rich_razzleberry);
+		reverseColorMap.put("tangerine_tango",R.color.tangerine_tango);
+		reverseColorMap.put("tempting_turquoise",R.color.tempting_turquoise);
+		// subtiles
+		reverseColorMap.put("blushing_bride",R.color.blushing_bride);
+		reverseColorMap.put("calypso_coral",R.color.calypso_coral);
+		reverseColorMap.put("marina_mist",R.color.marina_mist);
+		reverseColorMap.put("pear_pizzazz",R.color.pear_pizzazz);
+		reverseColorMap.put("pink_pirouette",R.color.pink_pirouette);
+		reverseColorMap.put("pool_party",R.color.pool_party);
+		reverseColorMap.put("so_saffron",R.color.so_saffron);
+		reverseColorMap.put("soft_sky",R.color.soft_sky);
+		reverseColorMap.put("wild_wasabi",R.color.wild_wasabi);
+		reverseColorMap.put("wisteria_wonder",R.color.wisteria_wonder);
+		// gourmandes
+		reverseColorMap.put("always_artichoke",R.color.always_artichoke);
+		reverseColorMap.put("cajun_craze",R.color.cajun_craze);
+		reverseColorMap.put("cherry_cobbler",R.color.cherry_cobbler);
+		reverseColorMap.put("crushed_curry",R.color.crushed_curry);
+		reverseColorMap.put("elegant_eggplant",R.color.elegant_eggplant);
+		reverseColorMap.put("garden_green",R.color.garden_green);
+		reverseColorMap.put("island_indigo",R.color.island_indigo);
+		reverseColorMap.put("night_of_navy",R.color.night_of_navy);
+		reverseColorMap.put("rose_red",R.color.rose_red);
+		reverseColorMap.put("perfect_plum",R.color.perfect_plum);
+		// neutres
+		reverseColorMap.put("basic_black",R.color.basic_black);
+		reverseColorMap.put("basic_gray",R.color.basic_gray);
+		reverseColorMap.put("chocolate_chip",R.color.chocolate_chip);
+		reverseColorMap.put("crumb_cake",R.color.crumb_cake);
+		reverseColorMap.put("early_espresso",R.color.early_espresso);
+		reverseColorMap.put("sahara_sand",R.color.sahara_sand);
+		reverseColorMap.put("whisper_white",R.color.whisper_white);
+		reverseColorMap.put("smoky_slate",R.color.smoky_slate);
+		reverseColorMap.put("soft_suede",R.color.soft_suede);
+		reverseColorMap.put("very_vanilla",R.color.very_vanilla);
+		
 	}
+	
+	
+	
+	
 }

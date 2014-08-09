@@ -25,10 +25,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public static final String P_STATUS = "project_status";
 	public static final String P_THEME = "theme";
 	public static final String P_TYPE = "type";
+	public static final String P_STYLE = "style";
 	public static final String P_COLORS = "colors";
 	public static final String P_ORDERDATA = "order_date";
 	public static final String P_NBRCARDS = "nbr_cards";
 	public static final String P_REMOTEID = "remote_id";
+	public static final String P_PROTO = "proto";
 	
 	public static final int PROJ_WAIT = -1;
 	public static final int PROJ_SUBMIT = 0;
@@ -72,11 +74,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ P_SUBDATE + " TEXT NOT NULL,"
 				+ P_THEME + " TEXT NOT NULL,"
 				+ P_TYPE + " TEXT NOT NULL,"
+				+ P_STYLE+ " TEXT NOT NULL,"
 				+ P_ORDERDATA + " TEXT NOT NULL,"
 				+ P_STATUS + " INTEGER NOT NULL,"
 				+ P_NBRCARDS + " INTEGER NOT NULL,"
 				+ P_REMOTEID + " INTEGER,"
-				+ P_COLORS + " TEXT NOT NULL"
+				+ P_COLORS + " TEXT NOT NULL,"
+				+ P_PROTO + " TEXT"
 				+ ")";
 		db.execSQL(CREATE_PROJECTS_TABLE);
 	}

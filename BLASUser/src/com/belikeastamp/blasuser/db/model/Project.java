@@ -2,6 +2,8 @@ package com.belikeastamp.blasuser.db.model;
 
 import java.io.Serializable;
 
+import android.net.Uri;
+
 public class Project implements Serializable {
 
 	/**
@@ -13,8 +15,10 @@ public class Project implements Serializable {
 	private String subDate;
 	private String theme;
 	private String type;
+	private String style;
 	private String orderDate;
 	private String path_to_prototype;
+	private Uri path_to_track;
 	private String perso;
 	private String colors;
 	private int status;
@@ -26,16 +30,18 @@ public class Project implements Serializable {
 
 
 	public Project(String project_name, String sub_date, int project_status,
-			String theme, String type, String order_date, int nbr_cards, String perso) {
+			String theme, String type, String style, String order_date, int nbr_cards, String perso) {
 		super();
 		this.name = project_name;
 		this.subDate = sub_date;
 		this.status = project_status;
 		this.theme = theme;
 		this.type = type;
+		this.style = style;
 		this.orderDate = order_date;
 		this.quantity = nbr_cards;
 		this.perso = perso;
+		this.remoteId = Long.valueOf("-1");
 	}
 
 	public String getName() {
@@ -68,6 +74,16 @@ public class Project implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 
 	public String getOrderDate() {
@@ -136,14 +152,27 @@ public class Project implements Serializable {
 
 
 
+	public Uri getPath_to_track() {
+		return path_to_track;
+	}
+
+
+
+	public void setPath_to_track(Uri path_to_track) {
+		this.path_to_track = path_to_track;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Project [name=" + name + "\n subDate=" + subDate + "\n theme="
-				+ theme + "\n type=" + type + "\n orderDate=" + orderDate
-				+ "\n path_to_prototype=" + path_to_prototype + "\n perso="
-				+ perso + "\n colors=" + colors + "\n status=" + status
-				+ "\n quantity=" + quantity + "\n remoteId=" + remoteId + "]";
+		return "Project [name=" + name + "\nsubDate=" + subDate + "\ntheme="
+				+ theme + "\ntype=" + type + "\nstyle=" + style
+				+ "\norderDate=" + orderDate + "\nperso=" + perso + "\ncolors="
+				+ colors + "\nstatus=" + status + "\nquantity=" + quantity
+				+ "\nremoteId=" + remoteId + "]";
 	}
+
 	
 	
 }

@@ -17,7 +17,7 @@ public class JoinMeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
-        View rootView = inflater.inflate(R.layout.fragment_blog, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_join_me, container, false);
          
         return rootView;
     }

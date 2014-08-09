@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -17,15 +19,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.adapter.NavDrawerListAdapter;
-import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageOneFragment;
-import com.belikeastamp.blasuser.fragments.WorkshopFragment;
 import com.belikeastamp.blasuser.fragments.FindPeopleFragment;
 import com.belikeastamp.blasuser.fragments.HomeFragment;
-import com.belikeastamp.blasuser.fragments.TutorialFragment;
 import com.belikeastamp.blasuser.fragments.JoinMeFragment;
+import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageOneFragment;
+import com.belikeastamp.blasuser.fragments.SavedProjectsFragment;
+import com.belikeastamp.blasuser.fragments.SubmitProjectsFragment;
+import com.belikeastamp.blasuser.fragments.TutorialFragment;
+import com.belikeastamp.blasuser.fragments.WorkshopFragment;
 import com.belikeastamp.blasuser.model.NavDrawerItem;
 
 public class MainActivity extends Activity {
@@ -183,25 +188,28 @@ public class MainActivity extends Activity {
 			fragment = new ProjectSubmissionPageOneFragment();
 			break;
 		case 2:
-			fragment = new TutorialFragment();
+			fragment = new SubmitProjectsFragment();
 			break;
 		case 3:
-			fragment = new WorkshopFragment();
+			fragment = new SavedProjectsFragment();
 			break;
 		case 4:
-			fragment = new FindPeopleFragment();
+			fragment = new TutorialFragment();
 			break;
 		case 5:
-			fragment = new JoinMeFragment();
+			fragment = new WorkshopFragment();
 			break;
 		case 6:
 			fragment = new JoinMeFragment();
 			break;
 		case 7:
-			fragment = new JoinMeFragment();
+			String url = getResources().getString(R.string.blog);
+			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+			startActivity(i);
 			break;
 		case 8:
-			fragment = new JoinMeFragment();
+			Toast.makeText(getApplicationContext(), R.string.see_u_soon, Toast.LENGTH_SHORT).show();
+			finish();
 			break;
 			
 

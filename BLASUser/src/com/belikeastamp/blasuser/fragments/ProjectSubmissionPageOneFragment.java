@@ -62,7 +62,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	final static long WEEK = 604800000L;
 	private long today = System.currentTimeMillis();
-	private long delay ;
+	private long delay = today + WEEK;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,7 +91,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		selectDate = (Button) this.getView().findViewById(R.id.select_date);
 		continuer = (Button) this.getView().findViewById(R.id.btn_continue);
 
-		setDate(today);
+		setDate(delay);
 		globalVariable.setSubmitDate(getDate(today));
 
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(),
@@ -104,7 +104,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 				globalVariable.setProjectType((String)parent.getItemAtPosition(position));
 				cardThemes = themes.get(globalVariable.getProjectType());
 
@@ -118,7 +118,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 				globalVariable.setProjectType((String)parent.getItemAtPosition(0));
 			}
 
@@ -142,7 +142,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 
 			}
 		});
@@ -151,20 +151,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 				globalVariable.setProjectTheme(s.toString());
 			}
 		});
@@ -191,7 +191,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 
 			}
 		});
@@ -200,20 +200,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 				globalVariable.setProjectStyle(s.toString());
 			}
 		});
@@ -230,7 +230,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				//  Auto-generated method stub
 				if(checkEntries()) {
 					Log.i("PROJET","=>"+globalVariable.toString());
 					Intent i = new Intent(getActivity(), ProjectSubmissionPageTwo.class);

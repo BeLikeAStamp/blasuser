@@ -293,88 +293,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 	}
 
 
-	public ArrayList<ColorPicker> getColorCat1() {
-		ArrayList<ColorPicker> list = new ArrayList<ColorPicker>();
-		// tendances
-		list.add(new ColorPicker(R.color.rasberry_ripple));
-		list.add(new ColorPicker(R.color.summer_starfruit));
-		list.add(new ColorPicker(R.color.midnight_muse));
-		list.add(new ColorPicker(R.color.primrose_petals));
-		list.add(new ColorPicker(R.color.gumball_green));
-		list.add(new ColorPicker(R.color.baked_brown_sugar));
-		list.add(new ColorPicker(R.color.coastal_cabana));
-		list.add(new ColorPicker(R.color.crisp_cantaloupe));
-		list.add(new ColorPicker(R.color.strawberry_slush));
-		list.add(new ColorPicker(R.color.pistachio_pudding));
-		// eclatantes
-		list.add(new ColorPicker(R.color.bermuda_bay));
-		list.add(new ColorPicker(R.color.daffodil_delight));
-		list.add(new ColorPicker(R.color.melon_mambo));
-		list.add(new ColorPicker(R.color.old_olive));
-		list.add(new ColorPicker(R.color.pacific_point));
-		list.add(new ColorPicker(R.color.pumpkin_pie));
-		list.add(new ColorPicker(R.color.real_red));
-		list.add(new ColorPicker(R.color.rich_razzleberry));
-		list.add(new ColorPicker(R.color.tangerine_tango));
-		list.add(new ColorPicker(R.color.tempting_turquoise));
-		// subtiles
-		list.add(new ColorPicker(R.color.blushing_bride));
-		list.add(new ColorPicker(R.color.calypso_coral));
-		list.add(new ColorPicker(R.color.marina_mist));
-		list.add(new ColorPicker(R.color.pear_pizzazz));
-		list.add(new ColorPicker(R.color.pink_pirouette));
-		list.add(new ColorPicker(R.color.pool_party));
-		list.add(new ColorPicker(R.color.so_saffron));
-		list.add(new ColorPicker(R.color.soft_sky));
-		list.add(new ColorPicker(R.color.wild_wasabi));
-		list.add(new ColorPicker(R.color.wisteria_wonder));
-		// gourmandes
-		list.add(new ColorPicker(R.color.always_artichoke));
-		list.add(new ColorPicker(R.color.cajun_craze));
-		list.add(new ColorPicker(R.color.cherry_cobbler));
-		list.add(new ColorPicker(R.color.crushed_curry));
-		list.add(new ColorPicker(R.color.elegant_eggplant));
-		list.add(new ColorPicker(R.color.garden_green));
-		list.add(new ColorPicker(R.color.island_indigo));
-		list.add(new ColorPicker(R.color.night_of_navy));
-		list.add(new ColorPicker(R.color.rose_red));
-		list.add(new ColorPicker(R.color.perfect_plum));
-		// neutres
-		list.add(new ColorPicker(R.color.basic_black));
-		list.add(new ColorPicker(R.color.basic_gray));
-		list.add(new ColorPicker(R.color.chocolate_chip));
-		list.add(new ColorPicker(R.color.crumb_cake));
-		list.add(new ColorPicker(R.color.early_espresso));
-		list.add(new ColorPicker(R.color.sahara_sand));
-		list.add(new ColorPicker(R.color.whisper_white));
-		list.add(new ColorPicker(R.color.smoky_slate));
-		list.add(new ColorPicker(R.color.soft_suede));
-		list.add(new ColorPicker(R.color.very_vanilla));
 
-
-		return list;
-	}
-
-	private class RazOnClickListener implements View.OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			ImageView i = (ImageView) v;
-			i.setBackgroundResource(android.R.color.transparent);
-			switch(i.getId()) {
-			case R.id.selected_color1:
-				selectedColors[0] = false;
-				break;
-			case R.id.selected_color2:
-				selectedColors[1] = false;
-				break;
-			case R.id.selected_color3:
-				selectedColors[2] = false;
-				break;
-			}
-		}
-	}
 
 	private int validSubmission() {
 		int ret = 0;
@@ -457,11 +376,15 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
                             + "Phoenix" + File.separator + "default";
                     f.delete();
                     OutputStream fOut = null;
-                    File file = new File(path, String.valueOf(System
+                    File selectedFile = new File(path, String.valueOf(System
                             .currentTimeMillis()) + ".jpg");
+                    
+                    globalVariable.setTrackFile(Uri.parse(selectedFile.getAbsolutePath()));
+                    
                     try {
-                        fOut = new FileOutputStream(file);
+                        fOut = new FileOutputStream(selectedFile);
                         bm.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+                        
                         fOut.flush();
                         fOut.close();
                     } catch (FileNotFoundException e) {
@@ -476,7 +399,6 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
                 }
             } else if (requestCode == ProjectSubmissionPageTwoFragment.SELECT_FILE) {
                 Uri selectedImageUri = data.getData();
- 
                 String tempPath = getPath(selectedImageUri, getActivity());
                 Bitmap bm;
                 BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
@@ -487,6 +409,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
     			parms.gravity = Gravity.CENTER;
     			file.setLayoutParams(parms);
                 file.setImageBitmap(bm);
+                globalVariable.setTrackFile(selectedImageUri);
             }
         }
     }
@@ -499,4 +422,86 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
         return cursor.getString(column_index);
     }
 	
+	public ArrayList<ColorPicker> getColorCat1() {
+		ArrayList<ColorPicker> list = new ArrayList<ColorPicker>();
+		// tendances
+		list.add(new ColorPicker(R.color.rasberry_ripple));
+		list.add(new ColorPicker(R.color.summer_starfruit));
+		list.add(new ColorPicker(R.color.midnight_muse));
+		list.add(new ColorPicker(R.color.primrose_petals));
+		list.add(new ColorPicker(R.color.gumball_green));
+		list.add(new ColorPicker(R.color.baked_brown_sugar));
+		list.add(new ColorPicker(R.color.coastal_cabana));
+		list.add(new ColorPicker(R.color.crisp_cantaloupe));
+		list.add(new ColorPicker(R.color.strawberry_slush));
+		list.add(new ColorPicker(R.color.pistachio_pudding));
+		// eclatantes
+		list.add(new ColorPicker(R.color.bermuda_bay));
+		list.add(new ColorPicker(R.color.daffodil_delight));
+		list.add(new ColorPicker(R.color.melon_mambo));
+		list.add(new ColorPicker(R.color.old_olive));
+		list.add(new ColorPicker(R.color.pacific_point));
+		list.add(new ColorPicker(R.color.pumpkin_pie));
+		list.add(new ColorPicker(R.color.real_red));
+		list.add(new ColorPicker(R.color.rich_razzleberry));
+		list.add(new ColorPicker(R.color.tangerine_tango));
+		list.add(new ColorPicker(R.color.tempting_turquoise));
+		// subtiles
+		list.add(new ColorPicker(R.color.blushing_bride));
+		list.add(new ColorPicker(R.color.calypso_coral));
+		list.add(new ColorPicker(R.color.marina_mist));
+		list.add(new ColorPicker(R.color.pear_pizzazz));
+		list.add(new ColorPicker(R.color.pink_pirouette));
+		list.add(new ColorPicker(R.color.pool_party));
+		list.add(new ColorPicker(R.color.so_saffron));
+		list.add(new ColorPicker(R.color.soft_sky));
+		list.add(new ColorPicker(R.color.wild_wasabi));
+		list.add(new ColorPicker(R.color.wisteria_wonder));
+		// gourmandes
+		list.add(new ColorPicker(R.color.always_artichoke));
+		list.add(new ColorPicker(R.color.cajun_craze));
+		list.add(new ColorPicker(R.color.cherry_cobbler));
+		list.add(new ColorPicker(R.color.crushed_curry));
+		list.add(new ColorPicker(R.color.elegant_eggplant));
+		list.add(new ColorPicker(R.color.garden_green));
+		list.add(new ColorPicker(R.color.island_indigo));
+		list.add(new ColorPicker(R.color.night_of_navy));
+		list.add(new ColorPicker(R.color.rose_red));
+		list.add(new ColorPicker(R.color.perfect_plum));
+		// neutres
+		list.add(new ColorPicker(R.color.basic_black));
+		list.add(new ColorPicker(R.color.basic_gray));
+		list.add(new ColorPicker(R.color.chocolate_chip));
+		list.add(new ColorPicker(R.color.crumb_cake));
+		list.add(new ColorPicker(R.color.early_espresso));
+		list.add(new ColorPicker(R.color.sahara_sand));
+		list.add(new ColorPicker(R.color.whisper_white));
+		list.add(new ColorPicker(R.color.smoky_slate));
+		list.add(new ColorPicker(R.color.soft_suede));
+		list.add(new ColorPicker(R.color.very_vanilla));
+
+
+		return list;
+	}
+
+	private class RazOnClickListener implements View.OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			ImageView i = (ImageView) v;
+			i.setBackgroundResource(android.R.color.transparent);
+			switch(i.getId()) {
+			case R.id.selected_color1:
+				selectedColors[0] = false;
+				break;
+			case R.id.selected_color2:
+				selectedColors[1] = false;
+				break;
+			case R.id.selected_color3:
+				selectedColors[2] = false;
+				break;
+			}
+		}
+	}
 }

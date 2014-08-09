@@ -1,46 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="10dp" >
 
     <ImageView
-        android:id="@+id/proto"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_no_image_available"
+        android:id="@+id/track"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_logodontworry"
+        android:paddingRight="10dp"
+        android:contentDescription="@string/file"
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/name"
+        style="@style/MediumLblue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/proto"
-        android:layout_toRightOf="@+id/proto"
+        android:layout_alignTop="@+id/track"
+        android:layout_toRightOf="@+id/track"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/theme"
+        style="@style/MediumHGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
         android:layout_gravity="center"
         android:layout_marginTop="2dip"
-        android:layout_toRightOf="@id/proto"
+        android:layout_toRightOf="@id/track"
         android:gravity="right"
-        android:textSize="16sp"
-        android:textStyle="italic" />
+         />
     
     
     <TextView
-        android:id="@+id/status"
+        android:id="@+id/date"
+        style="@style/MediumHGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/theme"
         android:layout_gravity="center"
         android:layout_marginTop="2dip"
-        android:layout_toRightOf="@id/proto"
+        android:layout_toRightOf="@id/track"
         android:gravity="right"
-        android:textSize="14sp"
         android:textStyle="italic" />
 
 </RelativeLayout>

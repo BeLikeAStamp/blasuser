@@ -39,6 +39,7 @@ public class ProjectController {
 	private static final String TAG_NAME = "name";
 	private static final String TAG_TYPE = "type";
 	private static final String TAG_THEME = "theme";
+	private static final String TAG_STYLE = "style";
 	private static final String TAG_ODATE = "orderDate";
 	private static final String TAG_PERSO = "perso";
 	private static final String TAG_STATUS = "status";
@@ -136,6 +137,7 @@ public class ProjectController {
 					String name = c.getString(TAG_NAME);
 					String theme = c.getString(TAG_THEME);
 					String type = c.getString(TAG_TYPE);
+					String style = c.getString(TAG_STYLE);
 					String orderDate = c.getString(TAG_ODATE);
 					String perso = c.getString(TAG_PERSO);
 					String status = c.getString(TAG_STATUS);
@@ -151,6 +153,7 @@ public class ProjectController {
 					hash.put(TAG_NAME, name);
 					hash.put(TAG_THEME, theme);
 					hash.put(TAG_TYPE, type);
+					hash.put(TAG_STYLE, style);
 					hash.put(TAG_ODATE, orderDate);
 					hash.put(TAG_PERSO, perso);
 					hash.put(TAG_STATUS, status);
@@ -158,7 +161,7 @@ public class ProjectController {
 					hash.put(TAG_COLORS, colors);
 					
 					// adding project to contact users list
-					Project p = new Project(name, subDate, Integer.valueOf(status), theme, type, orderDate, Integer.valueOf(quantity), perso);
+					Project p = new Project(name, subDate, Integer.valueOf(status), theme, type, style ,orderDate, Integer.valueOf(quantity), perso);
 					
 					p.setRemoteId(Long.valueOf(id));
 					p.setColors(colors);

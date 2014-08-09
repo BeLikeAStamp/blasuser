@@ -4,7 +4,7 @@ package com.belikeastamp.blasuser.fragments;
 import java.util.ArrayList;
 import java.util.List;
 import com.belikeastamp.blasuser.R;
-import com.belikeastamp.blasuser.adapter.ProjectAdapter;
+import com.belikeastamp.blasuser.adapter.SubmitProjectAdapter;
 import com.belikeastamp.blasuser.db.model.Project;
 
 import android.app.ListFragment;
@@ -25,9 +25,9 @@ public class SubmitProjectsFragment extends ListFragment {
 	    super.onActivityCreated(savedInstanceState);
 	    
 	    List<Project> projects = new ArrayList<Project>();
-	    Project p1 = new Project("name1", "1", 2 , "theme1", "type1", "1", 12, null); p1.setRemoteId(Long.valueOf(1));
-	    Project p2 = new Project("name2", "1", 0 , "theme2", "type2", "1", 1, null); p2.setRemoteId(Long.valueOf(2));
-	    Project p3 = new Project("name3", "1", 4 , "theme3", "type3", "1", 122, null); p3.setRemoteId(Long.valueOf(3));
+	    Project p1 = new Project("name1", "1", 2 , "theme1", "type1", "style1","1", 12, null); p1.setRemoteId(Long.valueOf(1));
+	    Project p2 = new Project("name2", "1", 0 , "theme2", "type2", "style2", "1", 1, null); p2.setRemoteId(Long.valueOf(2));
+	    Project p3 = new Project("name3", "1", 4 , "theme3", "type3", "style3", "1", 122, null); p3.setRemoteId(Long.valueOf(3));
 	    
 	    projects.add(p3); projects.add(p1); projects.add(p2);
 	   
@@ -55,7 +55,7 @@ public class SubmitProjectsFragment extends ListFragment {
 	    
 	    String[] status = getResources().getStringArray(R.array.status_arrays);
 	   
-	    BaseAdapter adapter = new ProjectAdapter(getActivity().getApplicationContext(), projects, map, status);
+	    BaseAdapter adapter = new SubmitProjectAdapter(getActivity().getApplicationContext(), projects, map, status);
 	    
 	   /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 	        android.R.layout.simple_list_item_1, values);*/

@@ -120,5 +120,32 @@
     <string name="reg_failed">Echec de l\'enregistrement</string>
     <string name="reg_succed">Enregistrement effectué ! Let\'s GO !</string>
     
+    <!-- Saved Projects Details -->
+    <string name="btn_modif">Modifier</string>
+    <string name="btn_submit">Soumission</string>
+    
+    
+    
+    
+    
+    
+    
+    <!-- Join Me !  -->
+    <string name="stampingup">Stampin\'Up</string>
+    <string name="stampingup1">Stampin\'Up existe depuis plus de 25 ans aux États-Unis, et depuis 5 ans en France et en Europe. Elle est considérée comme leader dans le domaine du scrapbooking.</string>
+    <string name="stampingup2">Sa renommée tient autant de la qualité et de la diversité de ses produits que du savoir-faire de ses démonstratrices.</string>
+    <string name="stampingup3">Elle a su évoluer avec le temps et continue de produire des accessoires répondant parfaitement aux attentes de ses clients. Attentive aux besoins des amateurs, elle reste moderne et novatrice.</string>
+    <string name="stampingup4">Actuellement, plus de 40 000 démonstratrices enseignent le Stamp\'Art et font partager leur enthousiasme pour l\'estampage, le Scrapbooking et la fabrication de cartes. </string>
+    <string name="stampingup5">Pour rejoindre l\'aventure et devenir ma filleule</string>
+    <string name="name">Nom</string>
+    <string name="email">Email</string>
+    <string name="message">Message</string>
+    <string name="btn_send">Envoyer</string>
+    
+     <!-- Blog access -->
+     <string name="blog">http://dontworrybecrafty.com/</string>
+    
+     <!-- Quitter l'appli -->
+     <string name="see_u_soon">Happy Crafting ! Bisous Bisous</string>
     
 </resources>

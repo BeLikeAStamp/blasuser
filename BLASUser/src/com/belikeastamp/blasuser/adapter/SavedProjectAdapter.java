@@ -16,18 +16,14 @@ import android.widget.TextView;
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.db.model.Project;
 
-public class ProjectAdapter extends BaseAdapter {
+public class SavedProjectAdapter extends BaseAdapter {
 
 	List<Project> list;
 	Context context;
-	LongSparseArray<Uri> prototypes;
-	String[] status;
 	
-	public ProjectAdapter (Context context, List<Project> projectList, LongSparseArray<Uri> map, String[] status) {
+	public SavedProjectAdapter (Context context, List<Project> projectList) {
 		this.context = context;
-		this.prototypes = map;
 		this.list = projectList;
-		this.status = status;
 	}
 	
 	
@@ -53,8 +49,8 @@ public class ProjectAdapter extends BaseAdapter {
     {
         TextView name;
         TextView theme;
-        TextView status;
-        ImageView img;
+        TextView date;
+        ImageView track;
     }
 	
 	@Override
@@ -65,16 +61,16 @@ public class ProjectAdapter extends BaseAdapter {
 		
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			rowView = inflater.inflate(R.layout.listview_project, null);
+			rowView = inflater.inflate(R.layout.listview_saved_project, null);
 			TextView name = (TextView) rowView.findViewById(R.id.name);
 			TextView theme = (TextView) rowView.findViewById(R.id.theme);
-			TextView status = (TextView) rowView.findViewById(R.id.status);
-			ImageView proto = (ImageView) rowView.findViewById(R.id.proto);
+			TextView date = (TextView) rowView.findViewById(R.id.date);
+			ImageView track = (ImageView) rowView.findViewById(R.id.track);
 			
 			holder.name = name;
 			holder.theme = theme;
-			holder.status = status;
-			holder.img = proto;
+			holder.date = date;
+			holder.track = track;
 			
 			rowView.setTag(holder);
 
@@ -87,8 +83,9 @@ public class ProjectAdapter extends BaseAdapter {
 		Log.d("BLASUSER", "Project "+p.toString());
 		holder.name.setText(p.getName());		
 		holder.theme.setText(p.getTheme());
-		holder.status.setText(status[p.getStatus()]);
-		holder.img.setImageURI(prototypes.get(p.getRemoteId()));
+		holder.date.setText(p.getSubDate());
+		
+		if (p.getPath_to_track() != null) holder.track.setImageURI(p.getPath_to_track());;
 		
 		return rowView;
 	}

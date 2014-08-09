@@ -42,6 +42,7 @@ public class ProjectsData {
 		values.put(DatabaseHandler.P_STATUS, project.getStatus());
 		values.put(DatabaseHandler.P_THEME, project.getTheme());
 		values.put(DatabaseHandler.P_TYPE, project.getType());
+		values.put(DatabaseHandler.P_STYLE, project.getStyle());
 		values.put(DatabaseHandler.P_ORDERDATA, project.getOrderDate());
 		values.put(DatabaseHandler.P_NBRCARDS, project.getQuantity());
 		values.put(DatabaseHandler.P_COLORS, project.getColors());
@@ -58,10 +59,12 @@ public class ProjectsData {
 				DatabaseHandler.P_STATUS,
 				DatabaseHandler.P_THEME,
 				DatabaseHandler.P_TYPE,
+				DatabaseHandler.P_STYLE,
 				DatabaseHandler.P_ORDERDATA,
 				DatabaseHandler.P_NBRCARDS,
 				DatabaseHandler.P_REMOTEID,
 				DatabaseHandler.P_COLORS,
+				DatabaseHandler.P_PROTO,
 		}, DatabaseHandler.P_NAME + "=?",
 		new String[] { name }, null, null, null, null);
 		if (cursor != null)
@@ -152,15 +155,27 @@ public class ProjectsData {
 		project.setSubDate(cursor.getString(1));
 		project.setTheme(cursor.getString(2));
 		project.setType(cursor.getString(3));
-		project.setOrderDate(cursor.getString(4));
-		project.setStatus(cursor.getInt(5));
-		project.setQuantity(cursor.getInt(6));
-		project.setRemoteId(cursor.getLong(7));
-		project.setColors(cursor.getString(8));
+		project.setStyle(cursor.getString(4));
+		project.setOrderDate(cursor.getString(5));
+		project.setStatus(cursor.getInt(6));
+		project.setQuantity(cursor.getInt(7));
+		project.setRemoteId(cursor.getLong(8));
+		project.setColors(cursor.getString(9));
+		project.setPath_to_prototype(cursor.getString(10));
 		return project;
 	}
 
 	public boolean checkUnicity(String name) {
+		Cursor cursor = database.query(DatabaseHandler.TABLE_PROJECTS, new String[] { 
+				DatabaseHandler.P_NAME, 
+		}, DatabaseHandler.P_NAME + "=?",
+		new String[] { name }, null, null, null, null);
+		
+		return (cursor.getCount() == 0);
+	}
+	
+	// TODAO
+	public boolean update(String name) {
 		Cursor cursor = database.query(DatabaseHandler.TABLE_PROJECTS, new String[] { 
 				DatabaseHandler.P_NAME, 
 				DatabaseHandler.P_SUBDATE,

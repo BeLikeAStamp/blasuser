@@ -1,10 +1,5 @@
 package com.belikeastamp.blasuser.activities;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
@@ -14,16 +9,9 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore.MediaColumns;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -38,7 +26,6 @@ import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.db.dao.ProjectsData;
 import com.belikeastamp.blasuser.db.model.Project;
 import com.belikeastamp.blasuser.db.model.User;
-import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageOneFragment;
 import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageTwoFragment;
 import com.belikeastamp.blasuser.util.ProjectController;
 import com.belikeastamp.blasuser.util.ProjectData;
@@ -119,7 +106,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 		Log.i("FragmentAlertDialog", "CANCEL click!");
 	}
 
-	public void doRegistrationClick(Project p) {
+	public void doSaveClick(Project p) {
 		// Do stuff here.
 		Log.i("FragmentAlertDialog", "LOCAL REGISTRATION click!");
 		localRegistration(p);
@@ -180,31 +167,34 @@ public class ProjectSubmissionPageTwo extends Activity {
 			if (color != -1) {
 				color1.setBackgroundResource(color);
 				color1.setLayoutParams(parms);
-				colors.append(ProjectData.colorName.get(color));
+				colorsBuffer.append(ProjectData.colorName.get(color));
 			}
 
 			color = data.getColor2();
 			if (color != -1) {
 				color2.setBackgroundResource(color);
 				color2.setLayoutParams(parms);
-				colors.append(ProjectData.colorName.get(color));
+				colorsBuffer.append(","+ProjectData.colorName.get(color));
 			}
 
 			color = data.getColor3();
 			if (color != -1) {
 				color3.setBackgroundResource(color);
 				color3.setLayoutParams(parms);
-				colors.append(ProjectData.colorName.get(color));
+				colorsBuffer.append(","+ProjectData.colorName.get(color));
 			}
 
-			final Project p = new Project(projectName.getText().toString(), 
+			final Project p = new Project(data.getProjectName(), 
 					data.getSubmitDate(), -1, data.getProjectTheme(),
-					data.getProjectType(), data.getOrderDate(),
+					data.getProjectType(), data.getProjectStyle(), data.getOrderDate(),
 					Integer.valueOf(data.getNumberOfCards()),
 					(data.getPerso() == null ? "anonymous" : data.getPerso().toString()));
 
 			p.setColors(colorsBuffer.toString());
-
+			p.setPath_to_track(data.getTrackFile());
+			
+			Log.d("PROJECT BEFORE SAVING ",p.toString());
+			
 			projectName.setText(getResources().getString(R.string.project_name)+" : "+data.getProjectName());
 			cardTheme.setText(getResources().getString(R.string.card_theme)+" : "+data.getProjectTheme());
 			cardType.setText(getResources().getString(R.string.card_type)+" : "+data.getProjectType());
@@ -212,12 +202,12 @@ public class ProjectSubmissionPageTwo extends Activity {
 			nbrCards.setText(getResources().getString(R.string.how_many_cards)+" : "+data.getNumberOfCards());
 			delay.setText(getResources().getString(R.string.for_when)+" : "+data.getOrderDate());
 			colors.setText(getResources().getString(R.string.color_set)+" : ");
-			perso.setText(getResources().getString(R.string.personnalisation)+" : "+data.getPerso());
+			perso.setText(getResources().getString(R.string.personnalisation)+" : "+(data.getPerso() == null ? "anonyme" : data.getPerso()));
 
 
 			layout.addView(projectName, layoutParams);
-			layout.addView(cardTheme, layoutParams);
 			layout.addView(cardType, layoutParams);
+			layout.addView(cardTheme, layoutParams);
 			layout.addView(cardStyle, layoutParams);
 			layout.addView(nbrCards, layoutParams);
 			layout.addView(delay, layoutParams);
@@ -226,7 +216,8 @@ public class ProjectSubmissionPageTwo extends Activity {
 			colorlayout.addView(color2);
 			colorlayout.addView(color3);
 			layout.addView(colorlayout, layoutParams);
-
+			layout.addView(perso, layoutParams);
+			
 			builder.setView(layout);
 
 			builder
@@ -244,7 +235,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 					((ProjectSubmissionPageTwo) getActivity())
-					.doRegistrationClick(p);
+					.doSaveClick(p);
 				}
 			})
 			.setNegativeButton(R.string.alert_dialog_cancel,
