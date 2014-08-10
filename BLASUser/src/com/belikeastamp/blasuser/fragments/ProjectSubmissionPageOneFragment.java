@@ -68,7 +68,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.fragment_project_submission, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_project_new_project_form, container, false);
 
 		return rootView;
 	}
@@ -81,7 +81,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		setThemeList();
 
 
-		card_type_spinner = (Spinner) this.getView().findViewById(R.id.card_type_spinner);
+		/*card_type_spinner = (Spinner) this.getView().findViewById(R.id.card_type_spinner);
 		card_theme_spinner = (Spinner) this.getView().findViewById(R.id.card_theme_spinner);
 		card_style_spinner = (Spinner) this.getView().findViewById(R.id.card_style_spinner);
 		project_name = (EditText) this.getView().findViewById(R.id.project_name);
@@ -97,9 +97,9 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(),
 				R.array.type_arrays, R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-		card_type_spinner.setAdapter(adapter);
+		card_type_spinner.setAdapter(adapter);*/
 
-		card_type_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+		/*card_type_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
@@ -123,8 +123,9 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 
 
-		});
+		});*/
 
+		/*
 		card_theme_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -146,7 +147,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			}
 		});
-
+*/
+		/*
 		other_theme.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -168,7 +170,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				globalVariable.setProjectTheme(s.toString());
 			}
 		});
-
+*/
+		/*
 		ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(getActivity().getApplicationContext(),
 				R.array.style_arrays, R.layout.simple_spinner_item);
 		adapter3.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
@@ -195,7 +198,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			}
 		});
-
+*/
+		/*
 		other_style.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -217,16 +221,17 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				globalVariable.setProjectStyle(s.toString());
 			}
 		});
-
-		selectDate.setOnClickListener(new OnClickListener() {  
+*/
+		
+		/*selectDate.setOnClickListener(new OnClickListener() {  
 			@Override  
 			public void onClick(View v) {  
 				DialogFragment newFragment = new DatePickerDialogFragment(callback);  
 				newFragment.show(getFragmentManager(), "datePicker");
 			}  
 		});
-
-		continuer.setOnClickListener(new View.OnClickListener() {
+*/
+		/*continuer.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -258,7 +263,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-
+*/
 
 	}
 

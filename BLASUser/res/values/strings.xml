@@ -3,8 +3,11 @@
     
     <!-- A CHANGER !!!  -->
     <string name="contact_email">andronekomimi@gmail.com</string>
-    
     <string name="app_name">DWBC</string>
+    <string name="welcome">Welcome</string>
+    <string name="loading">Chargement des données &#8230;</string>
+    <string name="cxn_alert">Information réseau</string>
+    <string name="no_connection">Aucune connexion internet n\'est disponible en ce moment.\nVeuillez réessayer ultérieurement.</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="drawer_open">Slider Menu Opened</string>
@@ -27,14 +30,14 @@
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
         <item>@drawable/ic_home</item>
-        <item>@drawable/ic_photos</item>
-        <item>@drawable/ic_photos</item>
-        <item>@drawable/ic_photos</item>
-        <item>@drawable/ic_pages</item>
-        <item>@drawable/ic_communities</item>
-        <item>@drawable/ic_people</item>
-        <item>@drawable/ic_whats_hot</item>
-        <item>@drawable/ic_action_exit</item>
+        <item>@drawable/ic_newproject</item>
+        <item>@drawable/ic_submittedproject</item>
+        <item>@drawable/ic_savedproject</item>
+        <item>@drawable/ic_tutorial</item>
+        <item>@drawable/ic_workshop</item>
+        <item>@drawable/ic_join</item>
+        <item>@drawable/ic_blog</item>
+        <item>@drawable/ic_quit</item>
     </array>
 
     <!-- Content Description -->
@@ -73,9 +76,14 @@
     </string-array>
 
     <!-- FORMULAIRE -->
-    <string name="project_explane">Helllooo ! Nous avons besoin de quelques précisions pour bien définir le projet : type de cartes, thème, couleurs, délais, personnalisation &#8230;</string>
+    <string name="project_explane">Bonjouuur ! Nous avons besoin de quelques précisions pour bien définir le projet : type de cartes, thème, couleurs, délais, personnalisation &#8230;</string>
     <string name="project_name">Nom du projet</string>
     <string name="card_type">Type de cartes</string>
+    <string name="event_date">Date</string>
+    <string name="people">Personne(s)</string>
+    <string name="person1">Personne 1</string>
+    <string name="person2">Personne 2</string>
+    <string name="to_put_on_card">Afficher sur la carte</string>
     <string name="card_theme">Thématique</string>
     <string name="card_style">Style</string>
     <string name="project_order">Livraison</string>
@@ -110,7 +118,7 @@
     <string name="err_illegal_char">"Quelques caractères farfelue dans cette saisie &#8230;"</string>
     <string name="err_no_theme">"Merci d'indiquer le thème"</string>
     <string name="err_no_style">"Merci d'indiquer le style"</string>
-    
+    <string name="logistic">Logistique</string>
     
     <!-- Submission Dialog -->
     <string name="alert_check">Ultime check !</string>
