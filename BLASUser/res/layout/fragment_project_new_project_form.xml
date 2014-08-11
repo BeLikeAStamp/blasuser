@@ -20,7 +20,7 @@
             android:focusableInTouchMode="true" />
 
         <TextView
-            style="@style/MediumGreen"
+            style="@style/MediumTurquoise3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
@@ -33,7 +33,7 @@
             android:paddingBottom="5dp" >
 
             <TextView
-                style="@style/MediumPink"
+                style="@style/MediumTurquoise2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="5dp"
@@ -48,7 +48,7 @@
         </LinearLayout>
 
         <TextView
-            style="@style/MediumPink"
+            style="@style/MediumTurquoise2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
@@ -57,7 +57,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:background="#DE3764" />
+            android:background="@color/turquoise2" />
 
         <Spinner
             android:id="@+id/card_type_spinner"
@@ -76,17 +76,18 @@
                 style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="10dp"
                 android:text="@string/event_date" />
 
             <Button
                 android:id="@+id/event_date"
-                style="@style/MediumHGray"
+                style="@style/btnStyleActionTurquoise2Inv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
         <TextView
-            style="@style/MediumPink"
+            style="@style/MediumTurquoise2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
@@ -95,7 +96,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:background="#DE3764" />
+            android:background="@color/turquoise2" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -208,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical"
-                android:visibility="visible" >
+                android:visibility="gone" >
 
                 <TextView
                     style="@style/MediumHGray"
@@ -334,7 +335,7 @@
         </LinearLayout>
 
         <TextView
-            style="@style/MediumPink"
+            style="@style/MediumTurquoise2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
@@ -343,7 +344,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:background="#DE3764" />
+            android:background="@color/turquoise2" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -368,27 +369,8 @@
                 android:text="@string/un" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal" >
-
-            <TextView
-                style="@style/MediumGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/for_when" />
-
-            <Button
-                android:id="@+id/select_date"
-                style="@style/MediumHGray"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
         <TextView
-            style="@style/MediumPink"
+            style="@style/MediumTurquoise2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
@@ -397,7 +379,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:background="#DE3764" />
+            android:background="@color/turquoise2" />
 
         <TextView
             style="@style/MediumGray"
@@ -458,11 +440,11 @@
 
         <Button
             android:id="@+id/btn_continue"
-            style="@style/btnStyleActionPink"
-            android:layout_width="wrap_content"
+            style="@style/btnStyleActionTurquoise2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="@string/continu" />
     </LinearLayout>
 

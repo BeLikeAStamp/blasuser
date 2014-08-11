@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,8 @@ public class NavDrawerListAdapter extends BaseAdapter {
          
         imgIcon.setImageResource(navDrawerItems.get(position).getIcon());        
         txtTitle.setText(navDrawerItems.get(position).getTitle());
+        txtTitle.setTextColor(context.getResources().getColor(R.color.turquoise2));
+        txtTitle.setTypeface(Typeface.SERIF);
         
         // displaying count
         // check whether it set visible or not

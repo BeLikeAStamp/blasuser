@@ -3,7 +3,8 @@
     
     <!-- A CHANGER !!!  -->
     <string name="contact_email">andronekomimi@gmail.com</string>
-    <string name="app_name">DWBC</string>
+    <string name="app_name_short">DWBC</string>
+    <string name="app_name">Don\'t Worry, Be Crafty!</string>
     <string name="welcome">Welcome</string>
     <string name="loading">Chargement des données &#8230;</string>
     <string name="cxn_alert">Information réseau</string>

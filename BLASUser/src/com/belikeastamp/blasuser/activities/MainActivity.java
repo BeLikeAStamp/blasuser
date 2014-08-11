@@ -103,6 +103,8 @@ public class MainActivity extends Activity {
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.banniere));
+		
 
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_navigation_drawer, //nav menu toggle icon
