@@ -15,9 +15,8 @@ public class ProjectData extends Application {
 	public static SparseArray<String> colorName;
 	public static Map<String,Integer> reverseColorMap;
 	
-	private String projectTheme;
 	private String projectType;
-	private String projectStyle;
+	private String projectDetail;
 	private String projectName;
 	private String numberOfCards;
 	private String submitDate;
@@ -30,9 +29,8 @@ public class ProjectData extends Application {
 	
 	public ProjectData() {
 		super();
-		projectTheme = "";
 		projectType = "";
-		projectStyle = "";
+		projectDetail = "";
 		projectName = "";
 		numberOfCards = "";
 		submitDate = "";
@@ -65,12 +63,7 @@ public class ProjectData extends Application {
 	public int getColor3() {
 		return this.colorPanel[2];
 	}
-	public String getProjectTheme() {
-		return projectTheme;
-	}
-	public void setProjectTheme(String projectTheme) {
-		this.projectTheme = projectTheme;
-	}
+
 	public String getProjectType() {
 		return projectType;
 	}
@@ -107,11 +100,11 @@ public class ProjectData extends Application {
 	public void setPerso(PersoSubject perso) {
 		this.perso = perso;
 	}
-	public String getProjectStyle() {
-		return projectStyle;
+	public String getProjectDetail() {
+		return projectDetail;
 	}
-	public void setProjectStyle(String projectStyle) {
-		this.projectStyle = projectStyle;
+	public void setProjectDetail(String projectDetail) {
+		this.projectDetail = projectDetail;
 	}
 	public String getInfos() {
 		return infos;
@@ -125,16 +118,16 @@ public class ProjectData extends Application {
 	public void setTrackFile(Uri trackFile) {
 		this.trackFile = trackFile;
 	}
+
 	@Override
 	public String toString() {
-		return "ProjectData [projectTheme=" + projectTheme + ", projectType="
-				+ projectType + ", projectStyle=" + projectStyle
-				+ ", projectName=" + projectName + ", numberOfCards="
-				+ numberOfCards + ", submitDate=" + submitDate + ", orderDate="
-				+ orderDate + ", colorPanel=" + Arrays.toString(colorPanel)
-				+ ", perso=" + perso + "]";
+		return "ProjectData [projectType=" + projectType + ", projectDetail="
+				+ projectDetail + ", projectName=" + projectName
+				+ ", numberOfCards=" + numberOfCards + ", submitDate="
+				+ submitDate + ", orderDate=" + orderDate + ", colorPanel="
+				+ Arrays.toString(colorPanel) + ", perso=" + perso
+				+ ", trackFile=" + trackFile + ", infos=" + infos + "]";
 	}
-
 	private void fillMap() {
 
 		colorName = new SparseArray<String>();

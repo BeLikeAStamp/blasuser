@@ -3,9 +3,6 @@ package com.belikeastamp.blasuser.fragments;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.DialogFragment;
@@ -24,11 +21,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -44,19 +43,19 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	private ProjectData globalVariable;
 	private Spinner card_type_spinner;
-	private EditText project_name;
+	private EditText project_name, age1, age2, nbrYears, prenom1, prenom2;
 	private Button eventDate, continuer;
 	private GridView gridView1;
 	private ImageView color1, color2, color3;
+	private LinearLayout person2Layout, eventDateLayout, nbrYearsLayout;
+	private CheckBox putFirstName, putAge;
+	private RadioGroup sexe1, sexe2;
+
 	private boolean[] selectedColors = new boolean[3];
 	private ArrayList<ImageView> selectedColorsList = new ArrayList<ImageView>();
 	private ArrayList<ColorPicker> colorPickerArray1;
-	private LinearLayout person2Layout, eventDateLayout;
-	
-	final static int BACKINTIME = 1;
-	final static int IMPOSSIBLE = 2;
-	final static int NOINFOS = 3;
-	final static int FAISABLE = 4;
+
+
 
 	private static final int ENTRY_OK = 0;
 	private static final int ILLEGAL_CHAR = 1;
@@ -79,23 +78,47 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		globalVariable = (ProjectData) getActivity().getApplicationContext();
-		
+
+		// nom de projet
 		project_name = (EditText) this.getView().findViewById(R.id.project_name);
+
+		// type de carte
 		card_type_spinner = (Spinner) this.getView().findViewById(R.id.card_type_spinner);
-		//selectDate = (Button) this.getView().findViewById(R.id.select_date);
+
+		// personnalisation nominative
+		person2Layout = (LinearLayout) this.getView().findViewById(R.id.perso2);
+		prenom1 = (EditText) this.getView().findViewById(R.id.firstname1);
+		prenom2 = (EditText) this.getView().findViewById(R.id.firstname2);
+		age1 = (EditText) this.getView().findViewById(R.id.age1);
+		age2 = (EditText) this.getView().findViewById(R.id.age2);
+		sexe1 = (RadioGroup) this.getView().findViewById(R.id.sexechoice1);
+		sexe2 = (RadioGroup) this.getView().findViewById(R.id.sexechoice2);
+
+		// precision type-dependant
+		eventDateLayout = (LinearLayout) this.getView().findViewById(R.id.layout_date);
+		nbrYearsLayout = (LinearLayout) this.getView().findViewById(R.id.layout_nbr_years);
 		eventDate = (Button) this.getView().findViewById(R.id.event_date);
+		nbrYears = (EditText) this.getView().findViewById(R.id.nbr_years);
+
+		// A afficher sur la carte
+		putFirstName = (CheckBox) this.getView().findViewById(R.id.put_firstname);
+		putAge = (CheckBox) this.getView().findViewById(R.id.put_age);
+
+		// les couleurs
 		gridView1 = (GridView)getView().findViewById(R.id.color_grid1);
 		color1 = (ImageView) getView().findViewById(R.id.selected_color1);
 		color2 = (ImageView) getView().findViewById(R.id.selected_color2);
 		color3 = (ImageView) getView().findViewById(R.id.selected_color3);
+
+		// validation
 		continuer = (Button) this.getView().findViewById(R.id.btn_continue);
-		person2Layout = (LinearLayout) this.getView().findViewById(R.id.perso2);
-		eventDateLayout = (LinearLayout) this.getView().findViewById(R.id.layout_date);
-		
+
+		/*************************** LES CHOSES SERIEUSES COMMENCENT **********************************/
+
+		globalVariable = (ProjectData) getActivity().getApplicationContext();
 		setDate(delay);
 		globalVariable.setSubmitDate(getDate(today));
-		
+
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(),
 				R.array.type_arrays, R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
@@ -108,23 +131,32 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 					int position, long id) {
 				//  Auto-generated method stub
 				globalVariable.setProjectType((String)parent.getItemAtPosition(position));
-				
+
 				if(globalVariable.getProjectType().equals("Anniversaires")) {
 					person2Layout.setVisibility(View.VISIBLE);
 				}
 				else
 				{
 					person2Layout.setVisibility(View.GONE);
-					
+
 				}
-				
+
 				if(globalVariable.getProjectType().equals("Save The Date")) {
 					eventDateLayout.setVisibility(View.VISIBLE);
 				}
 				else
 				{
 					eventDateLayout.setVisibility(View.GONE);
-					
+
+				}
+
+				if(globalVariable.getProjectType().equals("Saint Valentin")) {
+					nbrYearsLayout.setVisibility(View.VISIBLE);
+				}
+				else
+				{
+					nbrYearsLayout.setVisibility(View.GONE);
+
 				}
 			}
 
@@ -136,16 +168,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 
 		});
-		
-		/*
-		selectDate.setOnClickListener(new OnClickListener() {  
-			@Override  
-			public void onClick(View v) {  
-				DialogFragment newFragment = new DatePickerDialogFragment(callback);  
-				newFragment.show(getFragmentManager(), "datePicker");
-			}  
-		});*/
-		
+
 		eventDate.setOnClickListener(new OnClickListener() {  
 			@Override  
 			public void onClick(View v) {  
@@ -153,11 +176,11 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				newFragment.show(getFragmentManager(), "datePicker");
 			}  
 		});
-		
+
 		color1.setOnClickListener(new RazOnClickListener());
 		color2.setOnClickListener(new RazOnClickListener());
 		color3.setOnClickListener(new RazOnClickListener());
-		
+
 		Arrays.fill(selectedColors, false);
 		selectedColorsList.add(color1);
 		selectedColorsList.add(color2);
@@ -172,7 +195,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				// TODO Auto-generated method stub
+				
 				if(selectedColors[2]&&selectedColors[1]&&selectedColors[0])
 					Toast.makeText(getActivity().getApplicationContext(), R.string.color_warning, Toast.LENGTH_LONG).show();
 				else
@@ -193,10 +216,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 
 		});
-		
 
-		
-		
 		continuer.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -228,68 +248,17 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				}
 			}
 		});
-		
-		/*
-		card_num = (EditText) this.getView().findViewById(R.id.card_num);
-		
-
-		
-		globalVariable.setSubmitDate(getDate(today));
-
-	
-		/*
-		other_style.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				//  Auto-generated method stub
-
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				//  Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				//  Auto-generated method stub
-				globalVariable.setProjectStyle(s.toString());
-			}
-		});
-*/
-
-		/*
-
-*/
-
 	}
 
 
 
-	protected int isFaisable() {
-		int faisable = -1;
 
-		if(delay == today) faisable = NOINFOS;
-		else if (delay < today) {
-			faisable = BACKINTIME;
-		}
-		else if (delay - today < WEEK) {
-			faisable = IMPOSSIBLE;
-		}
-		else faisable = FAISABLE;
-
-		return faisable;
-	}
 
 	private void setDate(long millisecond){  
 		int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
 				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
 				| DateUtils.FORMAT_ABBREV_WEEKDAY;  
 		String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);
-		//selectDate.setText(dateString);  
 		eventDate.setText(dateString);  
 	}
 
@@ -341,7 +310,59 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		}
 
 		Log.i("checkEntries", "project_name = "+everythin_good);
-/*
+		
+		// check personnalisation data
+		if(putFirstName.isChecked()) {
+			if(prenom1.getText().toString().length() == 0) {
+				everythin_good = false;
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_firstname);
+				prenom1.setError(msg);
+			}
+
+			if(person2Layout.isShown()) {
+				if(prenom2.getText().toString().length() == 0) {
+					everythin_good = false;
+					msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_firstname);
+					prenom2.setError(msg);
+				}
+			}
+		}
+		
+		if(putAge.isChecked()) {
+			if(age1.getText().toString().length() == 0) {
+				everythin_good = false;
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_age);
+				age1.setError(msg);
+			}
+
+			if(person2Layout.isShown()) {
+				if(age2.getText().toString().length() == 0) {
+					everythin_good = false;
+					msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_age);
+					age2.setError(msg);
+				}
+			}
+		}
+		
+		// check color set
+		if((!selectedColors[2]) && (!selectedColors[1]) && (!selectedColors[0]))
+		{
+			everythin_good = false;
+			Toast.makeText(getActivity().getApplicationContext(), R.string.nocolor_warning, Toast.LENGTH_SHORT).show();
+		}
+		
+		
+		//check precision
+		if (nbrYearsLayout.isShown())
+		{
+			if(Integer.valueOf(nbrYears.getText().toString()).equals(Integer.valueOf(0))) {
+				everythin_good = false;
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_nbr_years);
+				nbrYears.setError(msg);
+			}
+		}
+		
+		/*
 		if(other_theme.isShown()) {
 			// check other theme
 			ret = checkEntry(other_theme.getText().toString());
@@ -387,45 +408,72 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		}
 
-		Log.i("checkEntries", "card num = "+everythin_good);
+		
 
-		if(Integer.valueOf(card_num.getText().toString()) == 0)
-		{
-			everythin_good = false;
-			msg = getActivity().getApplicationContext().getResources().getString(R.string.zero_card);
-			card_num.setError(msg);
-		}
-		else
-		{
-			globalVariable.setNumberOfCards(card_num.getText().toString());
-		}
+		/*
 
+		firstname.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				perso.setName(s.toString());
+			}
+		});
+
+
+		age.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				perso.setAge(s.toString());
+			}
+		});
+
+
+		gender.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				// TODO Auto-generated method stub
+				if(checkedId == R.id.male) {
+					perso.setSexe("M");
+
+				}
+				else
+				{
+					perso.setSexe("F");
+				}
+			}
+		});
 */
-
-		/*switch (isFaisable()) {
-
-		case FAISABLE:
-			globalVariable.setOrderDate(selectDate.getText().toString());
-			break;
-		case IMPOSSIBLE:
-			Toast.makeText(getActivity().getApplicationContext(), 
-					getActivity().getApplicationContext().getResources().getString(R.string.mission_impossible), Toast.LENGTH_LONG).show() ;
-			everythin_good = false;
-			break;
-		case NOINFOS:
-			Toast.makeText(getActivity().getApplicationContext(),
-					getActivity().getApplicationContext().getResources().getString(R.string.infos_manquantes), Toast.LENGTH_LONG).show();
-			everythin_good = false;
-			break;
-		case BACKINTIME:
-			Toast.makeText(getActivity().getApplicationContext(),
-					getActivity().getApplicationContext().getResources().getString(R.string.back_in_time), Toast.LENGTH_LONG).show();
-			everythin_good = false;
-			break;
-		default:
-			break;
-		}*/
-
 		Log.i("checkEntries", "faisable = "+everythin_good);
 
 		return everythin_good;
@@ -454,7 +502,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		return ret;
 	}
-	
+
 	public ArrayList<ColorPicker> getColorCat1() {
 		ArrayList<ColorPicker> list = new ArrayList<ColorPicker>();
 		// tendances

@@ -12,10 +12,9 @@ public class Project implements Serializable {
 	private static final long serialVersionUID = -8213396978710850752L;
 
 	private String name;
+	private String detail;
 	private String subDate;
-	private String theme;
 	private String type;
-	private String style;
 	private String orderDate;
 	private String path_to_prototype;
 	private Uri path_to_track;
@@ -30,14 +29,13 @@ public class Project implements Serializable {
 
 
 	public Project(String project_name, String sub_date, int project_status,
-			String theme, String type, String style, String order_date, int nbr_cards, String perso) {
+			String detail, String type, String order_date, int nbr_cards, String perso) {
 		super();
 		this.name = project_name;
 		this.subDate = sub_date;
 		this.status = project_status;
-		this.theme = theme;
+		this.detail = detail;
 		this.type = type;
-		this.style = style;
 		this.orderDate = order_date;
 		this.quantity = nbr_cards;
 		this.perso = perso;
@@ -52,6 +50,18 @@ public class Project implements Serializable {
 		this.name = name;
 	}
 
+	public String getDetail() {
+		return detail;
+	}
+
+
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+
+
 	public String getSubDate() {
 		return subDate;
 	}
@@ -60,13 +70,6 @@ public class Project implements Serializable {
 		this.subDate = subDate;
 	}
 
-	public String getTheme() {
-		return theme;
-	}
-
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
 
 	public String getType() {
 		return type;
@@ -74,16 +77,6 @@ public class Project implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public String getStyle() {
-		return style;
-	}
-
-
-
-	public void setStyle(String style) {
-		this.style = style;
 	}
 
 	public String getOrderDate() {
@@ -126,37 +119,25 @@ public class Project implements Serializable {
 		this.remoteId = remoteId;
 	}
 
-
-
 	public String getPerso() {
 		return perso;
 	}
-
-
 
 	public void setPerso(String perso) {
 		this.perso = perso;
 	}
 
-
-
 	public String getColors() {
 		return colors;
 	}
-
-
 
 	public void setColors(String colors) {
 		this.colors = colors;
 	}
 
-
-
 	public Uri getPath_to_track() {
 		return path_to_track;
 	}
-
-
 
 	public void setPath_to_track(Uri path_to_track) {
 		this.path_to_track = path_to_track;
@@ -166,8 +147,8 @@ public class Project implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Project [name=" + name + "\nsubDate=" + subDate + "\ntheme="
-				+ theme + "\ntype=" + type + "\nstyle=" + style
+		return "Project [name=" + name + "\nsubDate=" + subDate + "\ndetail="
+				+ detail + "\ntype=" + type
 				+ "\norderDate=" + orderDate + "\nperso=" + perso + "\ncolors="
 				+ colors + "\nstatus=" + status + "\nquantity=" + quantity
 				+ "\nremoteId=" + remoteId + "]";

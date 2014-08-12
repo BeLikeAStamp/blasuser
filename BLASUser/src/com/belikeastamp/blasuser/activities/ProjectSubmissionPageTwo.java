@@ -140,9 +140,8 @@ public class ProjectSubmissionPageTwo extends Activity {
 			layoutParams.setMargins(30, 20, 30, 30);
 
 			TextView projectName = new TextView(getActivity());
-			TextView cardTheme = new TextView(getActivity());
 			TextView cardType = new TextView(getActivity());
-			TextView cardStyle = new TextView(getActivity());
+			TextView cardDetail = new TextView(getActivity());
 			TextView nbrCards = new TextView(getActivity());
 			TextView delay = new TextView(getActivity());
 			TextView colors = new TextView(getActivity());
@@ -185,8 +184,8 @@ public class ProjectSubmissionPageTwo extends Activity {
 			}
 
 			final Project p = new Project(data.getProjectName(), 
-					data.getSubmitDate(), -1, data.getProjectTheme(),
-					data.getProjectType(), data.getProjectStyle(), data.getOrderDate(),
+					data.getSubmitDate(), -1, data.getProjectDetail(),
+					data.getProjectType(), data.getOrderDate(),
 					Integer.valueOf(data.getNumberOfCards()),
 					(data.getPerso() == null ? "anonymous" : data.getPerso().toString()));
 
@@ -196,9 +195,8 @@ public class ProjectSubmissionPageTwo extends Activity {
 			Log.d("PROJECT BEFORE SAVING ",p.toString());
 			
 			projectName.setText(getResources().getString(R.string.project_name)+" : "+data.getProjectName());
-			cardTheme.setText(getResources().getString(R.string.card_theme)+" : "+data.getProjectTheme());
 			cardType.setText(getResources().getString(R.string.card_type)+" : "+data.getProjectType());
-			cardStyle.setText(getResources().getString(R.string.card_style)+" : "+data.getProjectStyle());
+			cardDetail.setText(getResources().getString(R.string.card_style)+" : "+data.getProjectDetail());
 			nbrCards.setText(getResources().getString(R.string.how_many_cards)+" : "+data.getNumberOfCards());
 			delay.setText(getResources().getString(R.string.for_when)+" : "+data.getOrderDate());
 			colors.setText(getResources().getString(R.string.color_set)+" : ");
@@ -207,8 +205,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 
 			layout.addView(projectName, layoutParams);
 			layout.addView(cardType, layoutParams);
-			layout.addView(cardTheme, layoutParams);
-			layout.addView(cardStyle, layoutParams);
+			layout.addView(cardDetail, layoutParams);
 			layout.addView(nbrCards, layoutParams);
 			layout.addView(delay, layoutParams);
 			layout.addView(colors, layoutParams);

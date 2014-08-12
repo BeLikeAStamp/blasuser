@@ -25,9 +25,9 @@ public class SubmitProjectsFragment extends ListFragment {
 	    super.onActivityCreated(savedInstanceState);
 	    
 	    List<Project> projects = new ArrayList<Project>();
-	    Project p1 = new Project("name1", "1", 2 , "theme1", "type1", "style1","1", 12, null); p1.setRemoteId(Long.valueOf(1));
-	    Project p2 = new Project("name2", "1", 0 , "theme2", "type2", "style2", "1", 1, null); p2.setRemoteId(Long.valueOf(2));
-	    Project p3 = new Project("name3", "1", 4 , "theme3", "type3", "style3", "1", 122, null); p3.setRemoteId(Long.valueOf(3));
+	    Project p1 = new Project("name1", "1", 2 , "detail1", "type1", "1", 12, null); p1.setRemoteId(Long.valueOf(1));
+	    Project p2 = new Project("name2", "1", 0 , "detail2", "type2", "1", 1, null); p2.setRemoteId(Long.valueOf(2));
+	    Project p3 = new Project("name3", "1", 4 , "detail3", "type3", "1", 122, null); p3.setRemoteId(Long.valueOf(3));
 	    
 	    projects.add(p3); projects.add(p1); projects.add(p2);
 	   

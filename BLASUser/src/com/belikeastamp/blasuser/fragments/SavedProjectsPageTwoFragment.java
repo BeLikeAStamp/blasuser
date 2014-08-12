@@ -17,8 +17,7 @@ public class SavedProjectsPageTwoFragment extends Fragment {
 
 	private TextView projectName;
 	private TextView type;
-	private TextView theme;
-	private TextView style;
+	private TextView detail;
 	private TextView nbrCards;
 	private TextView orderDate;
 	private TextView perso;
@@ -43,8 +42,7 @@ public class SavedProjectsPageTwoFragment extends Fragment {
 
 		projectName = (TextView) getView().findViewById(R.id.project_name);
 		type = (TextView) getView().findViewById(R.id.card_type);
-		theme = (TextView) getView().findViewById(R.id.card_theme);
-		style = (TextView) getView().findViewById(R.id.card_style);
+		detail = (TextView) getView().findViewById(R.id.card_theme);
 		nbrCards = (TextView) getView().findViewById(R.id.number);
 		orderDate = (TextView) getView().findViewById(R.id.date);
 		perso = (TextView) getView().findViewById(R.id.perso);
@@ -54,8 +52,7 @@ public class SavedProjectsPageTwoFragment extends Fragment {
 
 		projectName.setText(project.getName());
 		type.setText(project.getType());
-		theme.setText(project.getTheme());
-		style.setText(project.getStyle());
+		detail.setText(project.getDetail());
 		perso.setText(project.getPerso() != null ? project.getPerso() : "anonyme");
 		nbrCards.setText(""+project.getQuantity());
 		orderDate.setText(project.getOrderDate());

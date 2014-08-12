@@ -81,7 +81,8 @@
     <string name="project_name">Nom du projet</string>
     <string name="card_type">Type de cartes</string>
     <string name="event_date">Date</string>
-    <string name="people">Personne(s)</string>
+    <string name="nbr_years">Nombre d\'années</string>
+    <string name="people">Pour qui ?</string>
     <string name="person1">Personne 1</string>
     <string name="person2">Personne 2</string>
     <string name="to_put_on_card">Afficher sur la carte</string>
@@ -90,6 +91,7 @@
     <string name="project_order">Livraison</string>
     <string name="how_many_cards">Combien de cartes</string>
     <string name="un">1</string>
+    <string name="zero">0</string>
     <string name="for_when">Pour quand ?</string>
     <string name="continu">Continuer</string>
     <string name="mission_impossible">Désolé nous n\'avons que 4 mains :(</string>
@@ -119,7 +121,17 @@
     <string name="err_illegal_char">"Quelques caractères farfelue dans cette saisie &#8230;"</string>
     <string name="err_no_theme">"Merci d'indiquer le thème"</string>
     <string name="err_no_style">"Merci d'indiquer le style"</string>
+    <string name="err_no_firstname">"Ça va être difficile d'afficher le prénom là"</string>
+    <string name="err_no_age">"Ça va être difficile d'afficher l\'âge là"</string>
+    <string name="err_no_nbr_years">"Même pas les noces de coton ???"</string>
+    <string name="err_too_big">"Pour de gros projet me contacter à l'adresse mail : %1s"</string>
     <string name="logistic">Logistique</string>
+    <string name="time">Lieu et heure</string>
+    <string name="hour">Heure</string>
+    <string name="poids">Poids</string>
+    <string name="taille">Taille</string>
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
     
     <!-- Submission Dialog -->
     <string name="alert_check">Ultime check !</string>

@@ -48,7 +48,7 @@ public class SavedProjectAdapter extends BaseAdapter {
 	public class Holder
     {
         TextView name;
-        TextView theme;
+        TextView type;
         TextView date;
         ImageView track;
     }
@@ -63,12 +63,12 @@ public class SavedProjectAdapter extends BaseAdapter {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			rowView = inflater.inflate(R.layout.listview_saved_project, null);
 			TextView name = (TextView) rowView.findViewById(R.id.name);
-			TextView theme = (TextView) rowView.findViewById(R.id.theme);
+			TextView type = (TextView) rowView.findViewById(R.id.theme);
 			TextView date = (TextView) rowView.findViewById(R.id.date);
 			ImageView track = (ImageView) rowView.findViewById(R.id.track);
 			
 			holder.name = name;
-			holder.theme = theme;
+			holder.type = type;
 			holder.date = date;
 			holder.track = track;
 			
@@ -82,7 +82,7 @@ public class SavedProjectAdapter extends BaseAdapter {
 		Project p = list.get(position);
 		Log.d("BLASUSER", "Project "+p.toString());
 		holder.name.setText(p.getName());		
-		holder.theme.setText(p.getTheme());
+		holder.type.setText(p.getType());
 		holder.date.setText(p.getSubDate());
 		
 		if (p.getPath_to_track() != null) holder.track.setImageURI(p.getPath_to_track());;

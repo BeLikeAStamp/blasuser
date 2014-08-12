@@ -40,10 +40,9 @@ public class ProjectsData {
 		values.put(DatabaseHandler.P_NAME, project.getName());
 		values.put(DatabaseHandler.P_SUBDATE, project.getSubDate());
 		values.put(DatabaseHandler.P_STATUS, project.getStatus());
-		values.put(DatabaseHandler.P_THEME, project.getTheme());
 		values.put(DatabaseHandler.P_TYPE, project.getType());
-		values.put(DatabaseHandler.P_STYLE, project.getStyle());
-		values.put(DatabaseHandler.P_ORDERDATA, project.getOrderDate());
+		values.put(DatabaseHandler.P_DETAIL, project.getDetail());
+		values.put(DatabaseHandler.P_ORDERDATE, project.getOrderDate());
 		values.put(DatabaseHandler.P_NBRCARDS, project.getQuantity());
 		values.put(DatabaseHandler.P_COLORS, project.getColors());
 		
@@ -57,10 +56,9 @@ public class ProjectsData {
 				DatabaseHandler.P_NAME, 
 				DatabaseHandler.P_SUBDATE,
 				DatabaseHandler.P_STATUS,
-				DatabaseHandler.P_THEME,
 				DatabaseHandler.P_TYPE,
-				DatabaseHandler.P_STYLE,
-				DatabaseHandler.P_ORDERDATA,
+				DatabaseHandler.P_DETAIL,
+				DatabaseHandler.P_ORDERDATE,
 				DatabaseHandler.P_NBRCARDS,
 				DatabaseHandler.P_REMOTEID,
 				DatabaseHandler.P_COLORS,
@@ -153,9 +151,9 @@ public class ProjectsData {
 		Project project = new Project();
 		project.setName(cursor.getString(0));
 		project.setSubDate(cursor.getString(1));
-		project.setTheme(cursor.getString(2));
+		project.setStatus(Integer.valueOf(cursor.getString(2)));
 		project.setType(cursor.getString(3));
-		project.setStyle(cursor.getString(4));
+		project.setDetail(cursor.getString(4));
 		project.setOrderDate(cursor.getString(5));
 		project.setStatus(cursor.getInt(6));
 		project.setQuantity(cursor.getInt(7));
@@ -180,9 +178,9 @@ public class ProjectsData {
 				DatabaseHandler.P_NAME, 
 				DatabaseHandler.P_SUBDATE,
 				DatabaseHandler.P_STATUS,
-				DatabaseHandler.P_THEME,
+				DatabaseHandler.P_DETAIL,
 				DatabaseHandler.P_TYPE,
-				DatabaseHandler.P_ORDERDATA,
+				DatabaseHandler.P_ORDERDATE,
 				DatabaseHandler.P_NBRCARDS,
 				DatabaseHandler.P_REMOTEID,
 				DatabaseHandler.P_COLORS,

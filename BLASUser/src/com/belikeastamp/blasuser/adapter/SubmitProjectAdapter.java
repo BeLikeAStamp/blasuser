@@ -52,7 +52,7 @@ public class SubmitProjectAdapter extends BaseAdapter {
 	public class Holder
     {
         TextView name;
-        TextView theme;
+        TextView type;
         TextView status;
         ImageView img;
     }
@@ -67,12 +67,12 @@ public class SubmitProjectAdapter extends BaseAdapter {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			rowView = inflater.inflate(R.layout.listview_submit_project, null);
 			TextView name = (TextView) rowView.findViewById(R.id.name);
-			TextView theme = (TextView) rowView.findViewById(R.id.theme);
+			TextView type = (TextView) rowView.findViewById(R.id.theme);
 			TextView status = (TextView) rowView.findViewById(R.id.status);
 			ImageView proto = (ImageView) rowView.findViewById(R.id.proto);
 			
 			holder.name = name;
-			holder.theme = theme;
+			holder.type = type;
 			holder.status = status;
 			holder.img = proto;
 			
@@ -86,7 +86,7 @@ public class SubmitProjectAdapter extends BaseAdapter {
 		Project p = list.get(position);
 		Log.d("BLASUSER", "Project "+p.toString());
 		holder.name.setText(p.getName());		
-		holder.theme.setText(p.getTheme());
+		holder.type.setText(p.getType());
 		holder.status.setText(status[p.getStatus()]);
 		holder.img.setImageURI(prototypes.get(p.getRemoteId()));
 		
