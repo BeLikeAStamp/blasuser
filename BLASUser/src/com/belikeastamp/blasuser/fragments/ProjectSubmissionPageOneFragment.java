@@ -3,11 +3,13 @@ package com.belikeastamp.blasuser.fragments;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -39,13 +42,14 @@ import com.belikeastamp.blasuser.db.dao.ProjectsData;
 import com.belikeastamp.blasuser.util.ColorPicker;
 import com.belikeastamp.blasuser.util.ColorPickerAdapter;
 import com.belikeastamp.blasuser.util.DatePickerDialogFragment;
+import com.belikeastamp.blasuser.util.HourPickerDialogFragment;
 import com.belikeastamp.blasuser.util.ProjectData;
 
 public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	private ProjectData globalVariable;
 	private Spinner card_type_spinner;
-	private EditText project_name, age1, ame1, titre1;
+	private EditText project_name;
 	private Button continuer;
 	private GridView gridView1;
 	private ImageView color1, color2, color3;
@@ -87,7 +91,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		// personnalisation
 		viewflipper = (ViewFlipper)this.getView().findViewById(R.id.vf);
 		viewflipper.setMeasureAllChildren(false);
-		
+
 		// A afficher sur la carte
 		putName = (CheckBox) this.getView().findViewById(R.id.put_name);
 		putAge = (CheckBox) this.getView().findViewById(R.id.put_age);
@@ -122,21 +126,27 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				switch (position) {
 				case 4:
 					viewflipper.setDisplayedChild(2);
+					prepareLayout3();
 					break;
 				case 10:
 					viewflipper.setDisplayedChild(3);
+					prepareLayout4();
 					break;
 				case 11:
 					viewflipper.setDisplayedChild(1);
+					prepareLayout2();
 					break;
 				case 12:
 					viewflipper.setDisplayedChild(4);
+					prepareLayout6();
 					break;
 				case 13:
 					viewflipper.setDisplayedChild(5);
+					prepareLayout7();
 					break;
 				default:
 					viewflipper.setDisplayedChild(0);
+					prepareLayout1();
 					break;
 				}
 
@@ -224,39 +234,171 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		});*/
 	}
 
+	private void prepareLayout1() {
+		View myLayout = getView().findViewById(R.id.layout1);
+		Spinner gender = (Spinner) myLayout.findViewById(R.id.gender); 
+		EditText name = (EditText) myLayout.findViewById(R.id.firstname);
+		Spinner age_type = (Spinner) myLayout.findViewById(R.id.age_type);
+		EditText age = (EditText) myLayout.findViewById(R.id.age);
+
+		gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("gender1",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		age_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("age-type",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		globalVariable.addNewDetails("name1", name.getText().toString());
+		globalVariable.addNewDetails("age1", age.getText().toString());
 
 
-	private String getDate(long millisecond){  
-		int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
-				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
-				| DateUtils.FORMAT_ABBREV_WEEKDAY;  
-		String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);  
-		return dateString;  
 	}
 
-	/*private void setDate(long millisecond){  
-		int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
-				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
-				| DateUtils.FORMAT_ABBREV_WEEKDAY;  
-		String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);
-		eventDate.setText(dateString);  
-	}
+
+	private void prepareLayout2() {
+		View myLayout = getView().findViewById(R.id.layout2);
+		Spinner gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
+		EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
+		Spinner age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
+		EditText age1 = (EditText) myLayout.findViewById(R.id.age1);
+
+		Spinner gender2 = (Spinner) myLayout.findViewById(R.id.gender2); 
+		EditText name2 = (EditText) myLayout.findViewById(R.id.firstname2);
+		Spinner age_type2 = (Spinner) myLayout.findViewById(R.id.age_type2);
+		EditText age2 = (EditText) myLayout.findViewById(R.id.age2);
+
+		final Button event_date = (Button) myLayout.findViewById(R.id.event_date);
+		final Button event_hour = (Button) myLayout.findViewById(R.id.event_hour);
+
+		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("gender1",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("age-type1",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		globalVariable.addNewDetails("name1", name1.getText().toString());
+		globalVariable.addNewDetails("age1", age1.getText().toString());
+
+		gender2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("gender2",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		age_type2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("age-type2",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		globalVariable.addNewDetails("name2", name2.getText().toString());
+		globalVariable.addNewDetails("age2", age2.getText().toString());
+
+		//globalVariable.addNewDetails("event-date", age2.getText().toString());
+		setDate(delay, event_date);
+		event_hour.setText("00:00");
+
+		event_date.setOnClickListener(new OnClickListener() {  
+			@Override  
+			public void onClick(View v) {  
+				DialogFragment newFragment = new DatePickerDialogFragment(new OnDateSetListener() {
+
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear,
+							int dayOfMonth) {
+						Calendar c = Calendar.getInstance();  
+						c.set(year, monthOfYear, dayOfMonth);
+						delay = c.getTime().getTime();
+						setDate(c.getTime().getTime(),event_date); 
+
+					}
+				} );  
+				newFragment.show(getFragmentManager(), "datePicker");
+			}  
+		});
+
+		event_hour.setOnClickListener(new OnClickListener() {  
+			@Override  
+			public void onClick(View v) {  
+				DialogFragment newFragment = new HourPickerDialogFragment(new TimePickerDialog.OnTimeSetListener() {
+
+							@Override
+							public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+								// TODO Auto-generated method stub
+								final Calendar c = Calendar.getInstance();
+								c.set(hourOfDay,minute);
+								event_hour.setText(hourOfDay+":"+minute);
+							}
+							
+						});
+				
+				newFragment.show(getFragmentManager(), "hourPicker");
+			}
+		});
+	}			
+
+		private void prepareLayout3() {
+			// TODO Auto-generated method stub
+
+		}
+
+		private void prepareLayout4() {
+			// TODO Auto-generated method stub
+
+		}
+
+		private void prepareLayout6() {
+			// TODO Auto-generated method stub
+
+		}
+
+		private void prepareLayout7() {
+			// TODO Auto-generated method stub
+
+		}
 
 
 
-	OnDateSetListener callback = new OnDateSetListener() {  
+		private String getDate(long millisecond){  
+			int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
+					| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
+					| DateUtils.FORMAT_ABBREV_WEEKDAY;  
+			String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);  
+			return dateString;  
+		}
 
-		@Override  
-		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {  
-			Calendar c = Calendar.getInstance();  
-			c.set(year, monthOfYear, dayOfMonth);
-			delay = c.getTime().getTime();
-			setDate(c.getTime().getTime());  
+		private void setDate(long millisecond, Button v){  
+			int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
+					| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
+					| DateUtils.FORMAT_ABBREV_WEEKDAY;  
+			String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);
+			v.setText(dateString);  
+		}
 
-		}  
-	}; 
-	 */
-	/*private boolean checkEntries() {
+		/*private boolean checkEntries() {
 		boolean everythin_good = true;
 		String msg = "";
 		int ret = 0;
@@ -454,109 +596,109 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	}*/
 
 
-	private int checkEntry(String s) {
-		int ret = ENTRY_OK;
-		if((ret = checkUnicity(s)) == ENTRY_OK) {
-			if(!(s.matches("[a-zA-Z0-9_]*"))) ret = ILLEGAL_CHAR;
-			if (s.length() == 0) ret = EMPTY;
+		private int checkEntry(String s) {
+			int ret = ENTRY_OK;
+			if((ret = checkUnicity(s)) == ENTRY_OK) {
+				if(!(s.matches("[a-zA-Z0-9_]*"))) ret = ILLEGAL_CHAR;
+				if (s.length() == 0) ret = EMPTY;
+			}
+
+			return ret;		
 		}
 
-		return ret;		
-	}
+		private int checkUnicity(String s) {
+			int ret = ENTRY_OK;
+			ProjectsData datasource = new ProjectsData(getActivity().getApplicationContext());
 
-	private int checkUnicity(String s) {
-		int ret = ENTRY_OK;
-		ProjectsData datasource = new ProjectsData(getActivity().getApplicationContext());
+			datasource.open();
 
-		datasource.open();
+			if (!(datasource.checkUnicity(s))) {			
+				ret = NOT_UNIQ;
+			}
 
-		if (!(datasource.checkUnicity(s))) {			
-			ret = NOT_UNIQ;
+			return ret;
 		}
 
-		return ret;
-	}
-
-	public ArrayList<ColorPicker> getColorCat1() {
-		ArrayList<ColorPicker> list = new ArrayList<ColorPicker>();
-		// tendances
-		list.add(new ColorPicker(R.color.rasberry_ripple));
-		list.add(new ColorPicker(R.color.summer_starfruit));
-		list.add(new ColorPicker(R.color.midnight_muse));
-		list.add(new ColorPicker(R.color.primrose_petals));
-		list.add(new ColorPicker(R.color.gumball_green));
-		list.add(new ColorPicker(R.color.baked_brown_sugar));
-		list.add(new ColorPicker(R.color.coastal_cabana));
-		list.add(new ColorPicker(R.color.crisp_cantaloupe));
-		list.add(new ColorPicker(R.color.strawberry_slush));
-		list.add(new ColorPicker(R.color.pistachio_pudding));
-		// eclatantes
-		list.add(new ColorPicker(R.color.bermuda_bay));
-		list.add(new ColorPicker(R.color.daffodil_delight));
-		list.add(new ColorPicker(R.color.melon_mambo));
-		list.add(new ColorPicker(R.color.old_olive));
-		list.add(new ColorPicker(R.color.pacific_point));
-		list.add(new ColorPicker(R.color.pumpkin_pie));
-		list.add(new ColorPicker(R.color.real_red));
-		list.add(new ColorPicker(R.color.rich_razzleberry));
-		list.add(new ColorPicker(R.color.tangerine_tango));
-		list.add(new ColorPicker(R.color.tempting_turquoise));
-		// subtiles
-		list.add(new ColorPicker(R.color.blushing_bride));
-		list.add(new ColorPicker(R.color.calypso_coral));
-		list.add(new ColorPicker(R.color.marina_mist));
-		list.add(new ColorPicker(R.color.pear_pizzazz));
-		list.add(new ColorPicker(R.color.pink_pirouette));
-		list.add(new ColorPicker(R.color.pool_party));
-		list.add(new ColorPicker(R.color.so_saffron));
-		list.add(new ColorPicker(R.color.soft_sky));
-		list.add(new ColorPicker(R.color.wild_wasabi));
-		list.add(new ColorPicker(R.color.wisteria_wonder));
-		// gourmandes
-		list.add(new ColorPicker(R.color.always_artichoke));
-		list.add(new ColorPicker(R.color.cajun_craze));
-		list.add(new ColorPicker(R.color.cherry_cobbler));
-		list.add(new ColorPicker(R.color.crushed_curry));
-		list.add(new ColorPicker(R.color.elegant_eggplant));
-		list.add(new ColorPicker(R.color.garden_green));
-		list.add(new ColorPicker(R.color.island_indigo));
-		list.add(new ColorPicker(R.color.night_of_navy));
-		list.add(new ColorPicker(R.color.rose_red));
-		list.add(new ColorPicker(R.color.perfect_plum));
-		// neutres
-		list.add(new ColorPicker(R.color.basic_black));
-		list.add(new ColorPicker(R.color.basic_gray));
-		list.add(new ColorPicker(R.color.chocolate_chip));
-		list.add(new ColorPicker(R.color.crumb_cake));
-		list.add(new ColorPicker(R.color.early_espresso));
-		list.add(new ColorPicker(R.color.sahara_sand));
-		list.add(new ColorPicker(R.color.whisper_white));
-		list.add(new ColorPicker(R.color.smoky_slate));
-		list.add(new ColorPicker(R.color.soft_suede));
-		list.add(new ColorPicker(R.color.very_vanilla));
+		public ArrayList<ColorPicker> getColorCat1() {
+			ArrayList<ColorPicker> list = new ArrayList<ColorPicker>();
+			// tendances
+			list.add(new ColorPicker(R.color.rasberry_ripple));
+			list.add(new ColorPicker(R.color.summer_starfruit));
+			list.add(new ColorPicker(R.color.midnight_muse));
+			list.add(new ColorPicker(R.color.primrose_petals));
+			list.add(new ColorPicker(R.color.gumball_green));
+			list.add(new ColorPicker(R.color.baked_brown_sugar));
+			list.add(new ColorPicker(R.color.coastal_cabana));
+			list.add(new ColorPicker(R.color.crisp_cantaloupe));
+			list.add(new ColorPicker(R.color.strawberry_slush));
+			list.add(new ColorPicker(R.color.pistachio_pudding));
+			// eclatantes
+			list.add(new ColorPicker(R.color.bermuda_bay));
+			list.add(new ColorPicker(R.color.daffodil_delight));
+			list.add(new ColorPicker(R.color.melon_mambo));
+			list.add(new ColorPicker(R.color.old_olive));
+			list.add(new ColorPicker(R.color.pacific_point));
+			list.add(new ColorPicker(R.color.pumpkin_pie));
+			list.add(new ColorPicker(R.color.real_red));
+			list.add(new ColorPicker(R.color.rich_razzleberry));
+			list.add(new ColorPicker(R.color.tangerine_tango));
+			list.add(new ColorPicker(R.color.tempting_turquoise));
+			// subtiles
+			list.add(new ColorPicker(R.color.blushing_bride));
+			list.add(new ColorPicker(R.color.calypso_coral));
+			list.add(new ColorPicker(R.color.marina_mist));
+			list.add(new ColorPicker(R.color.pear_pizzazz));
+			list.add(new ColorPicker(R.color.pink_pirouette));
+			list.add(new ColorPicker(R.color.pool_party));
+			list.add(new ColorPicker(R.color.so_saffron));
+			list.add(new ColorPicker(R.color.soft_sky));
+			list.add(new ColorPicker(R.color.wild_wasabi));
+			list.add(new ColorPicker(R.color.wisteria_wonder));
+			// gourmandes
+			list.add(new ColorPicker(R.color.always_artichoke));
+			list.add(new ColorPicker(R.color.cajun_craze));
+			list.add(new ColorPicker(R.color.cherry_cobbler));
+			list.add(new ColorPicker(R.color.crushed_curry));
+			list.add(new ColorPicker(R.color.elegant_eggplant));
+			list.add(new ColorPicker(R.color.garden_green));
+			list.add(new ColorPicker(R.color.island_indigo));
+			list.add(new ColorPicker(R.color.night_of_navy));
+			list.add(new ColorPicker(R.color.rose_red));
+			list.add(new ColorPicker(R.color.perfect_plum));
+			// neutres
+			list.add(new ColorPicker(R.color.basic_black));
+			list.add(new ColorPicker(R.color.basic_gray));
+			list.add(new ColorPicker(R.color.chocolate_chip));
+			list.add(new ColorPicker(R.color.crumb_cake));
+			list.add(new ColorPicker(R.color.early_espresso));
+			list.add(new ColorPicker(R.color.sahara_sand));
+			list.add(new ColorPicker(R.color.whisper_white));
+			list.add(new ColorPicker(R.color.smoky_slate));
+			list.add(new ColorPicker(R.color.soft_suede));
+			list.add(new ColorPicker(R.color.very_vanilla));
 
 
-		return list;
-	}
+			return list;
+		}
 
-	private class RazOnClickListener implements View.OnClickListener {
+		private class RazOnClickListener implements View.OnClickListener {
 
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			ImageView i = (ImageView) v;
-			i.setBackgroundResource(android.R.color.transparent);
-			switch(i.getId()) {
-			case R.id.selected_color1:
-				selectedColors[0] = false;
-				break;
-			case R.id.selected_color2:
-				selectedColors[1] = false;
-				break;
-			case R.id.selected_color3:
-				selectedColors[2] = false;
-				break;
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ImageView i = (ImageView) v;
+				i.setBackgroundResource(android.R.color.transparent);
+				switch(i.getId()) {
+				case R.id.selected_color1:
+					selectedColors[0] = false;
+					break;
+				case R.id.selected_color2:
+					selectedColors[1] = false;
+					break;
+				case R.id.selected_color3:
+					selectedColors[2] = false;
+					break;
+				}
 			}
 		}
 	}
-}

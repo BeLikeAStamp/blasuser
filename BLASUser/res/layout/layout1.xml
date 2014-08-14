@@ -39,7 +39,7 @@
             android:paddingRight="10dp" />
 
         <EditText
-            android:id="@+id/age1"
+            android:id="@+id/age"
             style="@style/MediumHGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -184,7 +184,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 			}
 
 			final Project p = new Project(data.getProjectName(), 
-					data.getSubmitDate(), -1, data.getProjectDetail(),
+					data.getSubmitDate(), -1, data.getDetails().toString(),
 					data.getProjectType(), data.getOrderDate(),
 					Integer.valueOf(data.getNumberOfCards()),
 					(data.getPerso() == null ? "anonymous" : data.getPerso().toString()));
@@ -196,7 +196,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 			
 			projectName.setText(getResources().getString(R.string.project_name)+" : "+data.getProjectName());
 			cardType.setText(getResources().getString(R.string.card_type)+" : "+data.getProjectType());
-			cardDetail.setText(getResources().getString(R.string.card_style)+" : "+data.getProjectDetail());
+			cardDetail.setText(getResources().getString(R.string.card_style)+" : "+data.getDetails().toString());
 			nbrCards.setText(getResources().getString(R.string.how_many_cards)+" : "+data.getNumberOfCards());
 			delay.setText(getResources().getString(R.string.for_when)+" : "+data.getOrderDate());
 			colors.setText(getResources().getString(R.string.color_set)+" : ");
