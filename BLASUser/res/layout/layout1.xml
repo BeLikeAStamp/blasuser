@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:visibility="visible" >
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <TextView
+        <Spinner
+            android:id="@+id/gender"
             style="@style/MediumGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:text="@string/firstname" />
+            android:entries="@array/gender_arrays"
+            android:paddingRight="10dp" />
 
         <EditText
-            android:id="@+id/firstname1"
+            android:id="@+id/firstname"
             style="@style/MediumHGray"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -26,53 +26,17 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/MediumGray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingRight="10dp"
-            android:text="@string/sexe" />
-
-        <RadioGroup
-            android:id="@+id/sexechoice1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/male1"
-                style="@style/MediumGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/man" />
-
-            <RadioButton
-                android:id="@+id/female1"
-                style="@style/MediumGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/woman" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <TextView
+        <Spinner
+            android:id="@+id/age_type"
             style="@style/MediumGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:text="@string/age" />
+            android:entries="@array/age_arrays"
+            android:paddingRight="10dp" />
 
         <EditText
             android:id="@+id/age1"
@@ -88,5 +52,6 @@
             android:paddingLeft="10dp"
             android:text="@string/year" />
     </LinearLayout>
+
 
 </LinearLayout>

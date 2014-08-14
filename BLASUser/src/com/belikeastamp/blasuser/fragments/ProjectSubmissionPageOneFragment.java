@@ -3,6 +3,7 @@ package com.belikeastamp.blasuser.fragments;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.DialogFragment;
@@ -30,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.activities.ProjectSubmissionPageTwo;
@@ -43,19 +45,16 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	private ProjectData globalVariable;
 	private Spinner card_type_spinner;
-	private EditText project_name, age1, age2, nbrYears, prenom1, prenom2;
-	private Button eventDate, continuer;
+	private EditText project_name, age1, ame1, titre1;
+	private Button continuer;
 	private GridView gridView1;
 	private ImageView color1, color2, color3;
-	private LinearLayout person2Layout, eventDateLayout, nbrYearsLayout;
-	private CheckBox putFirstName, putAge;
-	private RadioGroup sexe1, sexe2;
+	private ViewFlipper viewflipper;
+	private CheckBox putName, putAge;
 
 	private boolean[] selectedColors = new boolean[3];
 	private ArrayList<ImageView> selectedColorsList = new ArrayList<ImageView>();
 	private ArrayList<ColorPicker> colorPickerArray1;
-
-
 
 	private static final int ENTRY_OK = 0;
 	private static final int ILLEGAL_CHAR = 1;
@@ -85,23 +84,12 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		// type de carte
 		card_type_spinner = (Spinner) this.getView().findViewById(R.id.card_type_spinner);
 
-		// personnalisation nominative
-		person2Layout = (LinearLayout) this.getView().findViewById(R.id.perso2);
-		prenom1 = (EditText) this.getView().findViewById(R.id.firstname1);
-		prenom2 = (EditText) this.getView().findViewById(R.id.firstname2);
-		age1 = (EditText) this.getView().findViewById(R.id.age1);
-		age2 = (EditText) this.getView().findViewById(R.id.age2);
-		sexe1 = (RadioGroup) this.getView().findViewById(R.id.sexechoice1);
-		sexe2 = (RadioGroup) this.getView().findViewById(R.id.sexechoice2);
-
-		// precision type-dependant
-		eventDateLayout = (LinearLayout) this.getView().findViewById(R.id.layout_date);
-		nbrYearsLayout = (LinearLayout) this.getView().findViewById(R.id.layout_nbr_years);
-		eventDate = (Button) this.getView().findViewById(R.id.event_date);
-		nbrYears = (EditText) this.getView().findViewById(R.id.nbr_years);
-
+		// personnalisation
+		viewflipper = (ViewFlipper)this.getView().findViewById(R.id.vf);
+		viewflipper.setMeasureAllChildren(false);
+		
 		// A afficher sur la carte
-		putFirstName = (CheckBox) this.getView().findViewById(R.id.put_firstname);
+		putName = (CheckBox) this.getView().findViewById(R.id.put_name);
 		putAge = (CheckBox) this.getView().findViewById(R.id.put_age);
 
 		// les couleurs
@@ -116,7 +104,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		/*************************** LES CHOSES SERIEUSES COMMENCENT **********************************/
 
 		globalVariable = (ProjectData) getActivity().getApplicationContext();
-		setDate(delay);
+		//setDate(delay);
 		globalVariable.setSubmitDate(getDate(today));
 
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(),
@@ -131,33 +119,27 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 					int position, long id) {
 				//  Auto-generated method stub
 				globalVariable.setProjectType((String)parent.getItemAtPosition(position));
-
-				if(globalVariable.getProjectType().equals("Anniversaires")) {
-					person2Layout.setVisibility(View.VISIBLE);
+				switch (position) {
+				case 4:
+					viewflipper.setDisplayedChild(2);
+					break;
+				case 10:
+					viewflipper.setDisplayedChild(3);
+					break;
+				case 11:
+					viewflipper.setDisplayedChild(1);
+					break;
+				case 12:
+					viewflipper.setDisplayedChild(4);
+					break;
+				case 13:
+					viewflipper.setDisplayedChild(5);
+					break;
+				default:
+					viewflipper.setDisplayedChild(0);
+					break;
 				}
-				else
-				{
-					person2Layout.setVisibility(View.GONE);
 
-				}
-
-				if(globalVariable.getProjectType().equals("Save The Date")) {
-					eventDateLayout.setVisibility(View.VISIBLE);
-				}
-				else
-				{
-					eventDateLayout.setVisibility(View.GONE);
-
-				}
-
-				if(globalVariable.getProjectType().equals("Saint Valentin")) {
-					nbrYearsLayout.setVisibility(View.VISIBLE);
-				}
-				else
-				{
-					nbrYearsLayout.setVisibility(View.GONE);
-
-				}
 			}
 
 			@Override
@@ -167,14 +149,6 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 
 
-		});
-
-		eventDate.setOnClickListener(new OnClickListener() {  
-			@Override  
-			public void onClick(View v) {  
-				DialogFragment newFragment = new DatePickerDialogFragment(callback);  
-				newFragment.show(getFragmentManager(), "datePicker");
-			}  
 		});
 
 		color1.setOnClickListener(new RazOnClickListener());
@@ -195,7 +169,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				
+
 				if(selectedColors[2]&&selectedColors[1]&&selectedColors[0])
 					Toast.makeText(getActivity().getApplicationContext(), R.string.color_warning, Toast.LENGTH_LONG).show();
 				else
@@ -217,7 +191,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		});
 
-		continuer.setOnClickListener(new View.OnClickListener() {
+		/*continuer.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -247,20 +221,10 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 					alertDialog.show();
 				}
 			}
-		});
+		});*/
 	}
 
 
-
-
-
-	private void setDate(long millisecond){  
-		int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
-				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
-				| DateUtils.FORMAT_ABBREV_WEEKDAY;  
-		String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);
-		eventDate.setText(dateString);  
-	}
 
 	private String getDate(long millisecond){  
 		int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
@@ -269,6 +233,16 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);  
 		return dateString;  
 	}
+
+	/*private void setDate(long millisecond){  
+		int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
+				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
+				| DateUtils.FORMAT_ABBREV_WEEKDAY;  
+		String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);
+		eventDate.setText(dateString);  
+	}
+
+
 
 	OnDateSetListener callback = new OnDateSetListener() {  
 
@@ -281,8 +255,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		}  
 	}; 
-
-	private boolean checkEntries() {
+	 */
+	/*private boolean checkEntries() {
 		boolean everythin_good = true;
 		String msg = "";
 		int ret = 0;
@@ -310,7 +284,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		}
 
 		Log.i("checkEntries", "project_name = "+everythin_good);
-		
+
 		// check personnalisation data
 		if(putFirstName.isChecked()) {
 			if(prenom1.getText().toString().length() == 0) {
@@ -327,7 +301,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				}
 			}
 		}
-		
+
 		if(putAge.isChecked()) {
 			if(age1.getText().toString().length() == 0) {
 				everythin_good = false;
@@ -343,15 +317,15 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				}
 			}
 		}
-		
+
 		// check color set
 		if((!selectedColors[2]) && (!selectedColors[1]) && (!selectedColors[0]))
 		{
 			everythin_good = false;
 			Toast.makeText(getActivity().getApplicationContext(), R.string.nocolor_warning, Toast.LENGTH_SHORT).show();
 		}
-		
-		
+
+
 		//check precision
 		if (nbrYearsLayout.isShown())
 		{
@@ -361,8 +335,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				nbrYears.setError(msg);
 			}
 		}
-		
-		/*
+
+
 		if(other_theme.isShown()) {
 			// check other theme
 			ret = checkEntry(other_theme.getText().toString());
@@ -408,9 +382,9 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		}
 
-		
 
-		/*
+
+
 
 		firstname.addTextChangedListener(new TextWatcher() {
 
@@ -473,11 +447,11 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				}
 			}
 		});
-*/
+
 		Log.i("checkEntries", "faisable = "+everythin_good);
 
 		return everythin_good;
-	}
+	}*/
 
 
 	private int checkEntry(String s) {

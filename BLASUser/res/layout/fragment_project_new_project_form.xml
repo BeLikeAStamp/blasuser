@@ -65,52 +65,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp" />
 
-        <LinearLayout
-            android:id="@+id/layout_date"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp" >
-
-            <TextView
-                style="@style/MediumGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/event_date" />
-
-            <Button
-                android:id="@+id/event_date"
-                style="@style/btnStyleActionTurquoise2Inv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_nbr_years"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:visibility="gone" >
-
-            <TextView
-                style="@style/MediumGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/nbr_years" />
-
-            <EditText
-                android:id="@+id/nbr_years"
-                style="@style/MediumHGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/zero"
-                android:inputType="number" />
-
-        </LinearLayout>
-
         <TextView
             style="@style/MediumTurquoise2"
             android:layout_width="wrap_content"
@@ -123,240 +77,64 @@
             android:layout_height="2dp"
             android:background="@color/turquoise2" />
 
+        <ViewFlipper
+            android:id="@+id/vf"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <include
+                android:id="@+id/layout1"
+                layout="@layout/layout1" />
+
+            <include
+                android:id="@+id/layout2"
+                layout="@layout/layout2" />
+
+            <include
+                android:id="@+id/layout3"
+                layout="@layout/layout3" />
+
+            <include
+                android:id="@+id/layout4"
+                layout="@layout/layout4" />
+
+            <include
+                android:id="@+id/layout6"
+                layout="@layout/layout6" />
+
+            <include
+                android:id="@+id/layout7"
+                layout="@layout/layout7" />
+        </ViewFlipper>
+
+        <TextView
+            style="@style/MediumHGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/to_put_on_card" />
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:paddingBottom="5dp" >
 
-            <TextView
-                style="@style/MediumHGray"
+            <CheckBox
+                android:id="@+id/put_name"
+                style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
-                android:text="@string/person1" />
+                android:text="@string/name" />
 
-            <LinearLayout
-                android:id="@+id/perso1"
+            <CheckBox
+                android:id="@+id/put_age"
+                style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible" >
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        style="@style/MediumGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
-                        android:text="@string/firstname" />
-
-                    <EditText
-                        android:id="@+id/firstname1"
-                        style="@style/MediumHGray"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        style="@style/MediumGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingRight="10dp"
-                        android:text="@string/sexe" />
-
-                    <RadioGroup
-                        android:id="@+id/sexechoice1"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal" >
-
-                        <RadioButton
-                            android:id="@+id/male1"
-                            style="@style/MediumGray"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingRight="10dp"
-                            android:text="@string/man" />
-
-                        <RadioButton
-                            android:id="@+id/female1"
-                            style="@style/MediumGray"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/woman" />
-                    </RadioGroup>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        style="@style/MediumGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
-                        android:text="@string/age" />
-
-                    <EditText
-                        android:id="@+id/age1"
-                        style="@style/MediumHGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="number" />
-
-                    <TextView
-                        style="@style/MediumGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text="@string/year" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/perso2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical"
-                android:visibility="gone" >
-
-                <TextView
-                    style="@style/MediumHGray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="@string/person2" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        style="@style/MediumGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
-                        android:text="@string/firstname" />
-
-                    <EditText
-                        android:id="@+id/firstname2"
-                        style="@style/MediumHGray"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        style="@style/MediumGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingRight="10dp"
-                        android:text="@string/sexe" />
-
-                    <RadioGroup
-                        android:id="@+id/sexechoice2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal" >
-
-                        <RadioButton
-                            android:id="@+id/male2"
-                            style="@style/MediumGray"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingRight="10dp"
-                            android:text="@string/man" />
-
-                        <RadioButton
-                            android:id="@+id/female2"
-                            style="@style/MediumGray"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/woman" />
-                    </RadioGroup>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        style="@style/MediumGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
-                        android:text="@string/age" />
-
-                    <EditText
-                        android:id="@+id/age2"
-                        style="@style/MediumHGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="number" />
-
-                    <TextView
-                        style="@style/MediumGray"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text="@string/year" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <TextView
-                style="@style/MediumHGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:text="@string/to_put_on_card" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp" >
-
-                <CheckBox
-                    android:id="@+id/put_firstname"
-                    style="@style/MediumGray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/firstname" />
-
-                <CheckBox
-                    android:id="@+id/put_age"
-                    style="@style/MediumGray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/age" />
-            </LinearLayout>
+                android:text="@string/age" />
         </LinearLayout>
 
         <TextView
@@ -437,8 +215,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="@string/continu" />
-        
-        <!--include android:id="@+id/myid1" layout="@layout/layout2" /-->
     </LinearLayout>
 
 </ScrollView>

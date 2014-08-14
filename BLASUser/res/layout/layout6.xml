@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible" >
 
     <LinearLayout
         android:id="@+id/perso1"
@@ -27,7 +28,7 @@
                 style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/gender_arrays"
+                android:entries="@array/baby_arrays"
                 android:paddingRight="10dp" />
 
             <EditText
@@ -43,16 +44,37 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <Spinner
-                android:id="@+id/age_type1"
+            <TextView
                 style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/age_arrays"
-                android:paddingRight="10dp" />
+                android:paddingRight="10dp"
+                android:text="@string/poids" />
 
             <EditText
-                android:id="@+id/age1"
+                android:id="@+id/weight"
+                style="@style/MediumHGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                style="@style/MediumGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="@string/kg" />
+
+            <TextView
+                style="@style/MediumGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="@string/taille" />
+
+            <EditText
+                android:id="@+id/tall"
                 style="@style/MediumHGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,17 +85,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="@string/year" />
+                android:text="@string/cm" />
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        style="@style/btnStyleActionTurquoise2"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_baby" />
 
     <LinearLayout
         android:id="@+id/perso2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingBottom="5dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:paddingTop="10dp" >
 
         <TextView
             style="@style/MediumHGray"
@@ -108,16 +138,37 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <Spinner
-                android:id="@+id/age_type2"
+            <TextView
                 style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/age_arrays"
-                android:paddingRight="10dp" />
+                android:paddingRight="10dp"
+                android:text="@string/poids" />
 
             <EditText
-                android:id="@+id/age2"
+                android:id="@+id/weight2"
+                style="@style/MediumHGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                style="@style/MediumGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="@string/kg" />
+
+            <TextView
+                style="@style/MediumGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="@string/taille" />
+
+            <EditText
+                android:id="@+id/tall2"
                 style="@style/MediumHGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,67 +179,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="@string/year" />
+                android:text="@string/cm" />
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        style="@style/MediumHGray"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:text="@string/time" />
-
     <LinearLayout
-        android:id="@+id/layout_date"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="10dp" >
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
 
         <TextView
             style="@style/MediumGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
-            android:text="@string/event_date" />
+            android:text="@string/birthday" />
 
         <Button
-            android:id="@+id/event_date"
+            android:id="@+id/bday"
+            android:layout_marginTop="10dp"
             style="@style/btnStyleActionTurquoise2Inv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            style="@style/MediumGray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="@string/hour" />
-
-        <Button
-            android:id="@+id/event_hour"
-            style="@style/btnStyleActionTurquoise2Inv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
-    <TextView
-        style="@style/MediumGray"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:text="@string/address" />
-
-    <EditText
-        android:id="@+id/address"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/infos_height"
-        android:layout_marginBottom="5dp"
-        android:gravity="left|top"
-        android:scrollHorizontally="false" 
-        android:inputType="textMultiLine" />
 
 </LinearLayout>

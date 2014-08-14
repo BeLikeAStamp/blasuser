@@ -1,7 +1,6 @@
 <resources>
 
-    
-    <!-- A CHANGER !!!  -->
+    <!-- A CHANGER !!! -->
     <string name="contact_email">andronekomimi@gmail.com</string>
     <string name="app_name_short">DWBC</string>
     <string name="app_name">Don\'t Worry, Be Crafty!</string>
@@ -57,31 +56,57 @@
         <item>Réalisation en cours</item>
         <item>Réalisation finie</item>
     </string-array>
+    
     <string-array name="type_arrays">
-        <item>Save The Date</item>
-        <item>Remerciements</item>
-        <item>Fêtes</item>
-        <item>Anniversaires</item>
-        <item>Voeux</item>
-        <item>Saint Valentin</item>
-        <item>Félicitations</item>
+        <item>Carte : Anniversaire de naissance</item>
+        <item>Carte : Saint Valentin</item>
+        <item>Carte : Halloween</item>
+        <item>Carte : Remerciements</item>
+        <item>Carte : Félicitations</item>
+        <item>Carte : Bonne année</item>
+        <item>Carte : Fête des pères</item>
+        <item>Carte : Fête des mères</item>
+        <item>Carte : Éphéméride</item>
+        <item>Carte : Prompt rétablissement</item>
+        <item>Carte : Anniversaire de mariage</item>
+        <item>Faire-Part : Mariage</item>
+        <item>Faire-Part : Naissance</item>
+        <item>Invitation : Occasion</item>
     </string-array>
-    <string-array name="style_arrays">
-        <item>Romantique</item>
-        <item>Kids</item>
-        <item>Mature</item>
-        <item>Glamour</item>
-        <item>Tendance</item>
-        <item>Classic</item>
+   
+    <string-array name="occasion_arrays">
+        <item>Crémaillère</item>
+        <item>Anniversaire</item>
+        <item>Permis de conduire</item>
+        <item>Examen</item>
+        <item>Grossesse</item>
         <item>Autre</item>
     </string-array>
 
+     <string-array name="gender_arrays">
+        <item>Madame</item>
+        <item>Monsieur</item>
+        <item>Famille</item>
+        <item>Groupe</item>
+    </string-array>
+    
+     <string-array name="baby_arrays">
+        <item>Fille</item>
+        <item>Garçon</item>
+    </string-array>
+    
+     <string-array name="age_arrays">
+        <item>Âge</item>
+        <item>Tranche d\'âge</item>
+    </string-array>
+    
     <!-- FORMULAIRE -->
     <string name="project_explane">Bonjouuur ! Nous avons besoin de quelques précisions pour bien définir le projet : type de cartes, thème, couleurs, délais, personnalisation &#8230;</string>
     <string name="project_name">Nom du projet</string>
     <string name="card_type">Type de cartes</string>
     <string name="event_date">Date</string>
-    <string name="nbr_years">Nombre d\'années</string>
+    <string name="nbr_years">Années de mariage</string>
+    <string name="birthday">Date de naissance</string>
     <string name="people">Pour qui ?</string>
     <string name="person1">Personne 1</string>
     <string name="person2">Personne 2</string>
@@ -103,8 +128,8 @@
     <string name="sexe">Sexe</string>
     <string name="man">Homme</string>
     <string name="woman">Femme</string>
-	<string name="alertMsg">Validation impossible</string>
-	<string name="alertBox">Votre page contient une ou plusieurs erreurs indiquées en rouge sur le formulaire. Merci de revoir votre copie ;-p</string>
+    <string name="alertMsg">Validation impossible</string>
+    <string name="alertBox">Votre page contient une ou plusieurs erreurs indiquées en rouge sur le formulaire. Merci de revoir votre copie ;-p</string>
     <string name="color_set">Les couleurs</string>
     <string name="color_instruction">Choisis trois couleurs maximum</string>
     <string name="selected_colors">Couleurs choisies</string>
@@ -132,7 +157,11 @@
     <string name="taille">Taille</string>
     <string name="cm">cm</string>
     <string name="kg">kg</string>
-    
+	<string name="address">Adresse</string>
+	<string name="occaz">Occasion</string>
+	<string name="add_baby">Ajouter un bébé</string>
+	 
+	 
     <!-- Submission Dialog -->
     <string name="alert_check">Ultime check !</string>
     <string name="alert_dialog_send">Soumission</string>
@@ -141,21 +170,14 @@
     <string name="your_project">Ton projet</string>
     <string name="infos">Infos complémentaires</string>
     <string name="confirm_email">Email contact</string>
-    
     <string name="reg_failed">Echec de l\'enregistrement</string>
     <string name="reg_succed">Enregistrement effectué ! Let\'s GO !</string>
-    
+
     <!-- Saved Projects Details -->
     <string name="btn_modif">Modifier</string>
     <string name="btn_submit">Soumission</string>
-    
-    
-    
-    
-    
-    
-    
-    <!-- Join Me !  -->
+
+    <!-- Join Me ! -->
     <string name="stampingup">Stampin\'Up</string>
     <string name="stampingup1">Stampin\'Up existe depuis plus de 25 ans aux États-Unis, et depuis 5 ans en France et en Europe. Elle est considérée comme leader dans le domaine du scrapbooking.\n\nActuellement, plus de 40 000 démonstratrices enseignent le Stamp\'Art et font partager leur enthousiasme pour l\'estampage, le Scrapbooking et la fabrication de cartes.</string>
     <string name="join_my_team">Pour rejoindre l\'aventure et devenir ma filleule</string>
@@ -165,12 +187,11 @@
     <string name="btn_send">Envoyer</string>
     <string name="messagebody_format">To: Rachel\n\n %1$s\n\n %2$s (%3$s)</string>
     <string name="empty_field">Merci de remplir ce champ :-)</string>
-    
-    
-     <!-- Blog access -->
-     <string name="blog">http://dontworrybecrafty.com/</string>
-    
-     <!-- Quitter l'appli -->
-     <string name="see_u_soon">Happy Crafting ! Bisous Bisous</string>
-    
+
+    <!-- Blog access -->
+    <string name="blog">http://dontworrybecrafty.com/</string>
+
+    <!-- Quitter l'appli -->
+    <string name="see_u_soon">Happy Crafting ! Bisous Bisous</string>
+
 </resources>

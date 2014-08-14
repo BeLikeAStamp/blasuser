@@ -66,8 +66,7 @@
             android:layout_marginBottom="5dp"
             android:gravity="left|top"
             android:hint="@string/infos"
-            android:inputType="textMultiLine" >
-        </EditText>
+            android:inputType="textMultiLine" />
 
         <TextView
             style="@style/MediumTurquoise2"

@@ -59,7 +59,7 @@
         android:orientation="horizontal" >
 
         <TextView
-            style="@style/MediumGray"
+            style="@style/MediumHGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
@@ -79,5 +79,64 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:visibility="gone" />
+
+    <TextView
+        style="@style/MediumHGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:text="@string/time" />
+
+    <LinearLayout
+        android:id="@+id/layout_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="10dp" >
+
+        <TextView
+            style="@style/MediumGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="@string/event_date" />
+
+        <Button
+            android:id="@+id/event_date"
+            style="@style/btnStyleActionTurquoise2Inv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/MediumGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/hour" />
+
+        <Button
+            android:id="@+id/event_hour"
+            style="@style/btnStyleActionTurquoise2Inv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/MediumGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:text="@string/address" />
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/infos_height"
+        android:layout_marginBottom="5dp"
+        android:gravity="left|top"
+        android:inputType="textMultiLine"
+        android:scrollHorizontally="false" />
 
 </LinearLayout>
