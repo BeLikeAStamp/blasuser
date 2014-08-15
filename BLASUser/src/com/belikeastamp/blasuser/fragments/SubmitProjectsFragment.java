@@ -34,7 +34,7 @@ public class SubmitProjectsFragment extends ListFragment {
 	    LongSparseArray<Uri> map = new LongSparseArray<Uri>();
 	    Uri uri1 = Uri.parse("android.resource://com.belikeastamp.blasuser/drawable/ic_no_image_available");
 	    Uri uri2 = Uri.parse("android.resource://com.belikeastamp.blasuser/drawable/ic_home");
-	    Uri uri3 = Uri.parse("android.resource://com.belikeastamp.blasuser/drawable/ic_whats_hot");
+	    Uri uri3 = Uri.parse("android.resource://com.belikeastamp.blasuser/drawable/alert_dialog_dart_icon");
 	    
 	    map.put(Long.valueOf(1), uri1);
 	    map.put(Long.valueOf(2), uri2);

@@ -57,7 +57,7 @@ public class SavedProjectsPageTwoFragment extends Fragment {
 		nbrCards.setText(""+project.getQuantity());
 		orderDate.setText(project.getOrderDate());
 
-		String[] colors = project.getColors().split(",");
+		/*String[] colors = project.getColors().split(",");
 
 		Log.d("COLOR SET", project.getColors());
 
@@ -76,7 +76,7 @@ public class SavedProjectsPageTwoFragment extends Fragment {
 			break;	
 		default:
 			break;
-		}
+		}*/
 
 	}
 

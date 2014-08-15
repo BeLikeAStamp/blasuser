@@ -261,6 +261,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 		// 0. Check en interne si un projet du meme non n'existe pas
 		ProjectsData datasource = new ProjectsData(getApplicationContext());
 		datasource.open();
+		Log.i("PROJECT TO SAVE",p.toString());
 		datasource.addProjects(p);
 		datasource.close();
 	}

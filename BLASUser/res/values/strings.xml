@@ -144,9 +144,11 @@
     <string name="err_illegal_char">"Quelques caractères farfelue dans cette saisie &#8230;"</string>
     <string name="err_no_theme">"Merci d'indiquer le thème"</string>
     <string name="err_no_style">"Merci d'indiquer le style"</string>
-    <string name="err_no_firstname">"Ça va être difficile d'afficher le prénom là"</string>
-    <string name="err_no_age">"Ça va être difficile d'afficher l\'âge là"</string>
+    <string name="err_no_firstname">"Merci d\'indiquer un nom"</string>
+    <string name="err_no_age">"Merci d\'indiquer l\'âge"</string>
     <string name="err_no_nbr_years">"Même pas les noces de coton ???"</string>
+    <string name="err_illegal_date">"Petit problème de cohérence au niveau de date &#8230;"</string>
+    <string name="err_no_address">"Merci d\'indiquer une adresse"</string>
     <string name="err_too_big">"Pour de gros projet me contacter à l'adresse mail : %1s"</string>
     <string name="logistic">Logistique</string>
     <string name="time">Lieu et heure</string>

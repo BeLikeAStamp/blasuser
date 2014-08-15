@@ -3,14 +3,16 @@ package com.belikeastamp.blasuser.db.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.belikeastamp.blasuser.db.DatabaseHandler;
-import com.belikeastamp.blasuser.db.model.Project;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.util.Log;
+
+import com.belikeastamp.blasuser.db.DatabaseHandler;
+import com.belikeastamp.blasuser.db.model.Project;
 
 public class ProjectsData {
 
@@ -45,6 +47,9 @@ public class ProjectsData {
 		values.put(DatabaseHandler.P_ORDERDATE, project.getOrderDate());
 		values.put(DatabaseHandler.P_NBRCARDS, project.getQuantity());
 		values.put(DatabaseHandler.P_COLORS, project.getColors());
+		values.put(DatabaseHandler.P_REMOTEID, project.getRemoteId());
+		values.put(DatabaseHandler.P_PROTO, project.getPath_to_prototype());
+		values.put(DatabaseHandler.P_FILE, project.getPath_to_track().toString());
 		
 		// Inserting Row
 		database.insert(DatabaseHandler.TABLE_PROJECTS, null, values);
@@ -63,6 +68,7 @@ public class ProjectsData {
 				DatabaseHandler.P_REMOTEID,
 				DatabaseHandler.P_COLORS,
 				DatabaseHandler.P_PROTO,
+				DatabaseHandler.P_FILE,
 		}, DatabaseHandler.P_NAME + "=?",
 		new String[] { name }, null, null, null, null);
 		if (cursor != null)
@@ -148,6 +154,7 @@ public class ProjectsData {
 	}
 
 	private Project cursorToProject(Cursor cursor) {
+		
 		Project project = new Project();
 		project.setName(cursor.getString(0));
 		project.setSubDate(cursor.getString(1));
@@ -155,14 +162,12 @@ public class ProjectsData {
 		project.setType(cursor.getString(3));
 		project.setDetail(cursor.getString(4));
 		project.setOrderDate(cursor.getString(5));
-		project.setStatus(cursor.getInt(6));
-		project.setQuantity(cursor.getInt(7));
-		project.setRemoteId(cursor.getLong(8));
-		project.setColors(cursor.getString(9));
-		project.setPath_to_prototype(cursor.getString(10));
+		project.setQuantity(cursor.getInt(6));
+		project.setRemoteId(cursor.getLong(7));
+		project.setColors(cursor.getString(8));
 		return project;
 	}
-
+	
 	public boolean checkUnicity(String name) {
 		Cursor cursor = database.query(DatabaseHandler.TABLE_PROJECTS, new String[] { 
 				DatabaseHandler.P_NAME, 

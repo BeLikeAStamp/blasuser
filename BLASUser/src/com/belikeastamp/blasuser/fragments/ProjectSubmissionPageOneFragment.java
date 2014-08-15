@@ -3,8 +3,6 @@ package com.belikeastamp.blasuser.fragments;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.DialogFragment;
@@ -17,11 +15,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -34,7 +30,6 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -52,6 +47,8 @@ import com.belikeastamp.blasuser.util.ProjectData;
 public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	private ProjectData globalVariable;
+
+	/* CORE LAYOUT */
 	private Spinner card_type_spinner;
 	private EditText project_name;
 	private Button continuer;
@@ -59,6 +56,18 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	private ImageView color1, color2, color3;
 	private ViewFlipper viewflipper;
 	private CheckBox putName, putAge;
+
+	/* COMMON VIEW */
+	// gender
+	Spinner gender1;
+	// name
+	EditText name1;
+	// age
+	EditText age1;
+	// age-type
+	Spinner age_type1;
+
+
 
 	private boolean[] selectedColors = new boolean[3];
 	private ArrayList<ImageView> selectedColorsList = new ArrayList<ImageView>();
@@ -72,6 +81,9 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	final static long WEEK = 604800000L;
 	private long today = System.currentTimeMillis();
 	private long delay = today + WEEK;
+	private LinearLayout myLayout;
+	private boolean need_2perso = false;
+	private int selected_layout = 1;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -153,26 +165,32 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				case 4:
 					viewflipper.setDisplayedChild(2);
 					prepareLayout3();
+					selected_layout = 3;
 					break;
 				case 10:
 					viewflipper.setDisplayedChild(3);
 					prepareLayout4();
+					selected_layout = 4;
 					break;
 				case 11:
 					viewflipper.setDisplayedChild(1);
 					prepareLayout2();
+					selected_layout = 2;
 					break;
 				case 12:
 					viewflipper.setDisplayedChild(4);
 					prepareLayout6();
+					selected_layout = 6;
 					break;
 				case 13:
 					viewflipper.setDisplayedChild(5);
 					prepareLayout7();
+					selected_layout = 7;
 					break;
 				default:
 					viewflipper.setDisplayedChild(0);
 					prepareLayout1();
+					selected_layout = 1;
 					break;
 				}
 
@@ -227,20 +245,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		});
 
+
 		continuer.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				//  Auto-generated method stub
-				Log.i("PROJET","=>"+globalVariable.toString());
-				Intent i = new Intent(getActivity(), ProjectSubmissionPageTwo.class);
-				startActivity(i);
-			}
-		});
-
-
-
-		/*continuer.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -270,17 +276,18 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 					alertDialog.show();
 				}
 			}
-		});*/
+		});
 	}
 
 	private void prepareLayout1() {
-		View myLayout = getView().findViewById(R.id.layout1);
-		Spinner gender = (Spinner) myLayout.findViewById(R.id.gender); 
-		final EditText name = (EditText) myLayout.findViewById(R.id.firstname);
-		Spinner age_type = (Spinner) myLayout.findViewById(R.id.age_type);
-		final EditText age = (EditText) myLayout.findViewById(R.id.age);
+		myLayout = (LinearLayout) getView().findViewById(R.id.layout1);
+		gender1 = (Spinner) myLayout.findViewById(R.id.gender); 
+		name1 = (EditText) myLayout.findViewById(R.id.firstname);
+		age_type1 = (Spinner) myLayout.findViewById(R.id.age_type);
+		age1 = (EditText) myLayout.findViewById(R.id.age);
 
-		gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		globalVariable.addNewDetails("1.gender", "Madame");
+		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
 			}
@@ -288,7 +295,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		age_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		globalVariable.addNewDetails("1.age-type","Âge");
+		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
 			}
@@ -296,12 +304,12 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		name.addTextChangedListener(new TextWatcher() {
+		name1.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				globalVariable.addNewDetails("1.name", name.getText().toString());
+				globalVariable.addNewDetails("1.name", name1.getText().toString());
 			}
 
 			@Override
@@ -318,12 +326,12 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		age.addTextChangedListener(new TextWatcher() {
+		age1.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				globalVariable.addNewDetails("1.age", age.getText().toString());
+				globalVariable.addNewDetails("1.age", age1.getText().toString());
 			}
 
 			@Override
@@ -345,11 +353,12 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 
 	private void prepareLayout2() {
-		View myLayout = getView().findViewById(R.id.layout2);
-		Spinner gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
-		final EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
-		Spinner age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
-		final EditText age1 = (EditText) myLayout.findViewById(R.id.age1);
+		need_2perso = true;
+		myLayout = (LinearLayout) getView().findViewById(R.id.layout2);
+		gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
+		name1 = (EditText) myLayout.findViewById(R.id.firstname1);
+		age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
+		age1 = (EditText) myLayout.findViewById(R.id.age1);
 
 		Spinner gender2 = (Spinner) myLayout.findViewById(R.id.gender2); 
 		final EditText name2 = (EditText) myLayout.findViewById(R.id.firstname2);
@@ -360,7 +369,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		final Button event_hour = (Button) myLayout.findViewById(R.id.event_hour);
 
 		final EditText address = (EditText) myLayout.findViewById(R.id.address);
-		
+
+		globalVariable.addNewDetails("1.gender", "Madame");
 		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
@@ -369,6 +379,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
+		globalVariable.addNewDetails("1.age-type", "Âge");
 		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
@@ -378,7 +389,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		});
 
 
-
+		globalVariable.addNewDetails("2.gender", "Madame");
 		gender2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("2.gender",(String) parent.getItemAtPosition(pos));
@@ -387,6 +398,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
+		globalVariable.addNewDetails("2.age-type", "Âge");
 		age_type2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("2.age-type",(String) parent.getItemAtPosition(pos));
@@ -498,10 +510,21 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 						Calendar c = Calendar.getInstance();  
 						c.set(year, monthOfYear, dayOfMonth);
 						delay = c.getTime().getTime();
-						setDate(c.getTime().getTime(),event_date); 
-						globalVariable.addNewDetails("event-date", getDate(c.getTime().getTime()));
+						setDate(c.getTime().getTime(),event_date);
+						
+						if(checkEventDate(c.getTime().getTime(), selected_layout)) {
+							event_date.setError(null);
+							globalVariable.addNewDetails("event-date", getDate(c.getTime().getTime()));
+						}
+						else
+						{
+							String msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_date);
+							event_date.setError(msg);
+						}
+						
 					}
-				} );  
+				}); 
+				
 				newFragment.show(getFragmentManager(), "datePicker");
 			}  
 		});
@@ -526,7 +549,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				newFragment.show(getFragmentManager(), "hourPicker");
 			}
 		});
-		
+
 		address.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -548,20 +571,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			}
 		});
-		
-		
+
+
 	}			
 
 	private void prepareLayout3() {
-		// TODO Auto-generated method stub
-		View myLayout = getView().findViewById(R.id.layout3);
-		Spinner gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
-		final EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
-		Spinner age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
-		final EditText age1 = (EditText) myLayout.findViewById(R.id.age1);
+		myLayout = (LinearLayout) getView().findViewById(R.id.layout3);
+		gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
+		name1 = (EditText) myLayout.findViewById(R.id.firstname1);
+		age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
+		age1 = (EditText) myLayout.findViewById(R.id.age1);
 		Spinner occaz = (Spinner) myLayout.findViewById(R.id.occaz_type);
 		final EditText other_occaz = (EditText) myLayout.findViewById(R.id.other_occaz);
 
+		globalVariable.addNewDetails("1.gender", "Madame");
 		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
@@ -570,6 +593,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
+		globalVariable.addNewDetails("1.age-type", "Âge");
 		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
@@ -664,12 +688,12 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	}
 
 	private void prepareLayout4() {
-		// TODO Auto-generated method stub
-		View myLayout = getView().findViewById(R.id.layout4);
-		Spinner gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
-		final EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
-		Spinner age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
-		final EditText age1 = (EditText) myLayout.findViewById(R.id.age1);
+		need_2perso = true;
+		myLayout = (LinearLayout) getView().findViewById(R.id.layout4);
+		gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
+		name1 = (EditText) myLayout.findViewById(R.id.firstname1);
+		age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
+		age1 = (EditText) myLayout.findViewById(R.id.age1);
 
 		Spinner gender2 = (Spinner) myLayout.findViewById(R.id.gender2); 
 		final EditText name2 = (EditText) myLayout.findViewById(R.id.firstname2);
@@ -677,6 +701,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		final EditText age2 = (EditText) myLayout.findViewById(R.id.age2);
 		final EditText nbr_years = (EditText) myLayout.findViewById(R.id.nbr_years);
 
+		globalVariable.addNewDetails("1.gender", "Madame");
 		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
@@ -685,6 +710,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
+		globalVariable.addNewDetails("1.age-type", "Âge");
 		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
@@ -694,7 +720,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		});
 
 
-
+		globalVariable.addNewDetails("2.gender", "Madame");
 		gender2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("2.gender",(String) parent.getItemAtPosition(pos));
@@ -702,7 +728,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
-
+		
+		globalVariable.addNewDetails("2.age-type", "Âge");
 		age_type2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("2.age-type",(String) parent.getItemAtPosition(pos));
@@ -825,10 +852,10 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	private void prepareLayout6() {
 		// TODO Auto-generated method stub
-		View myLayout = getView().findViewById(R.id.layout6);
-		Spinner gender1 = (Spinner) myLayout.findViewById(R.id.gender1);
+		myLayout = (LinearLayout) getView().findViewById(R.id.layout6);
+		gender1 = (Spinner) myLayout.findViewById(R.id.gender1);
 		Spinner gender2 = (Spinner) myLayout.findViewById(R.id.gender2); 
-		final EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
+		name1 = (EditText) myLayout.findViewById(R.id.firstname1);
 		final EditText poids1 = (EditText) myLayout.findViewById(R.id.weight);
 		final EditText taille1 = (EditText) myLayout.findViewById(R.id.height);
 		final EditText name2 = (EditText) myLayout.findViewById(R.id.firstname2);
@@ -851,7 +878,21 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 						c.set(year, monthOfYear, dayOfMonth);
 						delay = c.getTime().getTime();
 						setDate(c.getTime().getTime(),event_date); 
-						globalVariable.addNewDetails("event-date", getDate(c.getTime().getTime()));
+						
+						if(checkEventDate(c.getTime().getTime(), selected_layout)) {
+							event_date.setError(null);
+							globalVariable.addNewDetails("event-date", getDate(c.getTime().getTime()));
+							globalVariable.addNewDetails("1.age", "0");
+							globalVariable.addNewDetails("1.age-type", "0");
+						}
+						else
+						{
+							String msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_date);
+							event_date.setError(msg);
+						}
+						
+						
+						
 					}
 				} );  
 				newFragment.show(getFragmentManager(), "datePicker");
@@ -865,9 +906,13 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				// TODO Auto-generated method stub
 				perso2.setVisibility(View.VISIBLE);
 				add_baby.setVisibility(View.GONE);
+				globalVariable.addNewDetails("2.age", "0");
+				globalVariable.addNewDetails("2.age-type", "0");
+				need_2perso = true;
 			}
 		});
 
+		globalVariable.addNewDetails("1.gender", "Fille");
 		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
@@ -900,7 +945,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 
 
-
+		globalVariable.addNewDetails("2.gender", "Fille");
 		gender2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("2.gender",(String) parent.getItemAtPosition(pos));
@@ -1026,19 +1071,19 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	private void prepareLayout7() {
 		// TODO Auto-generated method stub
-		View myLayout = getView().findViewById(R.id.layout7);
-		Spinner gender = (Spinner) myLayout.findViewById(R.id.gender);
+		myLayout = (LinearLayout) getView().findViewById(R.id.layout7);
+		gender1 = (Spinner) myLayout.findViewById(R.id.gender);
 		Spinner occaz = (Spinner) myLayout.findViewById(R.id.occaz_type);
-		final EditText name = (EditText) myLayout.findViewById(R.id.firstname);
-		Spinner age_type = (Spinner) myLayout.findViewById(R.id.age_type);
-		final EditText age = (EditText) myLayout.findViewById(R.id.age);
+		name1 = (EditText) myLayout.findViewById(R.id.firstname);
+		age_type1 = (Spinner) myLayout.findViewById(R.id.age_type);
+		age1 = (EditText) myLayout.findViewById(R.id.age);
 		final EditText other_occaz = (EditText) myLayout.findViewById(R.id.other_occaz);
 		final Button event_date = (Button) myLayout.findViewById(R.id.event_date);
 		final Button event_hour = (Button) myLayout.findViewById(R.id.event_hour);
 		final EditText address = (EditText) myLayout.findViewById(R.id.address);
-		
-		
-		gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+		globalVariable.addNewDetails("1.gender", "Madame");
+		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
 			}
@@ -1046,7 +1091,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		age_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("age-type",(String) parent.getItemAtPosition(pos));
 			}
@@ -1054,12 +1099,12 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		name.addTextChangedListener(new TextWatcher() {
+		name1.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				globalVariable.addNewDetails("1.name", name.getText().toString());
+				globalVariable.addNewDetails("1.name", name1.getText().toString());
 			}
 
 			@Override
@@ -1076,12 +1121,12 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		age.addTextChangedListener(new TextWatcher() {
+		age1.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				globalVariable.addNewDetails("1.age", age.getText().toString());
+				globalVariable.addNewDetails("1.age", age1.getText().toString());
 			}
 
 			@Override
@@ -1150,7 +1195,17 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 						c.set(year, monthOfYear, dayOfMonth);
 						delay = c.getTime().getTime();
 						setDate(c.getTime().getTime(),event_date); 
-						globalVariable.addNewDetails("event-date", getDate(c.getTime().getTime()));
+						
+						if(checkEventDate(c.getTime().getTime(), selected_layout)) {
+							event_date.setError(null);
+							globalVariable.addNewDetails("event-date", getDate(c.getTime().getTime()));
+						}
+						else
+						{
+							String msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_date);
+							event_date.setError(msg);
+						}
+						
 					}
 				} );  
 				newFragment.show(getFragmentManager(), "datePicker");
@@ -1177,7 +1232,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 				newFragment.show(getFragmentManager(), "hourPicker");
 			}
 		});
-		
+
 		address.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -1199,8 +1254,8 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			}
 		});
-		
-		
+
+
 	}
 
 
@@ -1221,13 +1276,13 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		v.setText(dateString);  
 	}
 
-	/*private boolean checkEntries() {
+	private boolean checkEntries() {
 		boolean everythin_good = true;
 		String msg = "";
 		int ret = 0;
 
 		// check project name
-		ret = checkEntry(project_name.getText().toString());
+		ret = checkEntryProject(project_name.getText().toString());
 		if(ret != ENTRY_OK) everythin_good = false;
 
 		switch (ret) {
@@ -1251,37 +1306,78 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		Log.i("checkEntries", "project_name = "+everythin_good);
 
 		// check personnalisation data
-		if(putFirstName.isChecked()) {
-			if(prenom1.getText().toString().length() == 0) {
+		if(!(globalVariable.isFilled("1.name"))) {
+			everythin_good = false;
+			msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_firstname);
+			name1.setError(msg);
+		}
+		else
+		{
+			ret = checkEntryName(name1.getText().toString());
+
+			switch (ret) {
+			case EMPTY:
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_project);
+				name1.setError(msg);
+				break;
+			case ILLEGAL_CHAR:
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_char);
+				name1.setError(msg);
+				break;
+			case NOT_UNIQ:
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_not_uniq);
+				name1.setError(msg);
+				break;	
+			default:
+				break;
+			}
+		}
+
+		if(need_2perso) {
+			EditText name2 =  (EditText) myLayout.findViewById(R.id.firstname2);
+
+			if(!(globalVariable.isFilled("2.name"))) {
 				everythin_good = false;
 				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_firstname);
-				prenom1.setError(msg);
+				name2.setError(msg);
 			}
+			else
+			{
+				ret = checkEntryName(name2.getText().toString());
 
-			if(person2Layout.isShown()) {
-				if(prenom2.getText().toString().length() == 0) {
-					everythin_good = false;
-					msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_firstname);
-					prenom2.setError(msg);
+				switch (ret) {
+				case EMPTY:
+					msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_project);
+					name2.setError(msg);
+					break;
+				case ILLEGAL_CHAR:
+					msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_char);
+					name2.setError(msg);
+					break;
+				case NOT_UNIQ:
+					msg = getActivity().getApplicationContext().getResources().getString(R.string.err_not_uniq);
+					name2.setError(msg);
+					break;	
+				default:
+					break;
 				}
 			}
 		}
 
-		if(putAge.isChecked()) {
-			if(age1.getText().toString().length() == 0) {
+		if(!(globalVariable.isFilled("1.age"))) {
+			everythin_good = false;
+			msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_age);
+			age1.setError(msg);
+		}
+		if(need_2perso) {
+			if(!(globalVariable.isFilled("2.age"))) {
 				everythin_good = false;
+				EditText age2 =  (EditText) myLayout.findViewById(R.id.age2);
 				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_age);
-				age1.setError(msg);
-			}
-
-			if(person2Layout.isShown()) {
-				if(age2.getText().toString().length() == 0) {
-					everythin_good = false;
-					msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_age);
-					age2.setError(msg);
-				}
+				age2.setError(msg);
 			}
 		}
+
 
 		// check color set
 		if((!selectedColors[2]) && (!selectedColors[1]) && (!selectedColors[0]))
@@ -1291,138 +1387,65 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		}
 
 
-		//check precision
-		if (nbrYearsLayout.isShown())
-		{
-			if(Integer.valueOf(nbrYears.getText().toString()).equals(Integer.valueOf(0))) {
+		// address and time is needed id needed
+		if(selected_layout == 2 || selected_layout == 7) {
+			if(!(globalVariable.isFilled("address"))) {
 				everythin_good = false;
-				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_nbr_years);
-				nbrYears.setError(msg);
+				EditText address =  (EditText) myLayout.findViewById(R.id.address);
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_address);
+				address.setError(msg);
+			}
+			
+			if(!(globalVariable.isFilled("address"))) {
+				everythin_good = false;
+				EditText address =  (EditText) myLayout.findViewById(R.id.address);
+				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_address);
+				address.setError(msg);
 			}
 		}
 
-
-		if(other_theme.isShown()) {
-			// check other theme
-			ret = checkEntry(other_theme.getText().toString());
-			if(ret != ENTRY_OK) everythin_good = false;
-
-			Log.i("checkEntries", "other_theme = "+everythin_good);
-
-			switch (ret) {
-			case EMPTY:
-				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_theme);
-				other_theme.setError(msg);
-				break;
-			case ILLEGAL_CHAR:
-				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_char);
-				other_theme.setError(msg);
-				break;
-			default:
-				globalVariable.setProjectTheme(other_theme.getText().toString());
-				break;
-			}
-		}
-
-		// check other style
-
-		if(other_style.isShown()) {
-			ret = checkEntry(other_style.getText().toString());
-			if(ret != ENTRY_OK) everythin_good = false;
-
-			Log.i("checkEntries", "other_style = "+everythin_good);
-
-			switch (ret) {
-			case EMPTY:
-				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_no_style);
-				other_style.setError(msg);
-				break;
-			case ILLEGAL_CHAR:
-				msg = getActivity().getApplicationContext().getResources().getString(R.string.err_illegal_char);
-				other_style.setError(msg);
-				break;
-			default:
-				globalVariable.setProjectStyle(other_style.getText().toString());
-				break;
-			}
-		}
-
-
-
-
-
-		firstname.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				perso.setName(s.toString());
-			}
-		});
-
-
-		age.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				perso.setAge(s.toString());
-			}
-		});
-
-
-		gender.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				// TODO Auto-generated method stub
-				if(checkedId == R.id.male) {
-					perso.setSexe("M");
-
-				}
-				else
-				{
-					perso.setSexe("F");
-				}
-			}
-		});
-
+		globalVariable.addNewDetails("put-age", ""+putAge.isChecked());
+		
+		globalVariable.addNewDetails("put-name", ""+putName.isChecked());
+		
 		Log.i("checkEntries", "faisable = "+everythin_good);
 
 		return everythin_good;
-	}*/
+	}
 
 
-	private int checkEntry(String s) {
+	private boolean checkEventDate(long time, int selected_layout) {
+		
+		switch (selected_layout) {
+		case 2: //mariage
+			if(time < today) return false;
+			else return true;
+		case 6: //naissance
+			if(time > today) return false;
+			else return true;
+		case 7: //occasion
+			if(time < today) return false;
+			else return true;
+		default:
+			return true;
+		}
+		
+	}
+	
+	private int checkEntryProject(String s) {
 		int ret = ENTRY_OK;
 		if((ret = checkUnicity(s)) == ENTRY_OK) {
 			if(!(s.matches("[a-zA-Z0-9_]*"))) ret = ILLEGAL_CHAR;
+			if (s.length() == 0) ret = EMPTY;
+		}
+
+		return ret;		
+	}
+
+	private int checkEntryName(String s) {
+		int ret = ENTRY_OK;
+		if((ret = checkUnicity(s)) == ENTRY_OK) {
+			if(!(s.matches("[a-zA-Z 'éèçà]*"))) ret = ILLEGAL_CHAR;
 			if (s.length() == 0) ret = EMPTY;
 		}
 

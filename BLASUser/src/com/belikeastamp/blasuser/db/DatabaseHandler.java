@@ -21,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	// colonnes
 	public static final String P_NAME = "project_name";
-	public static final String P_TYPE = "theme";
+	public static final String P_TYPE = "project_type";
 	public static final String P_DETAIL = "detail";
 	public static final String P_ORDERDATE = "order_date";
 	public static final String P_SUBDATE = "sub_date";
@@ -30,6 +30,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public static final String P_COLORS = "colors";
 	public static final String P_STATUS = "project_status";
 	public static final String P_PROTO = "proto";
+	public static final String P_FILE = "file";
 
 	public static final int PROJ_WAIT = -1;
 	public static final int PROJ_SUBMIT = 0;
@@ -71,18 +72,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ "("
 				+ P_NAME + " TEXT NOT NULL PRIMARY KEY,"
 				+ P_SUBDATE + " TEXT NOT NULL,"
+				+ P_STATUS + " INTEGER NOT NULL,"
 				+ P_TYPE + " TEXT NOT NULL,"
 				+ P_DETAIL+ " TEXT NOT NULL,"
 				+ P_ORDERDATE + " TEXT NOT NULL,"
-				+ P_STATUS + " INTEGER NOT NULL,"
 				+ P_NBRCARDS + " INTEGER NOT NULL,"
-				+ P_REMOTEID + " INTEGER,"
 				+ P_COLORS + " TEXT NOT NULL,"
-				+ P_PROTO + " TEXT"
+				+ P_REMOTEID + " INTEGER,"
+				+ P_PROTO + " TEXT,"
+				+ P_FILE + " TEXT"
 				+ ")";
 		db.execSQL(CREATE_PROJECTS_TABLE);
 	}
-
+	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
