@@ -30,7 +30,7 @@ public class HourPickerDialogFragment extends DialogFragment {
 		final Calendar c = Calendar.getInstance();  
 		mHour = c.get(Calendar.HOUR_OF_DAY);
 		mMinute = c.get(Calendar.MINUTE);
-		TimePickerDialog tpd = new TimePickerDialog(getActivity(), mTimeSetListener, mHour, mMinute, false);
+		TimePickerDialog tpd = new TimePickerDialog(getActivity(), mTimeSetListener, mHour, mMinute, true);
 		return tpd;
 	}  
 }

@@ -28,6 +28,7 @@
 
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
+    <!-- NE PAS TRADUIRE -->
     <array name="nav_drawer_icons">
         <item>@drawable/ic_home</item>
         <item>@drawable/ic_newproject</item>
@@ -42,7 +43,9 @@
 
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
-
+    <!-- NE PAS TRADUIRE -->
+    
+    
     <!-- Home View -->
     <string name="btn_welcome">Accueil</string>
     <string name="presentation1">Bonjour à tous et à toutes !\nJe m\'appelle Rachel et je suis ravie de vous accueillir sur ma nouvelle application.</string>
@@ -56,7 +59,6 @@
         <item>Réalisation en cours</item>
         <item>Réalisation finie</item>
     </string-array>
-    
     <string-array name="type_arrays">
         <item>Carte : Anniversaire de naissance</item>
         <item>Carte : Saint Valentin</item>
@@ -73,7 +75,6 @@
         <item>Faire-Part : Naissance</item>
         <item>Invitation : Occasion</item>
     </string-array>
-   
     <string-array name="occasion_arrays">
         <item>Crémaillère</item>
         <item>Anniversaire</item>
@@ -82,32 +83,29 @@
         <item>Grossesse</item>
         <item>Autre</item>
     </string-array>
-
-     <string-array name="gender_arrays">
+    <string-array name="gender_arrays">
         <item>Madame</item>
         <item>Monsieur</item>
         <item>Famille</item>
         <item>Groupe</item>
     </string-array>
-    
-     <string-array name="baby_arrays">
+    <string-array name="baby_arrays">
         <item>Fille</item>
         <item>Garçon</item>
     </string-array>
-    
-     <string-array name="age_arrays">
+    <string-array name="age_arrays">
         <item>Âge</item>
         <item>Tranche d\'âge</item>
     </string-array>
-    
+
     <!-- FORMULAIRE -->
     <string name="project_explane">Bonjouuur ! Nous avons besoin de quelques précisions pour bien définir le projet : type de cartes, thème, couleurs, délais, personnalisation &#8230;</string>
     <string name="project_name">Nom du projet</string>
-    <string name="card_type">Type de cartes</string>
+    <string name="project_type">Type de projet</string>
     <string name="event_date">Date</string>
     <string name="nbr_years">Années de mariage</string>
     <string name="birthday">Date de naissance</string>
-    <string name="people">Pour qui ?</string>
+    <string name="people">Qui ou Pour qui ?</string>
     <string name="person1">Personne 1</string>
     <string name="person2">Personne 2</string>
     <string name="to_put_on_card">Afficher sur la carte</string>
@@ -157,11 +155,10 @@
     <string name="taille">Taille</string>
     <string name="cm">cm</string>
     <string name="kg">kg</string>
-	<string name="address">Adresse</string>
-	<string name="occaz">Occasion</string>
-	<string name="add_baby">Ajouter un bébé</string>
-	 
-	 
+    <string name="address">Adresse</string>
+    <string name="occaz">Occasion</string>
+    <string name="add_baby">Ajouter un bébé</string>
+
     <!-- Submission Dialog -->
     <string name="alert_check">Ultime check !</string>
     <string name="alert_dialog_send">Soumission</string>

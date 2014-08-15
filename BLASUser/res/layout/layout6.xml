@@ -74,7 +74,7 @@
                 android:text="@string/taille" />
 
             <EditText
-                android:id="@+id/tall"
+                android:id="@+id/height"
                 style="@style/MediumHGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,6 +90,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/add_baby"
         style="@style/btnStyleActionTurquoise2"
         android:layout_gravity="right"
         android:layout_marginTop="10dp"
@@ -122,7 +123,7 @@
                 style="@style/MediumGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/gender_arrays"
+                android:entries="@array/baby_arrays"
                 android:paddingRight="10dp" />
 
             <EditText
@@ -168,7 +169,7 @@
                 android:text="@string/taille" />
 
             <EditText
-                android:id="@+id/tall2"
+                android:id="@+id/height2"
                 style="@style/MediumHGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -197,7 +198,7 @@
             android:text="@string/birthday" />
 
         <Button
-            android:id="@+id/bday"
+            android:id="@+id/event_date"
             android:layout_marginTop="10dp"
             style="@style/btnStyleActionTurquoise2Inv"
             android:layout_width="match_parent"

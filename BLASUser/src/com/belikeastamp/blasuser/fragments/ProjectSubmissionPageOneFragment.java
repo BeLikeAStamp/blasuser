@@ -13,11 +13,15 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -108,8 +112,30 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		/*************************** LES CHOSES SERIEUSES COMMENCENT **********************************/
 
 		globalVariable = (ProjectData) getActivity().getApplicationContext();
-		//setDate(delay);
+
 		globalVariable.setSubmitDate(getDate(today));
+
+		project_name.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.setProjectName(project_name.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(),
 				R.array.type_arrays, R.layout.simple_spinner_item);
@@ -201,6 +227,19 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		});
 
+		continuer.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				//  Auto-generated method stub
+				Log.i("PROJET","=>"+globalVariable.toString());
+				Intent i = new Intent(getActivity(), ProjectSubmissionPageTwo.class);
+				startActivity(i);
+			}
+		});
+
+
+
 		/*continuer.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -237,13 +276,13 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	private void prepareLayout1() {
 		View myLayout = getView().findViewById(R.id.layout1);
 		Spinner gender = (Spinner) myLayout.findViewById(R.id.gender); 
-		EditText name = (EditText) myLayout.findViewById(R.id.firstname);
+		final EditText name = (EditText) myLayout.findViewById(R.id.firstname);
 		Spinner age_type = (Spinner) myLayout.findViewById(R.id.age_type);
-		EditText age = (EditText) myLayout.findViewById(R.id.age);
+		final EditText age = (EditText) myLayout.findViewById(R.id.age);
 
 		gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-				globalVariable.addNewDetails("gender1",(String) parent.getItemAtPosition(pos));
+				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
 			}
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
@@ -251,14 +290,55 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		age_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-				globalVariable.addNewDetails("age-type",(String) parent.getItemAtPosition(pos));
+				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
 			}
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
 
-		globalVariable.addNewDetails("name1", name.getText().toString());
-		globalVariable.addNewDetails("age1", age.getText().toString());
+		name.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.name", name.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		age.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.age", age.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 
 	}
@@ -267,21 +347,23 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	private void prepareLayout2() {
 		View myLayout = getView().findViewById(R.id.layout2);
 		Spinner gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
-		EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
+		final EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
 		Spinner age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
-		EditText age1 = (EditText) myLayout.findViewById(R.id.age1);
+		final EditText age1 = (EditText) myLayout.findViewById(R.id.age1);
 
 		Spinner gender2 = (Spinner) myLayout.findViewById(R.id.gender2); 
-		EditText name2 = (EditText) myLayout.findViewById(R.id.firstname2);
+		final EditText name2 = (EditText) myLayout.findViewById(R.id.firstname2);
 		Spinner age_type2 = (Spinner) myLayout.findViewById(R.id.age_type2);
-		EditText age2 = (EditText) myLayout.findViewById(R.id.age2);
+		final EditText age2 = (EditText) myLayout.findViewById(R.id.age2);
 
 		final Button event_date = (Button) myLayout.findViewById(R.id.event_date);
 		final Button event_hour = (Button) myLayout.findViewById(R.id.event_hour);
 
+		final EditText address = (EditText) myLayout.findViewById(R.id.address);
+		
 		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-				globalVariable.addNewDetails("gender1",(String) parent.getItemAtPosition(pos));
+				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
 			}
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
@@ -289,18 +371,17 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-				globalVariable.addNewDetails("age-type1",(String) parent.getItemAtPosition(pos));
+				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
 			}
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
 
-		globalVariable.addNewDetails("name1", name1.getText().toString());
-		globalVariable.addNewDetails("age1", age1.getText().toString());
+
 
 		gender2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-				globalVariable.addNewDetails("gender2",(String) parent.getItemAtPosition(pos));
+				globalVariable.addNewDetails("2.gender",(String) parent.getItemAtPosition(pos));
 			}
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
@@ -308,16 +389,101 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		age_type2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-				globalVariable.addNewDetails("age-type2",(String) parent.getItemAtPosition(pos));
+				globalVariable.addNewDetails("2.age-type",(String) parent.getItemAtPosition(pos));
 			}
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
 
-		globalVariable.addNewDetails("name2", name2.getText().toString());
-		globalVariable.addNewDetails("age2", age2.getText().toString());
+		name2.addTextChangedListener(new TextWatcher() {
 
-		//globalVariable.addNewDetails("event-date", age2.getText().toString());
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("2.name", name2.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		age2.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("2.age", age2.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		name1.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.name", name1.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		age1.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.age", age1.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+
 		setDate(delay, event_date);
 		event_hour.setText("00:00");
 
@@ -333,7 +499,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 						c.set(year, monthOfYear, dayOfMonth);
 						delay = c.getTime().getTime();
 						setDate(c.getTime().getTime(),event_date); 
-
+						globalVariable.addNewDetails("event-date", getDate(c.getTime().getTime()));
 					}
 				} );  
 				newFragment.show(getFragmentManager(), "datePicker");
@@ -345,60 +511,717 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			public void onClick(View v) {  
 				DialogFragment newFragment = new HourPickerDialogFragment(new TimePickerDialog.OnTimeSetListener() {
 
-							@Override
-							public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-								// TODO Auto-generated method stub
-								final Calendar c = Calendar.getInstance();
-								c.set(hourOfDay,minute);
-								event_hour.setText(hourOfDay+":"+minute);
-							}
-							
-						});
-				
+					@Override
+					public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+						// TODO Auto-generated method stub
+						final Calendar c = Calendar.getInstance();
+						c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+						c.set(Calendar.MINUTE, minute);
+						event_hour.setText(hourOfDay+":"+minute);
+						globalVariable.addNewDetails("event-hour", hourOfDay+":"+minute);
+					}
+
+				});
+
 				newFragment.show(getFragmentManager(), "hourPicker");
 			}
 		});
+		
+		address.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("address", address.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		
+		
 	}			
 
-		private void prepareLayout3() {
-			// TODO Auto-generated method stub
+	private void prepareLayout3() {
+		// TODO Auto-generated method stub
+		View myLayout = getView().findViewById(R.id.layout3);
+		Spinner gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
+		final EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
+		Spinner age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
+		final EditText age1 = (EditText) myLayout.findViewById(R.id.age1);
+		Spinner occaz = (Spinner) myLayout.findViewById(R.id.occaz_type);
+		final EditText other_occaz = (EditText) myLayout.findViewById(R.id.other_occaz);
 
-		}
+		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
 
-		private void prepareLayout4() {
-			// TODO Auto-generated method stub
+		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
 
-		}
+		occaz.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				if(pos != (getActivity().getResources().getStringArray(R.array.occasion_arrays).length - 1)) { 
+					globalVariable.addNewDetails("occasion",(String) parent.getItemAtPosition(pos));
+					other_occaz.setVisibility(View.GONE);
+				}
+				else 
+				{
+					other_occaz.setVisibility(View.VISIBLE);
+				}
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
 
-		private void prepareLayout6() {
-			// TODO Auto-generated method stub
+		name1.addTextChangedListener(new TextWatcher() {
 
-		}
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.name", name1.getText().toString());
+			}
 
-		private void prepareLayout7() {
-			// TODO Auto-generated method stub
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
 
-		}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		age1.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.age", age1.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+
+		other_occaz.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("occasion", other_occaz.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+
+	}
+
+	private void prepareLayout4() {
+		// TODO Auto-generated method stub
+		View myLayout = getView().findViewById(R.id.layout4);
+		Spinner gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
+		final EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
+		Spinner age_type1 = (Spinner) myLayout.findViewById(R.id.age_type1);
+		final EditText age1 = (EditText) myLayout.findViewById(R.id.age1);
+
+		Spinner gender2 = (Spinner) myLayout.findViewById(R.id.gender2); 
+		final EditText name2 = (EditText) myLayout.findViewById(R.id.firstname2);
+		Spinner age_type2 = (Spinner) myLayout.findViewById(R.id.age_type2);
+		final EditText age2 = (EditText) myLayout.findViewById(R.id.age2);
+		final EditText nbr_years = (EditText) myLayout.findViewById(R.id.nbr_years);
+
+		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
 
 
 
-		private String getDate(long millisecond){  
-			int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
-					| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
-					| DateUtils.FORMAT_ABBREV_WEEKDAY;  
-			String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);  
-			return dateString;  
-		}
+		gender2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("2.gender",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
 
-		private void setDate(long millisecond, Button v){  
-			int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
-					| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
-					| DateUtils.FORMAT_ABBREV_WEEKDAY;  
-			String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);
-			v.setText(dateString);  
-		}
+		age_type2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("2.age-type",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
 
-		/*private boolean checkEntries() {
+		name2.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("2.name", name2.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		age2.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("2.age", age2.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		name1.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.name", name1.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		age1.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.age", age1.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		nbr_years.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("nbr_years", nbr_years.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+	}
+
+	private void prepareLayout6() {
+		// TODO Auto-generated method stub
+		View myLayout = getView().findViewById(R.id.layout6);
+		Spinner gender1 = (Spinner) myLayout.findViewById(R.id.gender1);
+		Spinner gender2 = (Spinner) myLayout.findViewById(R.id.gender2); 
+		final EditText name1 = (EditText) myLayout.findViewById(R.id.firstname1);
+		final EditText poids1 = (EditText) myLayout.findViewById(R.id.weight);
+		final EditText taille1 = (EditText) myLayout.findViewById(R.id.height);
+		final EditText name2 = (EditText) myLayout.findViewById(R.id.firstname2);
+		final EditText poids2 = (EditText) myLayout.findViewById(R.id.weight2);
+		final EditText taille2 = (EditText) myLayout.findViewById(R.id.height2);
+		final Button event_date = (Button) myLayout.findViewById(R.id.event_date);
+		final Button add_baby = (Button) myLayout.findViewById(R.id.add_baby);
+		final LinearLayout perso2 = (LinearLayout) myLayout.findViewById(R.id.perso2);
+
+		setDate(delay, event_date);
+		event_date.setOnClickListener(new OnClickListener() {  
+			@Override  
+			public void onClick(View v) {  
+				DialogFragment newFragment = new DatePickerDialogFragment(new OnDateSetListener() {
+
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear,
+							int dayOfMonth) {
+						Calendar c = Calendar.getInstance();  
+						c.set(year, monthOfYear, dayOfMonth);
+						delay = c.getTime().getTime();
+						setDate(c.getTime().getTime(),event_date); 
+						globalVariable.addNewDetails("event-date", getDate(c.getTime().getTime()));
+					}
+				} );  
+				newFragment.show(getFragmentManager(), "datePicker");
+			}  
+		});
+
+		add_baby.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				perso2.setVisibility(View.VISIBLE);
+				add_baby.setVisibility(View.GONE);
+			}
+		});
+
+		gender1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		name1.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.name", name1.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+
+
+
+		gender2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("2.gender",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+
+		name2.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("2.name", name2.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		taille1.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.height", taille1.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+
+		taille2.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("2.height", taille2.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		poids1.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.weigth", poids1.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		poids2.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("2.weigth", poids2.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+
+	}
+
+	private void prepareLayout7() {
+		// TODO Auto-generated method stub
+		View myLayout = getView().findViewById(R.id.layout7);
+		Spinner gender = (Spinner) myLayout.findViewById(R.id.gender);
+		Spinner occaz = (Spinner) myLayout.findViewById(R.id.occaz_type);
+		final EditText name = (EditText) myLayout.findViewById(R.id.firstname);
+		Spinner age_type = (Spinner) myLayout.findViewById(R.id.age_type);
+		final EditText age = (EditText) myLayout.findViewById(R.id.age);
+		final EditText other_occaz = (EditText) myLayout.findViewById(R.id.other_occaz);
+		final Button event_date = (Button) myLayout.findViewById(R.id.event_date);
+		final Button event_hour = (Button) myLayout.findViewById(R.id.event_hour);
+		final EditText address = (EditText) myLayout.findViewById(R.id.address);
+		
+		
+		gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("1.gender",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		age_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				globalVariable.addNewDetails("age-type",(String) parent.getItemAtPosition(pos));
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		name.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.name", name.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		age.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("1.age", age.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		occaz.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				if(pos != (getActivity().getResources().getStringArray(R.array.occasion_arrays).length - 1)) { 
+					globalVariable.addNewDetails("occasion",(String) parent.getItemAtPosition(pos));
+					other_occaz.setVisibility(View.GONE);
+				}
+				else 
+				{
+					other_occaz.setVisibility(View.VISIBLE);
+				}
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		other_occaz.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("occasion", other_occaz.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		setDate(delay, event_date);
+		event_hour.setText("00:00");
+
+		event_date.setOnClickListener(new OnClickListener() {  
+			@Override  
+			public void onClick(View v) {  
+				DialogFragment newFragment = new DatePickerDialogFragment(new OnDateSetListener() {
+
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear,
+							int dayOfMonth) {
+						Calendar c = Calendar.getInstance();  
+						c.set(year, monthOfYear, dayOfMonth);
+						delay = c.getTime().getTime();
+						setDate(c.getTime().getTime(),event_date); 
+						globalVariable.addNewDetails("event-date", getDate(c.getTime().getTime()));
+					}
+				} );  
+				newFragment.show(getFragmentManager(), "datePicker");
+			}  
+		});
+
+		event_hour.setOnClickListener(new OnClickListener() {  
+			@Override  
+			public void onClick(View v) {  
+				DialogFragment newFragment = new HourPickerDialogFragment(new TimePickerDialog.OnTimeSetListener() {
+
+					@Override
+					public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+						// TODO Auto-generated method stub
+						final Calendar c = Calendar.getInstance();
+						c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+						c.set(Calendar.MINUTE, minute);
+						event_hour.setText(hourOfDay+":"+minute);
+						globalVariable.addNewDetails("event-hour", hourOfDay+":"+minute);
+					}
+
+				});
+
+				newFragment.show(getFragmentManager(), "hourPicker");
+			}
+		});
+		
+		address.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				globalVariable.addNewDetails("adresse", address.getText().toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		
+		
+	}
+
+
+
+	private String getDate(long millisecond){  
+		int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
+				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
+				| DateUtils.FORMAT_ABBREV_WEEKDAY;  
+		String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);  
+		return dateString;  
+	}
+
+	private void setDate(long millisecond, Button v){  
+		int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
+				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
+				| DateUtils.FORMAT_ABBREV_WEEKDAY;  
+		String dateString = DateUtils.formatDateTime(getActivity().getApplicationContext(),millisecond, flags);
+		v.setText(dateString);  
+	}
+
+	/*private boolean checkEntries() {
 		boolean everythin_good = true;
 		String msg = "";
 		int ret = 0;
@@ -596,109 +1419,109 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	}*/
 
 
-		private int checkEntry(String s) {
-			int ret = ENTRY_OK;
-			if((ret = checkUnicity(s)) == ENTRY_OK) {
-				if(!(s.matches("[a-zA-Z0-9_]*"))) ret = ILLEGAL_CHAR;
-				if (s.length() == 0) ret = EMPTY;
-			}
-
-			return ret;		
+	private int checkEntry(String s) {
+		int ret = ENTRY_OK;
+		if((ret = checkUnicity(s)) == ENTRY_OK) {
+			if(!(s.matches("[a-zA-Z0-9_]*"))) ret = ILLEGAL_CHAR;
+			if (s.length() == 0) ret = EMPTY;
 		}
 
-		private int checkUnicity(String s) {
-			int ret = ENTRY_OK;
-			ProjectsData datasource = new ProjectsData(getActivity().getApplicationContext());
+		return ret;		
+	}
 
-			datasource.open();
+	private int checkUnicity(String s) {
+		int ret = ENTRY_OK;
+		ProjectsData datasource = new ProjectsData(getActivity().getApplicationContext());
 
-			if (!(datasource.checkUnicity(s))) {			
-				ret = NOT_UNIQ;
-			}
+		datasource.open();
 
-			return ret;
+		if (!(datasource.checkUnicity(s))) {			
+			ret = NOT_UNIQ;
 		}
 
-		public ArrayList<ColorPicker> getColorCat1() {
-			ArrayList<ColorPicker> list = new ArrayList<ColorPicker>();
-			// tendances
-			list.add(new ColorPicker(R.color.rasberry_ripple));
-			list.add(new ColorPicker(R.color.summer_starfruit));
-			list.add(new ColorPicker(R.color.midnight_muse));
-			list.add(new ColorPicker(R.color.primrose_petals));
-			list.add(new ColorPicker(R.color.gumball_green));
-			list.add(new ColorPicker(R.color.baked_brown_sugar));
-			list.add(new ColorPicker(R.color.coastal_cabana));
-			list.add(new ColorPicker(R.color.crisp_cantaloupe));
-			list.add(new ColorPicker(R.color.strawberry_slush));
-			list.add(new ColorPicker(R.color.pistachio_pudding));
-			// eclatantes
-			list.add(new ColorPicker(R.color.bermuda_bay));
-			list.add(new ColorPicker(R.color.daffodil_delight));
-			list.add(new ColorPicker(R.color.melon_mambo));
-			list.add(new ColorPicker(R.color.old_olive));
-			list.add(new ColorPicker(R.color.pacific_point));
-			list.add(new ColorPicker(R.color.pumpkin_pie));
-			list.add(new ColorPicker(R.color.real_red));
-			list.add(new ColorPicker(R.color.rich_razzleberry));
-			list.add(new ColorPicker(R.color.tangerine_tango));
-			list.add(new ColorPicker(R.color.tempting_turquoise));
-			// subtiles
-			list.add(new ColorPicker(R.color.blushing_bride));
-			list.add(new ColorPicker(R.color.calypso_coral));
-			list.add(new ColorPicker(R.color.marina_mist));
-			list.add(new ColorPicker(R.color.pear_pizzazz));
-			list.add(new ColorPicker(R.color.pink_pirouette));
-			list.add(new ColorPicker(R.color.pool_party));
-			list.add(new ColorPicker(R.color.so_saffron));
-			list.add(new ColorPicker(R.color.soft_sky));
-			list.add(new ColorPicker(R.color.wild_wasabi));
-			list.add(new ColorPicker(R.color.wisteria_wonder));
-			// gourmandes
-			list.add(new ColorPicker(R.color.always_artichoke));
-			list.add(new ColorPicker(R.color.cajun_craze));
-			list.add(new ColorPicker(R.color.cherry_cobbler));
-			list.add(new ColorPicker(R.color.crushed_curry));
-			list.add(new ColorPicker(R.color.elegant_eggplant));
-			list.add(new ColorPicker(R.color.garden_green));
-			list.add(new ColorPicker(R.color.island_indigo));
-			list.add(new ColorPicker(R.color.night_of_navy));
-			list.add(new ColorPicker(R.color.rose_red));
-			list.add(new ColorPicker(R.color.perfect_plum));
-			// neutres
-			list.add(new ColorPicker(R.color.basic_black));
-			list.add(new ColorPicker(R.color.basic_gray));
-			list.add(new ColorPicker(R.color.chocolate_chip));
-			list.add(new ColorPicker(R.color.crumb_cake));
-			list.add(new ColorPicker(R.color.early_espresso));
-			list.add(new ColorPicker(R.color.sahara_sand));
-			list.add(new ColorPicker(R.color.whisper_white));
-			list.add(new ColorPicker(R.color.smoky_slate));
-			list.add(new ColorPicker(R.color.soft_suede));
-			list.add(new ColorPicker(R.color.very_vanilla));
+		return ret;
+	}
+
+	public ArrayList<ColorPicker> getColorCat1() {
+		ArrayList<ColorPicker> list = new ArrayList<ColorPicker>();
+		// tendances
+		list.add(new ColorPicker(R.color.rasberry_ripple));
+		list.add(new ColorPicker(R.color.summer_starfruit));
+		list.add(new ColorPicker(R.color.midnight_muse));
+		list.add(new ColorPicker(R.color.primrose_petals));
+		list.add(new ColorPicker(R.color.gumball_green));
+		list.add(new ColorPicker(R.color.baked_brown_sugar));
+		list.add(new ColorPicker(R.color.coastal_cabana));
+		list.add(new ColorPicker(R.color.crisp_cantaloupe));
+		list.add(new ColorPicker(R.color.strawberry_slush));
+		list.add(new ColorPicker(R.color.pistachio_pudding));
+		// eclatantes
+		list.add(new ColorPicker(R.color.bermuda_bay));
+		list.add(new ColorPicker(R.color.daffodil_delight));
+		list.add(new ColorPicker(R.color.melon_mambo));
+		list.add(new ColorPicker(R.color.old_olive));
+		list.add(new ColorPicker(R.color.pacific_point));
+		list.add(new ColorPicker(R.color.pumpkin_pie));
+		list.add(new ColorPicker(R.color.real_red));
+		list.add(new ColorPicker(R.color.rich_razzleberry));
+		list.add(new ColorPicker(R.color.tangerine_tango));
+		list.add(new ColorPicker(R.color.tempting_turquoise));
+		// subtiles
+		list.add(new ColorPicker(R.color.blushing_bride));
+		list.add(new ColorPicker(R.color.calypso_coral));
+		list.add(new ColorPicker(R.color.marina_mist));
+		list.add(new ColorPicker(R.color.pear_pizzazz));
+		list.add(new ColorPicker(R.color.pink_pirouette));
+		list.add(new ColorPicker(R.color.pool_party));
+		list.add(new ColorPicker(R.color.so_saffron));
+		list.add(new ColorPicker(R.color.soft_sky));
+		list.add(new ColorPicker(R.color.wild_wasabi));
+		list.add(new ColorPicker(R.color.wisteria_wonder));
+		// gourmandes
+		list.add(new ColorPicker(R.color.always_artichoke));
+		list.add(new ColorPicker(R.color.cajun_craze));
+		list.add(new ColorPicker(R.color.cherry_cobbler));
+		list.add(new ColorPicker(R.color.crushed_curry));
+		list.add(new ColorPicker(R.color.elegant_eggplant));
+		list.add(new ColorPicker(R.color.garden_green));
+		list.add(new ColorPicker(R.color.island_indigo));
+		list.add(new ColorPicker(R.color.night_of_navy));
+		list.add(new ColorPicker(R.color.rose_red));
+		list.add(new ColorPicker(R.color.perfect_plum));
+		// neutres
+		list.add(new ColorPicker(R.color.basic_black));
+		list.add(new ColorPicker(R.color.basic_gray));
+		list.add(new ColorPicker(R.color.chocolate_chip));
+		list.add(new ColorPicker(R.color.crumb_cake));
+		list.add(new ColorPicker(R.color.early_espresso));
+		list.add(new ColorPicker(R.color.sahara_sand));
+		list.add(new ColorPicker(R.color.whisper_white));
+		list.add(new ColorPicker(R.color.smoky_slate));
+		list.add(new ColorPicker(R.color.soft_suede));
+		list.add(new ColorPicker(R.color.very_vanilla));
 
 
-			return list;
-		}
+		return list;
+	}
 
-		private class RazOnClickListener implements View.OnClickListener {
+	private class RazOnClickListener implements View.OnClickListener {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ImageView i = (ImageView) v;
-				i.setBackgroundResource(android.R.color.transparent);
-				switch(i.getId()) {
-				case R.id.selected_color1:
-					selectedColors[0] = false;
-					break;
-				case R.id.selected_color2:
-					selectedColors[1] = false;
-					break;
-				case R.id.selected_color3:
-					selectedColors[2] = false;
-					break;
-				}
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			ImageView i = (ImageView) v;
+			i.setBackgroundResource(android.R.color.transparent);
+			switch(i.getId()) {
+			case R.id.selected_color1:
+				selectedColors[0] = false;
+				break;
+			case R.id.selected_color2:
+				selectedColors[1] = false;
+				break;
+			case R.id.selected_color3:
+				selectedColors[2] = false;
+				break;
 			}
 		}
 	}
+}

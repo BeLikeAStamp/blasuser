@@ -2,7 +2,10 @@ package com.belikeastamp.blasuser.util;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import android.app.Application;
 import android.net.Uri;
@@ -14,7 +17,7 @@ public class ProjectData extends Application {
 
 	public static SparseArray<String> colorName;
 	public static Map<String,Integer> reverseColorMap;
-	
+
 	private String projectType;
 	private String projectName;
 	private String numberOfCards;
@@ -25,8 +28,8 @@ public class ProjectData extends Application {
 	private Uri trackFile;
 	private String infos;
 	private Map<String,String> details;
-	
-	
+
+
 	public ProjectData() {
 		super();
 		projectType = "";
@@ -122,24 +125,33 @@ public class ProjectData extends Application {
 	public void addNewDetails(String key, String value) {
 		this.details.put(key, value);
 	}
-	
+
 	public boolean isFilled(String detail) {
 		return this.details.containsKey(detail);
 	}
-	
-	
-	
+
+	public String getPrintableDetails() {
+		Map<String, String> map = new TreeMap<String, String>(details);
+		StringBuffer sb = new StringBuffer();
+		
+		for (String s : map.keySet() ) {
+			sb.append(s+" => "+map.get(s)+" ; ");
+		}
+
+		return sb.toString();
+	}
+
 	@Override
-	public String toString() {
+	public String toString() {		
 		return "ProjectData [projectType=" + projectType + ", projectName="
 				+ projectName + ", numberOfCards=" + numberOfCards
 				+ ", submitDate=" + submitDate + ", orderDate=" + orderDate
 				+ ", colorPanel=" + Arrays.toString(colorPanel) + ", perso="
 				+ perso + ", trackFile=" + trackFile + ", infos=" + infos
-				+ ", details=" + details + "]";
+				+ ", details=" + getPrintableDetails() + "]";
 	}
-	
-	
+
+
 	private void fillMap() {
 
 		colorName = new SparseArray<String>();
@@ -198,9 +210,9 @@ public class ProjectData extends Application {
 		colorName.put(R.color.smoky_slate,"smoky_slate");
 		colorName.put(R.color.soft_suede,"soft_suede");
 		colorName.put(R.color.very_vanilla,"very_vanilla");
-		
+
 		reverseColorMap = new HashMap<String, Integer>();
-		
+
 		reverseColorMap.put("rasberry_ripple",R.color.rasberry_ripple);
 		reverseColorMap.put("summer_starfruit",R.color.summer_starfruit);
 		reverseColorMap.put("midnight_muse",R.color.midnight_muse);
@@ -255,10 +267,10 @@ public class ProjectData extends Application {
 		reverseColorMap.put("smoky_slate",R.color.smoky_slate);
 		reverseColorMap.put("soft_suede",R.color.soft_suede);
 		reverseColorMap.put("very_vanilla",R.color.very_vanilla);
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 }

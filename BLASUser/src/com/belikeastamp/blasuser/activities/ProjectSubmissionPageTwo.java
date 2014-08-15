@@ -36,20 +36,20 @@ public class ProjectSubmissionPageTwo extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
-	private ProjectData globalVariable;
 	private Long id;
-	private String userEmail;
+	//private String userEmail;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_submission_page2);
-		globalVariable = (ProjectData) getApplicationContext();
+		ProjectData globalVariable = (ProjectData) getApplicationContext();
 
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.banniere));
 
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_navigation_drawer, //nav menu toggle icon
@@ -145,7 +145,6 @@ public class ProjectSubmissionPageTwo extends Activity {
 			TextView nbrCards = new TextView(getActivity());
 			TextView delay = new TextView(getActivity());
 			TextView colors = new TextView(getActivity());
-			TextView perso = new TextView(getActivity());
 
 			LinearLayout colorlayout = new LinearLayout(getActivity());
 			colorlayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -195,26 +194,27 @@ public class ProjectSubmissionPageTwo extends Activity {
 			Log.d("PROJECT BEFORE SAVING ",p.toString());
 			
 			projectName.setText(getResources().getString(R.string.project_name)+" : "+data.getProjectName());
-			cardType.setText(getResources().getString(R.string.card_type)+" : "+data.getProjectType());
-			cardDetail.setText(getResources().getString(R.string.card_style)+" : "+data.getDetails().toString());
+			cardType.setText(getResources().getString(R.string.project_type)+" : "+data.getProjectType());
+			cardDetail.setText(getResources().getString(R.string.personnalisation)+" : "+data.getPrintableDetails());
 			nbrCards.setText(getResources().getString(R.string.how_many_cards)+" : "+data.getNumberOfCards());
 			delay.setText(getResources().getString(R.string.for_when)+" : "+data.getOrderDate());
 			colors.setText(getResources().getString(R.string.color_set)+" : ");
-			perso.setText(getResources().getString(R.string.personnalisation)+" : "+(data.getPerso() == null ? "anonyme" : data.getPerso()));
+			
 
 
 			layout.addView(projectName, layoutParams);
 			layout.addView(cardType, layoutParams);
 			layout.addView(cardDetail, layoutParams);
-			layout.addView(nbrCards, layoutParams);
-			layout.addView(delay, layoutParams);
+			
 			layout.addView(colors, layoutParams);
 			colorlayout.addView(color1);
 			colorlayout.addView(color2);
 			colorlayout.addView(color3);
 			layout.addView(colorlayout, layoutParams);
-			layout.addView(perso, layoutParams);
 			
+			layout.addView(nbrCards, layoutParams);
+			layout.addView(delay, layoutParams);
+						
 			builder.setView(layout);
 
 			builder

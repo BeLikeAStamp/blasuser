@@ -10,7 +10,7 @@
         android:orientation="horizontal" >
 
         <Spinner
-            android:id="@+id/gender"
+            android:id="@+id/gender1"
             style="@style/MediumGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
             android:paddingRight="10dp" />
 
         <EditText
-            android:id="@+id/firstname"
+            android:id="@+id/firstname1"
             style="@style/MediumHGray"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
         android:orientation="horizontal" >
 
         <Spinner
-            android:id="@+id/age_type"
+            android:id="@+id/age_type1"
             style="@style/MediumGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
