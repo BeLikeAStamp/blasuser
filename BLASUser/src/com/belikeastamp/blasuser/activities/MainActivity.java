@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.net.Uri;
@@ -51,11 +54,13 @@ public class MainActivity extends Activity {
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
 
+	public static final String CLOSE = "close";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -76,19 +81,19 @@ public class MainActivity extends Activity {
 		// Find People
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
 		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), true, "5"));
 		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "3"));
 		// Pages
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 		// What's hot, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
 		// What's hot, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1), true, "50+"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 		// What's hot, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1), true, "50+"));		
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1)));		
 		// What's hot, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons.getResourceId(8, -1), true, "50+"));		
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons.getResourceId(8, -1)));		
 
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -208,10 +213,10 @@ public class MainActivity extends Activity {
 			String url = getResources().getString(R.string.blog);
 			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			startActivity(i);
-			break;
+			break;	
 		case 8:
 			Toast.makeText(getApplicationContext(), R.string.see_u_soon, Toast.LENGTH_SHORT).show();
-			finish();
+		    finish();
 			break;
 			
 

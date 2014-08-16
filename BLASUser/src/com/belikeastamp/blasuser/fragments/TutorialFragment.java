@@ -26,9 +26,9 @@ public class TutorialFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 
 		tutorials = new ArrayList<Tutorial>();
-		/*tutorials.add(new Tutorial("Audrey", "Quebec", "01/10/14", 200));
-		tutorials.add(new Tutorial("Js", "Quebec", "01/10/14", 21));
-		tutorials.add(new Tutorial("Kratos", "Quebec", "01/10/14", 0));*/
+		tutorials.add(new Tutorial("Audrey", true, "Quebec", "01/10/14", 200));
+		tutorials.add(new Tutorial("Js", true, "Quebec", "01/10/14", 21));
+		tutorials.add(new Tutorial("Kratos", false, "Quebec", "01/10/14", 0));
 		
 		BaseAdapter adapter = new TutorialAdapter(getActivity().getApplicationContext(), tutorials);
 		setListAdapter(adapter);

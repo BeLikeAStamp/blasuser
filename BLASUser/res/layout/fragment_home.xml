@@ -10,7 +10,7 @@
         android:layout_margin="10dp"
         android:gravity="center"
         android:text="@string/presentation1"
-        style="@style/MediumHGray"
+        style="@style/MediumTurquoise3"
         android:textSize="16sp" />
 
     <ImageView

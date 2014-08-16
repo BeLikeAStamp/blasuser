@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,11 +50,9 @@ public class TutorialAdapter extends BaseAdapter {
 
 	public class Holder
 	{
-		TextView theme;
-		TextView town;
-		TextView date;
-		TextView price;
-		//ImageView icon;
+		TextView title;
+		TextView dispo;
+		Button action;
 	}
 
 	@Override
@@ -65,17 +64,13 @@ public class TutorialAdapter extends BaseAdapter {
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			rowView = inflater.inflate(R.layout.listview_tutorial, null);
-			TextView theme = (TextView) rowView.findViewById(R.id.theme);
-			TextView town = (TextView) rowView.findViewById(R.id.town);
-			TextView date = (TextView) rowView.findViewById(R.id.date);
-			TextView price = (TextView) rowView.findViewById(R.id.price);
-			//ImageView icon = (ImageView) rowView.findViewById(R.id.icon);
+			TextView title = (TextView) rowView.findViewById(R.id.title);
+			TextView dispo = (TextView) rowView.findViewById(R.id.dispo);
+			Button action = (Button) rowView.findViewById(R.id.action);
 
-			holder.theme = theme;
-			holder.town = town;
-			holder.date = date;
-			holder.price = price;
-			//holder.icon = icon;
+			holder.title = title;
+			holder.dispo = dispo;
+			holder.action = action;
 
 			rowView.setTag(holder);
 
@@ -83,13 +78,13 @@ public class TutorialAdapter extends BaseAdapter {
 
 		holder = (Holder) rowView.getTag();
 
-		/*Workshop w = list.get(position);
-		Log.d("BLASUSER", "Workshop "+w.toString());
+		Tutorial t = list.get(position);
+		Log.d("BLASUSER", "Tutorial "+t.toString());
 
-		holder.theme.setText(context.getResources().getString(R.string.theme)+" "+w.getTheme());
-		holder.town.setText(context.getResources().getString(R.string.town)+" "+w.getTown());
-		holder.date.setText(context.getResources().getString(R.string.date)+" "+w.getDate());
-		holder.price.setText(context.getResources().getString(R.string.price)+" "+w.getPrice());*/
+		holder.title.setText(context.getResources().getString(R.string.title)+" "+t.getTitle());
+		holder.dispo.setText(context.getResources().getString(R.string.availability)+" "
+		+(t.getAvailabale() ? context.getResources().getString(R.string.available)  : context.getResources().getString(R.string.not_available) ));
+		holder.action.setText(t.getAvailabale() ? context.getResources().getString(R.string.btn_get_tuto)  : context.getResources().getString(R.string.btn_demand));
 
 		/*
 		int ratio = 0;

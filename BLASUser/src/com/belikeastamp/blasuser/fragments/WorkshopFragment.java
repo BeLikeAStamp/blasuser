@@ -3,22 +3,20 @@ package com.belikeastamp.blasuser.fragments;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-import android.app.Fragment;
 import android.app.ListFragment;
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.belikeastamp.blasuser.activities.SavedProjectsActivity;
 import com.belikeastamp.blasuser.adapter.WorkshopAdapter;
-import com.belikeastamp.blasuser.db.dao.ProjectsData;
 import com.belikeastamp.blasuser.db.model.Workshop;
+import com.belikeastamp.blasuser.util.WorkshopController;
 
 public class WorkshopFragment extends ListFragment {
-	private ProjectsData datasource;
 	private List<Workshop> workshops;
 
 
@@ -29,9 +27,15 @@ public class WorkshopFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 
 		workshops = new ArrayList<Workshop>();
-		workshops.add(new Workshop("Audrey", "Quebec", "le monde", "Quebec", "01/10/14", 3, 3, 200));
-		workshops.add(new Workshop("Js", "Quebec", "le monde", "Quebec", "01/10/14", 10, 3, 21));
-		workshops.add(new Workshop("Kratos", "Quebec", "le monde", "Quebec", "01/10/14", 10, 0, 21));
+		
+		Request request = new Request();
+		try {
+			workshops = (List<Workshop>) request.execute().get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
 		
 		BaseAdapter adapter = new WorkshopAdapter(getActivity().getApplicationContext(), workshops);
 		setListAdapter(adapter);
@@ -46,6 +50,26 @@ public class WorkshopFragment extends ListFragment {
 		//Intent intent = new Intent(getActivity(),SavedProjectsActivity.class);
 		//intent.putExtra("project",workshops.get(position));
 		//startActivity(intent);
+
+	}
+	
+	private class Request extends AsyncTask<Void, Void, List<Workshop>> {
+
+		@SuppressWarnings("unchecked")
+		@Override
+		protected List<Workshop> doInBackground(Void... params) {
+			WorkshopController c = new WorkshopController();
+			@SuppressWarnings("rawtypes")
+			List lists = new ArrayList<Workshop>();
+
+			try {
+				lists = c.getAllWorkshops();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return lists;
+		}
 
 	}
 }

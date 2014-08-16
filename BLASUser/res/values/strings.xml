@@ -184,6 +184,16 @@
     <string name="price">Prix :</string>
     <string name="remaning_place">Places restantes :</string>
     <string name="btn_signin">S\'inscrire</string>
+	<string name="btn_complet">Complet</string>
+
+    <!-- Tutorials -->
+    <string name="tutorial">Tutoriel</string>
+    <string name="title">Titre :</string>
+    <string name="availability">Disponibilité :</string>
+    <string name="available">disponible</string>
+    <string name="not_available">à la demande</string>
+    <string name="btn_get_tuto">Télécharger</string>
+    <string name="btn_demand">Demander</string>
 
     <!-- Join Me ! -->
     <string name="stampingup">Stampin\'Up</string>

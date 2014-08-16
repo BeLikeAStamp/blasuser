@@ -8,11 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.belikeastamp.blasuser.R;
-import com.belikeastamp.blasuser.db.model.Project;
 import com.belikeastamp.blasuser.db.model.Workshop;
 
 public class WorkshopAdapter extends BaseAdapter {
@@ -50,7 +49,7 @@ public class WorkshopAdapter extends BaseAdapter {
 		TextView town;
 		TextView date;
 		TextView price;
-		//ImageView icon;
+		Button action;
 	}
 
 	@Override
@@ -66,13 +65,13 @@ public class WorkshopAdapter extends BaseAdapter {
 			TextView town = (TextView) rowView.findViewById(R.id.town);
 			TextView date = (TextView) rowView.findViewById(R.id.date);
 			TextView price = (TextView) rowView.findViewById(R.id.price);
-			//ImageView icon = (ImageView) rowView.findViewById(R.id.icon);
+			Button action = (Button) rowView.findViewById(R.id.action);
 
 			holder.theme = theme;
 			holder.town = town;
 			holder.date = date;
 			holder.price = price;
-			//holder.icon = icon;
+			holder.action = action;
 
 			rowView.setTag(holder);
 
@@ -87,23 +86,11 @@ public class WorkshopAdapter extends BaseAdapter {
 		holder.town.setText(context.getResources().getString(R.string.town)+" "+w.getTown());
 		holder.date.setText(context.getResources().getString(R.string.date)+" "+w.getDate());
 		holder.price.setText(context.getResources().getString(R.string.price)+" "+w.getPrice());
-
-		/*
-		int ratio = 0;
-		if(list.get(position).getRegistered() > 0 ) 
-			ratio = list.get(position).getCapacity()/list.get(position).getRegistered();
-
-		if (list.get(position).getRegistered() == 0) {
-			holder.icon.setImageResource(R.drawable.nobody);
-		} else if (list.get(position).getRegistered() > 0 && ratio >= 3){
-			holder.icon.setImageResource(R.drawable.tiers);
-		} else if (ratio < 3 && ratio >= 2){
-			holder.icon.setImageResource(R.drawable.middle);
-		} else if (ratio < 2 && list.get(position).getRegistered() < list.get(position).getCapacity()){
-			holder.icon.setImageResource(R.drawable.twotiers);
-		} else {
-			holder.icon.setImageResource(R.drawable.full);
-		}*/
+		holder.action.setText(w.getRegistered() >= w.getCapacity() ? context.getResources().getString(R.string.btn_complet)  : context.getResources().getString(R.string.btn_signin));
+		if (w.getRegistered() >= w.getCapacity()) {
+			holder.action.setEnabled(false);
+			holder.action.setBackgroundResource(R.drawable.btn_action_turquoise1);
+		}
 		
 		return rowView;
 	}
