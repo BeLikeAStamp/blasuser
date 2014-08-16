@@ -44,8 +44,8 @@
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
     <!-- NE PAS TRADUIRE -->
-    
-    
+
+
     <!-- Home View -->
     <string name="btn_welcome">Accueil</string>
     <string name="presentation1">Bonjour à tous et à toutes !\nJe m\'appelle Rachel et je suis ravie de vous accueillir sur ma nouvelle application.</string>
@@ -175,6 +175,15 @@
     <!-- Saved Projects Details -->
     <string name="btn_modif">Modifier</string>
     <string name="btn_submit">Soumission</string>
+
+    <!-- Workshops -->
+    <string name="worksphop">Atelier</string>
+    <string name="theme">Thème :</string>
+    <string name="town">Ville :</string>
+    <string name="date">Date :</string>
+    <string name="price">Prix :</string>
+    <string name="remaning_place">Places restantes :</string>
+    <string name="btn_signin">S\'inscrire</string>
 
     <!-- Join Me ! -->
     <string name="stampingup">Stampin\'Up</string>

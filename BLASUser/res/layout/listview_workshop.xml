@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/theme"
+        style="@style/MediumLblue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/town"
+        style="@style/MediumHGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/theme"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dip"
+        android:gravity="right"
+        android:textStyle="normal" />
+    
+    
+    <TextView
+        android:id="@+id/date"
+        style="@style/MediumHGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/town"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dip"
+        android:gravity="right"
+        android:textStyle="normal" />
+    
+    <TextView
+        android:id="@+id/price"
+        style="@style/MediumHGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dip"
+        android:gravity="right"
+        android:textStyle="italic" />
+    
+
+</RelativeLayout>
