@@ -83,8 +83,8 @@ public class TutorialAdapter extends BaseAdapter {
 
 		holder.title.setText(context.getResources().getString(R.string.title)+" "+t.getTitle());
 		holder.dispo.setText(context.getResources().getString(R.string.availability)+" "
-		+(t.getAvailabale() ? context.getResources().getString(R.string.available)  : context.getResources().getString(R.string.not_available) ));
-		holder.action.setText(t.getAvailabale() ? context.getResources().getString(R.string.btn_get_tuto)  : context.getResources().getString(R.string.btn_demand));
+		+(t.getAvailable() ? context.getResources().getString(R.string.available)  : context.getResources().getString(R.string.not_available) ));
+		holder.action.setText(t.getAvailable() ? context.getResources().getString(R.string.btn_get_tuto)  : context.getResources().getString(R.string.btn_demand));
 
 		/*
 		int ratio = 0;
