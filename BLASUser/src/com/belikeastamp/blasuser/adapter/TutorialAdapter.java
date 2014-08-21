@@ -86,22 +86,7 @@ public class TutorialAdapter extends BaseAdapter {
 		+(t.getAvailable() ? context.getResources().getString(R.string.available)  : context.getResources().getString(R.string.not_available) ));
 		holder.action.setText(t.getAvailable() ? context.getResources().getString(R.string.btn_get_tuto)  : context.getResources().getString(R.string.btn_demand));
 
-		/*
-		int ratio = 0;
-		if(list.get(position).getRegistered() > 0 ) 
-			ratio = list.get(position).getCapacity()/list.get(position).getRegistered();
-
-		if (list.get(position).getRegistered() == 0) {
-			holder.icon.setImageResource(R.drawable.nobody);
-		} else if (list.get(position).getRegistered() > 0 && ratio >= 3){
-			holder.icon.setImageResource(R.drawable.tiers);
-		} else if (ratio < 3 && ratio >= 2){
-			holder.icon.setImageResource(R.drawable.middle);
-		} else if (ratio < 2 && list.get(position).getRegistered() < list.get(position).getCapacity()){
-			holder.icon.setImageResource(R.drawable.twotiers);
-		} else {
-			holder.icon.setImageResource(R.drawable.full);
-		}*/
+		
 		
 		return rowView;
 	}

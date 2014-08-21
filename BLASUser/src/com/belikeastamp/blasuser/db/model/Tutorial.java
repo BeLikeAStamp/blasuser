@@ -9,6 +9,7 @@ public class Tutorial implements Serializable {
 	 */
 	private static final long serialVersionUID = -1778891610597448685L;
 	
+	Long id;
 	String title;
 	String file;
 	Boolean available;
@@ -24,6 +25,16 @@ public class Tutorial implements Serializable {
 		this.onDemand = demand;
 	}
 	
+	
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
 		return title;
 	}

@@ -38,7 +38,7 @@ public class ProjectsData {
 
 	public void addProjects(Project project) {
 		ContentValues values = new ContentValues();
-
+		
 		values.put(DatabaseHandler.P_NAME, project.getName());
 		values.put(DatabaseHandler.P_SUBDATE, project.getSubDate());
 		values.put(DatabaseHandler.P_STATUS, project.getStatus());
@@ -49,7 +49,7 @@ public class ProjectsData {
 		values.put(DatabaseHandler.P_COLORS, project.getColors());
 		values.put(DatabaseHandler.P_REMOTEID, project.getRemoteId());
 		values.put(DatabaseHandler.P_PROTO, project.getPath_to_prototype());
-		values.put(DatabaseHandler.P_FILE, project.getPath_to_track().toString());
+		if(project.getTrackFile() != null) values.put(DatabaseHandler.P_FILE, project.getTrackFile().toString());
 		
 		// Inserting Row
 		database.insert(DatabaseHandler.TABLE_PROJECTS, null, values);
@@ -163,8 +163,9 @@ public class ProjectsData {
 		project.setDetail(cursor.getString(4));
 		project.setOrderDate(cursor.getString(5));
 		project.setQuantity(cursor.getInt(6));
-		project.setRemoteId(cursor.getLong(7));
-		project.setColors(cursor.getString(8));
+		project.setRemoteId(cursor.getLong(8));
+		project.setColors(cursor.getString(7));
+
 		return project;
 	}
 	

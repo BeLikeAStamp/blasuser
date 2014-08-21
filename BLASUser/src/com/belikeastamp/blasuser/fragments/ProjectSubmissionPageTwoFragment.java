@@ -51,7 +51,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 	final static int NOINFOS = 3;
 	final static int FAISABLE = 4;
 
-	private ImageView file;
+	private ImageView fileView;
 	private Button valider, selectDate;
 	private EditText infos, card_num;
 	private ProjectData globalVariable;
@@ -59,7 +59,9 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 	final static long WEEK = 604800000L;
 	private long today = System.currentTimeMillis();
 	private long delay = today + WEEK;
-
+	private File file = null;
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -76,14 +78,14 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 		valider = (Button) getView().findViewById(R.id.btn_continue);
 		infos = (EditText) getView().findViewById(R.id.infos);
 		selectDate = (Button) getView().findViewById(R.id.select_date);
-		file =(ImageView) getView().findViewById(R.id.file);
+		fileView =(ImageView) getView().findViewById(R.id.file);
 		card_num = (EditText) getView().findViewById(R.id.card_num);
 
 		globalVariable = (ProjectData) getActivity().getApplicationContext();
 		setDate(delay);
 		globalVariable.setSubmitDate(getDate(today));
 
-		file.setOnClickListener(new View.OnClickListener() {
+		fileView.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -230,8 +232,8 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 					int height = 300;
 					LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
 					parms.gravity = Gravity.CENTER;
-					file.setLayoutParams(parms);
-					file.setImageBitmap(bm);
+					fileView.setLayoutParams(parms);
+					fileView.setImageBitmap(bm);
 
 
 					String path = android.os.Environment
@@ -243,7 +245,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 					File selectedFile = new File(path, String.valueOf(System
 							.currentTimeMillis()) + ".jpg");
 
-					globalVariable.setTrackFile(Uri.parse(selectedFile.getAbsolutePath()));
+					globalVariable.setTrackFile(selectedFile);
 
 					try {
 						fOut = new FileOutputStream(selectedFile);
@@ -271,9 +273,9 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 				int height = 300;
 				LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
 				parms.gravity = Gravity.CENTER;
-				file.setLayoutParams(parms);
-				file.setImageBitmap(bm);
-				globalVariable.setTrackFile(selectedImageUri);
+				fileView.setLayoutParams(parms);
+				fileView.setImageBitmap(bm);
+				globalVariable.setTrackFile(new File(data.getData().getPath()));
 			}
 		}
 	}

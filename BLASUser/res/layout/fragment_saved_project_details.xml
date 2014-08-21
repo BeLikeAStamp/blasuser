@@ -20,105 +20,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <TableRow
-           android:layout_marginBottom="10dp" >
-
-            <TextView
-                style="@style/MediumHGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/project_type" />
+        <TableRow android:layout_marginBottom="10dp" >
 
             <TextView
                 android:id="@+id/card_type"
-                style="@style/MediumGray"
+                style="@style/MediumTurquoise3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp" />
         </TableRow>
 
-        <TableRow
-           android:layout_marginBottom="10dp" >
+        <TableRow android:layout_marginBottom="10dp" >
 
             <TextView
-                style="@style/MediumHGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/card_theme" />
-
-            <TextView
-                android:id="@+id/card_theme"
-                style="@style/MediumGray"
+                android:id="@+id/details"
+                style="@style/MediumTurquoise3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp" />
         </TableRow>
 
-        <TableRow
-           android:layout_marginBottom="10dp" >
-
-            <TextView
-                style="@style/MediumHGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/card_style" />
-
-            <TextView
-                android:id="@+id/card_style"
-                style="@style/MediumGray"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp" />
-        </TableRow>
-
-        <TableRow
-           android:layout_marginBottom="10dp" >
-
-            <TextView
-                style="@style/MediumHGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/how_many_cards" />
+        <TableRow android:layout_marginBottom="10dp" >
 
             <TextView
                 android:id="@+id/number"
-                style="@style/MediumGray"
+                style="@style/MediumTurquoise3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp" />
         </TableRow>
 
-        <TableRow
-           android:layout_marginBottom="10dp" >
-
-            <TextView
-                style="@style/MediumHGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/for_when" />
+        <TableRow android:layout_marginBottom="10dp" >
 
             <TextView
                 android:id="@+id/date"
-                style="@style/MediumGray"
+                style="@style/MediumTurquoise3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp" />
         </TableRow>
 
-        <TableRow
-           android:layout_marginBottom="10dp" >
-
-            <TextView
-                style="@style/MediumHGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/color_set" />
+        <TableRow android:layout_marginBottom="10dp" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/MediumTurquoise3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="15dp"
+                    android:text="@string/color_set" />
 
                 <ImageView
                     android:id="@+id/selected_color1"
@@ -140,23 +95,6 @@
                     android:layout_marginLeft="10dp"
                     android:background="@android:color/transparent" />
             </LinearLayout>
-        </TableRow>
-
-        <TableRow
-           android:layout_marginBottom="10dp" >
-
-            <TextView
-                style="@style/MediumHGray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/personnalisation" />
-
-            <TextView
-                android:id="@+id/perso"
-                style="@style/MediumGray"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp" />
         </TableRow>
     </TableLayout>
 

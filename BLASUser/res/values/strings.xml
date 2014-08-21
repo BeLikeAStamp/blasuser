@@ -175,7 +175,8 @@
     <!-- Saved Projects Details -->
     <string name="btn_modif">Modifier</string>
     <string name="btn_submit">Soumission</string>
-
+    <string name="save_date">Date de sauvegarde</string>
+    
     <!-- Workshops -->
     <string name="worksphop">Atelier</string>
     <string name="theme">Thème :</string>
@@ -184,7 +185,7 @@
     <string name="price">Prix :</string>
     <string name="remaning_place">Places restantes :</string>
     <string name="btn_signin">S\'inscrire</string>
-	<string name="btn_complet">Complet</string>
+    <string name="btn_complet">Complet</string>
 
     <!-- Tutorials -->
     <string name="tutorial">Tutoriel</string>

@@ -1,14 +1,12 @@
 package com.belikeastamp.blasuser.util;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import android.app.Application;
-import android.net.Uri;
 import android.util.SparseArray;
 
 import com.belikeastamp.blasuser.R;
@@ -25,7 +23,7 @@ public class ProjectData extends Application {
 	private String orderDate;
 	private int[] colorPanel;
 	private PersoSubject perso;
-	private Uri trackFile;
+	private File trackFile;
 	private String infos;
 	private Map<String,String> details;
 
@@ -115,10 +113,10 @@ public class ProjectData extends Application {
 	public void setDetails(Map<String,String> details) {
 		this.details = details;
 	}
-	public Uri getTrackFile() {
+	public File getTrackFile() {
 		return trackFile;
 	}
-	public void setTrackFile(Uri trackFile) {
+	public void setTrackFile(File trackFile) {
 		this.trackFile = trackFile;
 	}
 

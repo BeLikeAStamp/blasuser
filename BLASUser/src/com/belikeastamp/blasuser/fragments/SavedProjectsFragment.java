@@ -11,6 +11,7 @@ import com.belikeastamp.blasuser.db.model.Project;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -30,6 +31,9 @@ public class SavedProjectsFragment extends ListFragment {
 		projects = datasource.getAllWaitingProjects();
 		datasource.close();
 
+		
+		Log.i("PROJET RECUPERE", projects.toString());
+		
 		BaseAdapter adapter = new SavedProjectAdapter(getActivity().getApplicationContext(), projects);
 
 		/* ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),

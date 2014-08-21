@@ -9,6 +9,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -189,7 +190,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 					(data.getPerso() == null ? "anonymous" : data.getPerso().toString()));
 
 			p.setColors(colorsBuffer.toString());
-			p.setPath_to_track(data.getTrackFile());
+			if(data.getTrackFile() != null) p.setTrackFile(data.getTrackFile());
 			
 			Log.d("PROJECT BEFORE SAVING ",p.toString());
 			
@@ -242,13 +243,6 @@ public class ProjectSubmissionPageTwo extends Activity {
 					((ProjectSubmissionPageTwo) getActivity())
 					.doCancelClick();
 				}
-			}).setNegativeButton(R.string.alert_dialog_cancel,
-					new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,
-						int whichButton) {
-					((ProjectSubmissionPageTwo) getActivity())
-					.doCancelClick();
-				}
 			});
 
 			return builder.create();
@@ -264,6 +258,9 @@ public class ProjectSubmissionPageTwo extends Activity {
 		Log.i("PROJECT TO SAVE",p.toString());
 		datasource.addProjects(p);
 		datasource.close();
+		
+		//Intent i = new Intent(ProjectSubmissionPageTwo.this, SavedProjectsActivity.class);
+		//startActivity(i);
 	}
 
 	private void remoteSubmission(Project p) {

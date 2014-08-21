@@ -48,7 +48,6 @@ public class SavedProjectAdapter extends BaseAdapter {
         TextView name;
         TextView type;
         TextView date;
-        ImageView track;
     }
 	
 	@Override
@@ -63,12 +62,10 @@ public class SavedProjectAdapter extends BaseAdapter {
 			TextView name = (TextView) rowView.findViewById(R.id.name);
 			TextView type = (TextView) rowView.findViewById(R.id.theme);
 			TextView date = (TextView) rowView.findViewById(R.id.date);
-			ImageView track = (ImageView) rowView.findViewById(R.id.track);
 			
 			holder.name = name;
 			holder.type = type;
 			holder.date = date;
-			holder.track = track;
 			
 			rowView.setTag(holder);
 
@@ -82,9 +79,7 @@ public class SavedProjectAdapter extends BaseAdapter {
 		holder.name.setText(p.getName());		
 		holder.type.setText(p.getType());
 		holder.date.setText(p.getSubDate());
-		
-		if (p.getPath_to_track() != null) holder.track.setImageURI(p.getPath_to_track());;
-		
+				
 		return rowView;
 	}
 

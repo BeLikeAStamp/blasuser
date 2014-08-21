@@ -1,5 +1,6 @@
 package com.belikeastamp.blasuser.db.model;
 
+import java.io.File;
 import java.io.Serializable;
 
 import android.net.Uri;
@@ -17,7 +18,7 @@ public class Project implements Serializable {
 	private String type;
 	private String orderDate;
 	private String path_to_prototype;
-	private Uri path_to_track;
+	private File trackFile;
 	private String perso;
 	private String colors;
 	private int status;
@@ -135,16 +136,21 @@ public class Project implements Serializable {
 		this.colors = colors;
 	}
 
-	public Uri getPath_to_track() {
-		return path_to_track;
+	public File getTrackFile() {
+		return trackFile;
 	}
 
-	public void setPath_to_track(Uri path_to_track) {
-		this.path_to_track = path_to_track;
+	public void setTrackFile(File path_to_track) {
+		this.trackFile = path_to_track;
 	}
 
 
-
+	public String getPrintableDetails() {
+		
+		String s = getDetail().replace(", ", "\n");
+		return s;
+	}
+	
 	@Override
 	public String toString() {
 		return "Project [name=" + name + "\nsubDate=" + subDate + "\ndetail="
