@@ -1,47 +1,25 @@
 package com.belikeastamp.blasuser.fragments;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 import android.app.ListFragment;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.belikeastamp.blasuser.adapter.TutorialAdapter;
-import com.belikeastamp.blasuser.db.model.Tutorial;
-import com.belikeastamp.blasuser.util.TutorialController;
+import com.belikeastamp.blasuser.util.GlobalVariable;
 
 public class TutorialFragment extends ListFragment {
-	
-	private List<Tutorial> tutorials;
+	private GlobalVariable globalVariable;
 	
 	public TutorialFragment(){}
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
-		/*tutorials = new ArrayList<Tutorial>();
-		tutorials.add(new Tutorial("Audrey", true, "Quebec", "01/10/14", 200));
-		tutorials.add(new Tutorial("Js", true, "Quebec", "01/10/14", 21));
-		tutorials.add(new Tutorial("Kratos", false, "Quebec", "01/10/14", 0));*/
-		
-		
-		Request request = new Request();
-		try {
-			tutorials = (List<Tutorial>) request.execute().get();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-		
-		BaseAdapter adapter = new TutorialAdapter(getActivity().getApplicationContext(), tutorials);
+		globalVariable = (GlobalVariable) getActivity().getApplicationContext();
+		BaseAdapter adapter = new TutorialAdapter(getActivity().getApplicationContext(), globalVariable.getData().getTutorials());
 		setListAdapter(adapter);
 	}
 
@@ -56,25 +34,4 @@ public class TutorialFragment extends ListFragment {
 		//startActivity(intent);
 
 	}
-	
-	private class Request extends AsyncTask<Void, Void, List<Tutorial>> {
-
-		@SuppressWarnings("unchecked")
-		@Override
-		protected List<Tutorial> doInBackground(Void... params) {
-			TutorialController c = new TutorialController();
-			@SuppressWarnings("rawtypes")
-			List lists = new ArrayList<Tutorial>();
-
-			try {
-				lists = c.getAllTutorials();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return lists;
-		}
-
-	}
-	
 }

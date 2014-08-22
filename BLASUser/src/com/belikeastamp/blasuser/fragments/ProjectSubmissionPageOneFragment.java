@@ -37,16 +37,16 @@ import android.widget.ViewFlipper;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.activities.ProjectSubmissionPageTwo;
-import com.belikeastamp.blasuser.db.dao.ProjectsData;
+import com.belikeastamp.blasuser.db.dao.Datasource;
 import com.belikeastamp.blasuser.util.ColorPicker;
 import com.belikeastamp.blasuser.util.ColorPickerAdapter;
 import com.belikeastamp.blasuser.util.DatePickerDialogFragment;
 import com.belikeastamp.blasuser.util.HourPickerDialogFragment;
-import com.belikeastamp.blasuser.util.ProjectData;
+import com.belikeastamp.blasuser.util.GlobalVariable;
 
 public class ProjectSubmissionPageOneFragment extends Fragment {
 
-	private ProjectData globalVariable;
+	private GlobalVariable globalVariable;
 
 	/* CORE LAYOUT */
 	private Spinner card_type_spinner;
@@ -123,7 +123,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		/*************************** LES CHOSES SERIEUSES COMMENCENT **********************************/
 
-		globalVariable = (ProjectData) getActivity().getApplicationContext();
+		globalVariable = (GlobalVariable) getActivity().getApplicationContext();
 
 		globalVariable.setSubmitDate(getDate(today));
 
@@ -1454,7 +1454,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	private int checkUnicity(String s) {
 		int ret = ENTRY_OK;
-		ProjectsData datasource = new ProjectsData(getActivity().getApplicationContext());
+		Datasource datasource = new Datasource(getActivity().getApplicationContext());
 
 		datasource.open();
 

@@ -6,10 +6,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.net.Uri;
@@ -26,7 +23,6 @@ import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.adapter.NavDrawerListAdapter;
-import com.belikeastamp.blasuser.fragments.FindPeopleFragment;
 import com.belikeastamp.blasuser.fragments.HomeFragment;
 import com.belikeastamp.blasuser.fragments.JoinMeFragment;
 import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageOneFragment;
@@ -35,12 +31,14 @@ import com.belikeastamp.blasuser.fragments.SubmitProjectsFragment;
 import com.belikeastamp.blasuser.fragments.TutorialFragment;
 import com.belikeastamp.blasuser.fragments.WorkshopFragment;
 import com.belikeastamp.blasuser.model.NavDrawerItem;
+import com.belikeastamp.blasuser.util.GlobalVariable;
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
-
+	private GlobalVariable globalVariable;
+	
 	// nav drawer title
 	private CharSequence mDrawerTitle;
 
@@ -60,6 +58,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		globalVariable = (GlobalVariable) getApplicationContext();
 		
 		mTitle = mDrawerTitle = getTitle();
 
@@ -74,20 +73,25 @@ public class MainActivity extends Activity {
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
 		navDrawerItems = new ArrayList<NavDrawerItem>();
-
+		
+		int submit_prj = (globalVariable.getData().getSubmitProjects() != null) ? globalVariable.getData().getSubmitProjects().size() : 0;
+		int saved_prj = (globalVariable.getData().getSavedProjects() != null) ? globalVariable.getData().getSavedProjects().size() : 0;
+		int tutos_prj = (globalVariable.getData().getTutorials() != null) ? globalVariable.getData().getTutorials().size() : 0;
+		int works_prj = (globalVariable.getData().getWorkshops() != null) ? globalVariable.getData().getWorkshops().size() : 0;
+		
 		// adding nav drawer items to array
 		// Home
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
 		// Find People
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
 		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), true, "5"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), true, ""+submit_prj));
 		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "3"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, ""+saved_prj));
 		// Pages
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1), true, ""+tutos_prj));
 		// What's hot, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, ""+works_prj));
 		// What's hot, We  will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 		// What's hot, We  will add a counter here

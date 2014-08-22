@@ -11,7 +11,7 @@ import android.util.SparseArray;
 
 import com.belikeastamp.blasuser.R;
 
-public class ProjectData extends Application {
+public class GlobalVariable extends Application {
 
 	public static SparseArray<String> colorName;
 	public static Map<String,Integer> reverseColorMap;
@@ -26,19 +26,22 @@ public class ProjectData extends Application {
 	private File trackFile;
 	private String infos;
 	private Map<String,String> details;
-
-
-	public ProjectData() {
+	private UploadedData data;
+	private String userEmail;
+	private Long userId;
+	
+	public GlobalVariable() {
 		super();
-		projectType = "";
-		projectName = "";
-		numberOfCards = "";
-		submitDate = "";
-		orderDate = "";
-		infos = "";
+		this.projectType = "";
+		this.projectName = "";
+		this.numberOfCards = "";
+		this.submitDate = "";
+		this.orderDate = "";
+		this.infos = "";
 		setDetails(new HashMap<String, String>());
-		colorPanel = new int[]{-1,-1,-1};
+		this.colorPanel = new int[]{-1,-1,-1};
 		fillMap();
+		this.data = new UploadedData();
 	}
 	public int[] getColorPanel() {
 		return colorPanel;
@@ -127,7 +130,15 @@ public class ProjectData extends Application {
 	public boolean isFilled(String detail) {
 		return this.details.containsKey(detail);
 	}
+	
+	public UploadedData getData() {
+		return data;
+	}
+	public void setData(UploadedData data) {
+		this.data = data;
+	}
 
+	
 	public String getPrintableDetails() {
 		Map<String, String> map = new TreeMap<String, String>(details);
 		StringBuffer sb = new StringBuffer();
@@ -267,8 +278,17 @@ public class ProjectData extends Application {
 		reverseColorMap.put("very_vanilla",R.color.very_vanilla);
 
 	}
-
-
-
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
 }

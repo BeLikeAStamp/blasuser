@@ -1,43 +1,28 @@
 package com.belikeastamp.blasuser.fragments;
 
 
-import java.util.List;
-
 import com.belikeastamp.blasuser.activities.SavedProjectsActivity;
 import com.belikeastamp.blasuser.adapter.SavedProjectAdapter;
-import com.belikeastamp.blasuser.db.dao.ProjectsData;
-import com.belikeastamp.blasuser.db.model.Project;
+import com.belikeastamp.blasuser.util.GlobalVariable;
 
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 
 public class SavedProjectsFragment extends ListFragment {
-
-	private ProjectsData datasource;
+	private GlobalVariable globalVariable;
+	
 	public SavedProjectsFragment(){}
-	private List<Project> projects;
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		datasource = new ProjectsData(getActivity().getApplicationContext());
-		datasource.open();
-		projects = datasource.getAllWaitingProjects();
-		datasource.close();
-
-		
-		Log.i("PROJET RECUPERE", projects.toString());
-		
-		BaseAdapter adapter = new SavedProjectAdapter(getActivity().getApplicationContext(), projects);
-
-		/* ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-	        android.R.layout.simple_list_item_1, values);*/
+		globalVariable = (GlobalVariable) getActivity().getApplicationContext();
+		BaseAdapter adapter = new SavedProjectAdapter(getActivity().getApplicationContext(), globalVariable.getData().getSavedProjects());
 		setListAdapter(adapter);
 	}
 
@@ -48,7 +33,7 @@ public class SavedProjectsFragment extends ListFragment {
 
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(getActivity(),SavedProjectsActivity.class);
-		intent.putExtra("project",projects.get(position));
+		intent.putExtra("project",globalVariable.getData().getSavedProjects().get(position));
 		startActivity(intent);
 
 	}

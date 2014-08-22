@@ -13,6 +13,11 @@
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
 
+    
+    <!-- Pre MAinActivity -->
+     <string name="alert_loading_data">Une petite erreur s\'est produite redémarrer l\'application</string>
+    
+    
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item>Accueil</item>
@@ -94,8 +99,8 @@
         <item>Garçon</item>
     </string-array>
     <string-array name="age_arrays">
-        <item>Âge</item>
-        <item>Tranche d\'âge</item>
+        <item>age</item>
+        <item>Tranche d\'age</item>
     </string-array>
 
     <!-- FORMULAIRE -->
@@ -134,7 +139,7 @@
     <string name="color_warning">Trois couleurs maximum parce que trop de couleurs tue la couleur !\nClique sur une couleur pour la supprimer puis choisis-en une autre </string>
     <string name="personnalisation">Personnalisation</string>
     <string name="firstname">Prénom</string>
-    <string name="age">Âge</string>
+    <string name="age">Age</string>
     <string name="year">ans</string>
     <string name="validate">Valider</string>
     <string name="file">Joindre un fichier</string>

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.db.model.Project;
-import com.belikeastamp.blasuser.util.ProjectData;
+import com.belikeastamp.blasuser.util.GlobalVariable;
 
 public class SavedProjectsPageTwoFragment extends Fragment {
 
@@ -60,16 +60,16 @@ public class SavedProjectsPageTwoFragment extends Fragment {
 
 		switch (colors.length) {
 		case 1:
-			color1.setBackgroundResource(ProjectData.reverseColorMap.get(colors[0]));
+			color1.setBackgroundResource(GlobalVariable.reverseColorMap.get(colors[0]));
 			break;
 		case 2:
-			color1.setBackgroundResource(ProjectData.reverseColorMap.get(colors[0]));
-			color2.setBackgroundResource(ProjectData.reverseColorMap.get(colors[1]));
+			color1.setBackgroundResource(GlobalVariable.reverseColorMap.get(colors[0]));
+			color2.setBackgroundResource(GlobalVariable.reverseColorMap.get(colors[1]));
 			break;
 		case 3:
-			color1.setBackgroundResource(ProjectData.reverseColorMap.get(colors[0]));
-			color2.setBackgroundResource(ProjectData.reverseColorMap.get(colors[1]));
-			color3.setBackgroundResource(ProjectData.reverseColorMap.get(colors[2]));
+			color1.setBackgroundResource(GlobalVariable.reverseColorMap.get(colors[0]));
+			color2.setBackgroundResource(GlobalVariable.reverseColorMap.get(colors[1]));
+			color3.setBackgroundResource(GlobalVariable.reverseColorMap.get(colors[2]));
 			break;	
 		default:
 			break;

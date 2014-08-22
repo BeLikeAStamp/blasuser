@@ -14,12 +14,12 @@ import android.util.Log;
 import com.belikeastamp.blasuser.db.DatabaseHandler;
 import com.belikeastamp.blasuser.db.model.Project;
 
-public class ProjectsData {
+public class Datasource {
 
 	private SQLiteDatabase database;
 	private DatabaseHandler dbHelper;
 
-	public ProjectsData(Context context) {
+	public Datasource(Context context) {
 		dbHelper = DatabaseHandler.getInstance(context);
 	}  
 
