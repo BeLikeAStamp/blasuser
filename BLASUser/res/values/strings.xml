@@ -28,7 +28,7 @@
         <item>Ateliers</item>
         <item>Join me!</item>
         <item>Blog</item>
-        <item>Quitter</item>
+        <item>Actualiser</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
@@ -43,7 +43,7 @@
         <item>@drawable/ic_workshop</item>
         <item>@drawable/ic_join</item>
         <item>@drawable/ic_blog</item>
-        <item>@drawable/ic_quit</item>
+        <item>@drawable/ic_actualiser</item>
     </array>
 
     <!-- Content Description -->
@@ -176,7 +176,9 @@
     <string name="confirm_email">Email contact</string>
     <string name="reg_failed">Echec de l\'enregistrement</string>
     <string name="reg_succed">Enregistrement effectué ! Let\'s GO !</string>
-
+	<string name="email_subject">Soumission de projet</string>
+    <string name="email_body">Bonjour Rachel,\nCi-joint les détails du projet que j\'aimerais réaliser.\nInfos complémentaires: !!\nAmicalement.</string>
+    
     <!-- Saved Projects Details -->
     <string name="btn_modif">Modifier</string>
     <string name="btn_submit">Soumission</string>

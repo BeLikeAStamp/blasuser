@@ -193,7 +193,10 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 
 
 	private void selectImage() {
-		final CharSequence[] items = { "Take Photo", "Choose from Library",
+		/*final CharSequence[] items = { "Take Photo", "Choose from Library",
+		"Cancel" };*/
+		
+		final CharSequence[] items = { "Choose from Library",
 		"Cancel" };
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -201,13 +204,13 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int item) {
-				if (items[item].equals("Take Photo")) {
+				/*if (items[item].equals("Take Photo")) {
 					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 					File f = new File(android.os.Environment
 							.getExternalStorageDirectory(), "temp.jpg");
 					intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
 					startActivityForResult(intent, REQUEST_CAMERA);
-				} else if (items[item].equals("Choose from Library")) {
+				} else */if (items[item].equals("Choose from Library")) {
 					Intent intent = new Intent(
 							Intent.ACTION_PICK,
 							android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -231,6 +234,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 		Log.d("RESULT CODE", ""+resultCode);
 
 		if (resultCode == Activity.RESULT_OK) {
+			
 			if (requestCode == ProjectSubmissionPageTwoFragment.REQUEST_CAMERA) {
 				File f = new File(Environment.getExternalStorageDirectory()
 						.toString());
@@ -247,7 +251,6 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 					bm = BitmapFactory.decodeFile(f.getAbsolutePath(),
 							btmapOptions);
 
-					// bm = Bitmap.createScaledBitmap(bm, 70, 70, true);
 					int width = 300;
 					int height = 300;
 					LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
@@ -265,8 +268,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 					File selectedFile = new File(path, String.valueOf(System
 							.currentTimeMillis()) + ".jpg");
 
-					file = selectedFile;
-					//globalVariable.setTrackFile(selectedFile);
+					file = f;
 
 					try {
 						fOut = new FileOutputStream(selectedFile);
@@ -296,8 +298,12 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 				parms.gravity = Gravity.CENTER;
 				fileView.setLayoutParams(parms);
 				fileView.setImageBitmap(bm);
-
-				file = new File(data.getData().getPath());
+			    Uri selUri = Uri.withAppendedPath(selectedImageUri, "test");
+				Toast.makeText(getActivity().getApplicationContext(), 
+				     selUri.getPath(), 
+				     Toast.LENGTH_LONG).show();
+				//file = new File(data.getData().getPath());
+				file = new File(selectedImageUri.getPath());
 			}
 		}
 	}

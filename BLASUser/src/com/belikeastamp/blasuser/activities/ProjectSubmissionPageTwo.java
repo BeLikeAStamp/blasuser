@@ -25,7 +25,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.res.Resources.NotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -41,23 +42,22 @@ import android.widget.Toast;
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.db.dao.Datasource;
 import com.belikeastamp.blasuser.db.model.Project;
-import com.belikeastamp.blasuser.db.model.User;
 import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageTwoFragment;
 import com.belikeastamp.blasuser.util.CustomMultiPartEntity;
 import com.belikeastamp.blasuser.util.EngineConfiguration;
-import com.belikeastamp.blasuser.util.ProjectController;
 import com.belikeastamp.blasuser.util.GlobalVariable;
-import com.belikeastamp.blasuser.util.UserController;
+import com.belikeastamp.blasuser.util.ProjectController;
 
 public class ProjectSubmissionPageTwo extends Activity {
+	private static final int SEND_EMAIL = 0;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private Long projectId;
 	private GlobalVariable globalVariable;
-	
-	
+	boolean everything_ok = true;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_submission_page2);
@@ -282,14 +282,20 @@ public class ProjectSubmissionPageTwo extends Activity {
 	}
 
 	private void remoteSubmission(Project p) {
+
 		p.setStatus(1);
-		
+
 		// remote
 		AddProjectTask task = new AddProjectTask();
 		try {
 			projectId = task.execute(p).get();
 			p.setRemoteId(projectId);
-			if (p.getTrackFile() != null) new SendHttpRequestTask().execute(p.getTrackFile());
+
+			if (!projectId.equals(Long.valueOf(-1)))
+			{
+				sendEmail(p);
+			}
+			else everything_ok = false;
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -298,15 +304,40 @@ public class ProjectSubmissionPageTwo extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		// local 
-		Datasource datasource = new Datasource(getApplicationContext());
-		datasource.open();
-		Log.i("PROJECT TO SUBMIT",p.toString());
-		datasource.addProjects(p);
-		datasource.close();
+		if (everything_ok) {
+			Datasource datasource = new Datasource(getApplicationContext());
+			datasource.open();
+			Log.i("PROJECT TO SUBMIT",p.toString());
+			datasource.addProjects(p);
+			datasource.close();
+		}
+		else
+		{
+			Toast.makeText(getApplicationContext(), "Ca a merdé !!!", Toast.LENGTH_SHORT).show();
+		}
+
 
 	}
+
+	private void sendEmail(Project p) {
+		// TODO Auto-generated method stub
+		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,  new String[]{getResources().getString(R.string.contact_email)});
+
+		String body = getResources().getString(R.string.email_body);
+		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getResources().getString(R.string.email_subject));
+		emailIntent.setType("plain/text");
+		emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
+
+		if (p.getTrackFile() != null) {
+			emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(p.getTrackFile().toString()));
+		}
+
+		startActivityForResult(emailIntent, SEND_EMAIL);
+	}
+
 
 	private class AddProjectTask extends AsyncTask<Project, Void, Long> {
 
@@ -417,6 +448,25 @@ public class ProjectSubmissionPageTwo extends Activity {
 		{
 			pd.dismiss();
 		}
-	} 
+	}
+
+	@Override 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub 
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (requestCode) {
+
+		case SEND_EMAIL: 
+			if(resultCode==Activity.RESULT_CANCELED){
+				everything_ok = false;
+			} 
+			break; 
+
+		default: 
+			break; 
+		} 
+	}
+
 }
 

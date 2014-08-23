@@ -219,8 +219,8 @@ public class MainActivity extends Activity {
 			startActivity(i);
 			break;	
 		case 8:
-			Toast.makeText(getApplicationContext(), R.string.see_u_soon, Toast.LENGTH_SHORT).show();
-		    finish();
+			Intent i2 = new Intent(MainActivity.this, PreMainActivity.class);
+			startActivity(i2);
 			break;
 			
 
