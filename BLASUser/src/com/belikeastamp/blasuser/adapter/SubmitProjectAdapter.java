@@ -20,12 +20,10 @@ public class SubmitProjectAdapter extends BaseAdapter {
 
 	List<Project> list;
 	Context context;
-	LongSparseArray<Uri> prototypes;
 	String[] status;
 	
-	public SubmitProjectAdapter (Context context, List<Project> projectList, LongSparseArray<Uri> map, String[] status) {
+	public SubmitProjectAdapter (Context context, List<Project> projectList, String[] status) {
 		this.context = context;
-		this.prototypes = map;
 		this.list = projectList;
 		this.status = status;
 	}
@@ -54,7 +52,6 @@ public class SubmitProjectAdapter extends BaseAdapter {
         TextView name;
         TextView type;
         TextView status;
-        ImageView img;
     }
 	
 	@Override
@@ -69,12 +66,10 @@ public class SubmitProjectAdapter extends BaseAdapter {
 			TextView name = (TextView) rowView.findViewById(R.id.name);
 			TextView type = (TextView) rowView.findViewById(R.id.theme);
 			TextView status = (TextView) rowView.findViewById(R.id.status);
-			ImageView proto = (ImageView) rowView.findViewById(R.id.proto);
 			
 			holder.name = name;
 			holder.type = type;
 			holder.status = status;
-			holder.img = proto;
 			
 			rowView.setTag(holder);
 
@@ -88,7 +83,6 @@ public class SubmitProjectAdapter extends BaseAdapter {
 		holder.name.setText(p.getName());		
 		holder.type.setText(p.getType());
 		holder.status.setText(status[p.getStatus()]);
-		holder.img.setImageURI(prototypes.get(p.getRemoteId()));
 		
 		return rowView;
 	}

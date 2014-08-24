@@ -4,22 +4,13 @@
     android:layout_height="match_parent"
     android:padding="10dp" >
 
-    <ImageView
-        android:id="@+id/track"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_logodontworry"
-        android:paddingRight="10dp"
-        android:contentDescription="@string/file"
-        android:layout_alignParentLeft="true" />
-
     <TextView
         android:id="@+id/name"
         style="@style/MediumLblue"
+        android:paddingRight="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/track"
-        android:layout_toRightOf="@+id/track"
+        android:layout_alignParentLeft="true"
         android:textStyle="bold" />
 
     <TextView
@@ -30,7 +21,6 @@
         android:layout_below="@id/name"
         android:layout_gravity="center"
         android:layout_marginTop="2dip"
-        android:layout_toRightOf="@id/track"
         android:gravity="right"
          />
     
@@ -43,7 +33,6 @@
         android:layout_below="@id/theme"
         android:layout_gravity="center"
         android:layout_marginTop="2dip"
-        android:layout_toRightOf="@id/track"
         android:gravity="right"
         android:textStyle="italic" />
 

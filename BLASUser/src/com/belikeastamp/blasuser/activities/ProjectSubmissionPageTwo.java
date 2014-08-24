@@ -283,7 +283,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 
 	private void remoteSubmission(Project p) {
 
-		p.setStatus(1);
+		p.setStatus(0);
 
 		// remote
 		AddProjectTask task = new AddProjectTask();

@@ -2,6 +2,7 @@ package com.belikeastamp.blasuser.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -57,7 +58,7 @@ public class TutorialController {
 			throw e;
 		}
 	}
-	
+
 
 	public void update(Tutorial tuto) throws Exception {
 		try {
@@ -68,7 +69,7 @@ public class TutorialController {
 			throw e;
 		}
 	}
-	 
+
 	public void delete(Long id)  throws Exception {
 		try {
 			buildDeleteURL(id);
@@ -77,7 +78,7 @@ public class TutorialController {
 			Log.i("TutorialController", "Delete failed !");
 			throw e;
 		}
-		
+
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -106,10 +107,16 @@ public class TutorialController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 		return (list.size() > 0) ? list.get(0).getId() : Long.valueOf(-1);
 	}
-	
+
+	public InputStream downloadFile(Long tutorialId) {
+		InputStream inputStream = getInputStreamFromUrl(EngineConfiguration.path + "download?type=tutorial&correspondance="+tutorialId);	
+		return inputStream;
+
+	}
+
 	private List<Tutorial> JSON2Tutorial(String json) {
 		// TODO Auto-generated method stub
 		List<Tutorial> tutorials = new ArrayList<Tutorial>();
@@ -133,7 +140,7 @@ public class TutorialController {
 					String file = c.getString(TAG_FILE);
 					String date = c.getString(TAG_DATE);
 					String demand = c.getString(TAG_DEMAND);
-					
+
 					// tmp hashmap for single contact
 					HashMap<String, String> hash = new HashMap<String, String>();
 
@@ -178,7 +185,7 @@ public class TutorialController {
 			params.add(new BasicNameValuePair(TAG_FILE, tuto.getFile()));
 			params.add(new BasicNameValuePair(TAG_DATE, tuto.getDate()));
 			params.add(new BasicNameValuePair(TAG_DEMAND, tuto.getOnDemand().toString()));
-			
+
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(
 					new OutputStreamWriter(os, "UTF-8"));
@@ -221,7 +228,7 @@ public class TutorialController {
 			params.add(new BasicNameValuePair(TAG_FILE, tuto.getFile()));
 			params.add(new BasicNameValuePair(TAG_DATE, tuto.getDate()));
 			params.add(new BasicNameValuePair(TAG_DEMAND, tuto.getOnDemand().toString()));
-			
+
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(
 					new OutputStreamWriter(os, "UTF-8"));
@@ -245,7 +252,7 @@ public class TutorialController {
 		}
 
 	}
-	
+
 	private void buildDeleteURL(Long id) {
 
 		try {
@@ -276,7 +283,7 @@ public class TutorialController {
 		}
 
 	}
-	
+
 	private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException
 	{
 		StringBuilder result = new StringBuilder();

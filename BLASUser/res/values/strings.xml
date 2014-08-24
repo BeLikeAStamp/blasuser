@@ -65,20 +65,20 @@
         <item>Réalisation finie</item>
     </string-array>
     <string-array name="type_arrays">
-        <item>Carte : Anniversaire de naissance</item>
-        <item>Carte : Saint Valentin</item>
-        <item>Carte : Halloween</item>
-        <item>Carte : Remerciements</item>
-        <item>Carte : Félicitations</item>
-        <item>Carte : Bonne année</item>
-        <item>Carte : Fête des pères</item>
-        <item>Carte : Fête des mères</item>
-        <item>Carte : Éphéméride</item>
-        <item>Carte : Prompt rétablissement</item>
-        <item>Carte : Anniversaire de mariage</item>
-        <item>Faire-Part : Mariage</item>
-        <item>Faire-Part : Naissance</item>
-        <item>Invitation : Occasion</item>
+        <item>Carte: Anniversaire de naissance</item>
+        <item>Carte: Saint Valentin</item>
+        <item>Carte: Halloween</item>
+        <item>Carte: Remerciements</item>
+        <item>Carte: Félicitations</item>
+        <item>Carte: Bonne année</item>
+        <item>Carte: Fête des pères</item>
+        <item>Carte: Fête des mères</item>
+        <item>Carte: Éphéméride</item>
+        <item>Carte: Prompt rétablissement</item>
+        <item>Carte: Anniversaire de mariage</item>
+        <item>Faire-Part: Mariage</item>
+        <item>Faire-Part: Naissance</item>
+        <item>Invitation: Occasion</item>
     </string-array>
     <string-array name="occasion_arrays">
         <item>Crémaillère</item>
@@ -147,8 +147,8 @@
     <string name="err_not_uniq">"Ce nom de projet existe déjà ! Il faut innover ;-)"</string>
     <string name="err_no_project">"Merci d'indiquer le nom du projet"</string>
     <string name="err_illegal_char">"Quelques caractères farfelue dans cette saisie &#8230;"</string>
-    <string name="err_no_theme">"Merci d'indiquer le thème"</string>
-    <string name="err_no_style">"Merci d'indiquer le style"</string>
+    <string name="err_no_theme">"Merci d\'indiquer le thème"</string>
+    <string name="err_no_style">"Merci d\'indiquer le style"</string>
     <string name="err_no_firstname">"Merci d\'indiquer un nom"</string>
     <string name="err_no_age">"Merci d\'indiquer l\'âge"</string>
     <string name="err_no_nbr_years">"Même pas les noces de coton ???"</string>
@@ -176,7 +176,7 @@
     <string name="confirm_email">Email contact</string>
     <string name="reg_failed">Echec de l\'enregistrement</string>
     <string name="reg_succed">Enregistrement effectué ! Let\'s GO !</string>
-	<string name="email_subject">Soumission de projet</string>
+	<string name="email_subject">[DWGetCreafty] Soumission de projet</string>
     <string name="email_body">Bonjour Rachel,\nCi-joint les détails du projet que j\'aimerais réaliser.\nInfos complémentaires: !!\nAmicalement.</string>
     
     <!-- Saved Projects Details -->
@@ -202,6 +202,7 @@
     <string name="not_available">à la demande</string>
     <string name="btn_get_tuto">Télécharger</string>
     <string name="btn_demand">Demander</string>
+    <string name="demand_return">Merci ! Votre demande a bien été prise en compte.</string>
 
     <!-- Join Me ! -->
     <string name="stampingup">Stampin\'Up</string>

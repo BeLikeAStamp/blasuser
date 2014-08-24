@@ -4,22 +4,13 @@
     android:layout_height="match_parent"
     android:padding="10dp" >
 
-    <ImageView
-        android:id="@+id/proto"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:contentDescription="@string/file"
-        android:paddingRight="10dp"
-        android:src="@drawable/ic_logodontworry" />
-
     <TextView
         android:id="@+id/name"
         style="@style/MediumLblue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/proto"
-        android:layout_toRightOf="@+id/proto"
+        android:layout_alignParentLeft="true"
+        android:paddingRight="10dp"
         android:textStyle="bold" />
 
     <TextView
@@ -30,7 +21,6 @@
         android:layout_below="@id/name"
         android:layout_gravity="center"
         android:layout_marginTop="2dip"
-        android:layout_toRightOf="@id/proto"
         android:gravity="right" />
 
     <TextView
@@ -41,7 +31,6 @@
         android:layout_below="@id/theme"
         android:layout_gravity="center"
         android:layout_marginTop="2dip"
-        android:layout_toRightOf="@id/proto"
         android:gravity="right"
         android:textStyle="italic" />
 
