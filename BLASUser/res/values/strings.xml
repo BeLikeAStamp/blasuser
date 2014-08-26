@@ -221,4 +221,14 @@
     <!-- Quitter l'appli -->
     <string name="see_u_soon">Happy Crafting ! Bisous Bisous</string>
 
+    <!-- Notification -->
+    <string name="notif">Bonne nouvelle ! Votre %1$s est %2$s pour le projet %3$s !</string>
+    <string name="notif_proj">projet</string>
+    <string name="notif_proto">prototype</string>
+    <string name="notif_real">réalisation</string>
+    <string name="notif_accept">accepté</string>
+    <string name="notif_inprogress">en cours</string>
+    <string name="notif_dispo">disponible</string>
+    
+    
 </resources>

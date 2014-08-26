@@ -27,11 +27,13 @@ public class PreMainActivity extends Activity {
 	public static final String CLOSE = "close";
 	private GlobalVariable globalVariable;
 	private Datasource datasource;
+	private Long userId = Long.valueOf(-1);
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pre_activity_main);
 		globalVariable = (GlobalVariable) getApplicationContext();
+		userId = getSharedPreferences("BLAS", MODE_PRIVATE).getLong("user_id", Long.valueOf(-1));
 		
 		if(isOnline()) {
 						
@@ -80,7 +82,7 @@ public class PreMainActivity extends Activity {
 	private boolean loadRemoteData() {
 		// Projets soumis
 		
-		new Request4Project().execute();
+		if(!userId.equals(Long.valueOf(-1))) new Request4Project().execute();
 		new Request4Tuto().execute();
 		new Request4Workshop().execute();
 		
@@ -154,7 +156,7 @@ public class PreMainActivity extends Activity {
 			ProjectController c = new ProjectController();
 
 			try {
-				globalVariable.getData().setSubmitProjects((List<Project>)c.getAllProjects());
+				globalVariable.getData().setSubmitProjects((List<Project>)c.getAllProjects(userId));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -85,8 +85,8 @@ public class ProjectController {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List getAllProjects() {
-		InputStream inputStream = getInputStreamFromUrl(EngineConfiguration.path + "rest/project");
+	public List getAllProjects(Long userId) {
+		InputStream inputStream = getInputStreamFromUrl(EngineConfiguration.path + "rest/project?userid="+userId);
 		List<Project> list = null;
 		try { 
 			String jsonStr = convertInputStreamToString(inputStream);

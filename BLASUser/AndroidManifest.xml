@@ -65,6 +65,23 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".util.MessageReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter android:priority="999" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" >
+                </action>
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".util.MessageReceiver"
+            android:permission="android.permission.BROADCAST_SMS" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_DELIVER" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
