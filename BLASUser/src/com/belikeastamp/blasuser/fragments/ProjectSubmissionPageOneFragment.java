@@ -295,7 +295,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		globalVariable.addNewDetails("1.age-type","Âge");
+		globalVariable.addNewDetails("1.age-type","age");
 		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
@@ -379,7 +379,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		globalVariable.addNewDetails("1.age-type", "Âge");
+		globalVariable.addNewDetails("1.age-type", "age");
 		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
@@ -398,7 +398,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		globalVariable.addNewDetails("2.age-type", "Âge");
+		globalVariable.addNewDetails("2.age-type", "age");
 		age_type2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("2.age-type",(String) parent.getItemAtPosition(pos));
@@ -593,7 +593,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		globalVariable.addNewDetails("1.age-type", "Âge");
+		globalVariable.addNewDetails("1.age-type", "age");
 		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
@@ -710,7 +710,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 
-		globalVariable.addNewDetails("1.age-type", "Âge");
+		globalVariable.addNewDetails("1.age-type", "age");
 		age_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("1.age-type",(String) parent.getItemAtPosition(pos));
@@ -729,7 +729,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			}
 		});
 		
-		globalVariable.addNewDetails("2.age-type", "Âge");
+		globalVariable.addNewDetails("2.age-type", "age");
 		age_type2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				globalVariable.addNewDetails("2.age-type",(String) parent.getItemAtPosition(pos));
