@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/MediumLblue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/type"
+            style="@style/MediumHGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:id="@+id/status"
+            style="@style/MediumHGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/proto_link"
+            style="@style/btnStyleActionTurquoise2Inv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/btn_proto"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/btn_proto"
+            android:src="@drawable/ic_join"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/valid_proto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@+id/ok_proto"
+                style="@style/btnStyleActionTurquoise2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_ok_proto" />
+
+            <Button
+                android:id="@+id/no_proto"
+                style="@style/btnStyleActionTurquoise2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:text="@string/btn_no_proto" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/send_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <EditText
+                android:id="@+id/msg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/infos_height"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:gravity="left|top"
+                android:hint="@string/infos"
+                android:inputType="textMultiLine" >
+            </EditText>
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/btn_send" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

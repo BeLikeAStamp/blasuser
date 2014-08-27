@@ -6,23 +6,33 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
-import com.belikeastamp.blasuser.fragments.SavedProjectsPageTwoFragment;
+import com.belikeastamp.blasuser.db.DatabaseHandler;
+import com.belikeastamp.blasuser.db.model.Project;
+import com.belikeastamp.blasuser.fragments.SubmitProjectsPageTwoFragment;
 
-public class SavedProjectsActivity extends Activity {
+public class SubmitProjectsActivity extends Activity {
+
+	
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
-
 	
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//setContentView(R.layout.submitproject_details);
 		setContentView(R.layout.activity_projects);
-
+		Project project = (Project) getIntent().getSerializableExtra("project");
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -53,15 +63,17 @@ public class SavedProjectsActivity extends Activity {
 
 		if (savedInstanceState == null) {
 			// on first time display view for first nav item
-			Fragment fragment = new SavedProjectsPageTwoFragment();
+			Fragment fragment = new SubmitProjectsPageTwoFragment();
 
 			FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()
 			.replace(R.id.frame_container, fragment).commit();
 
 		}
+		
+
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {   
 		// Get item selected and deal with it
@@ -73,5 +85,8 @@ public class SavedProjectsActivity extends Activity {
 		}
 		return false;
 	}
-}
+	
+	
+	
 
+}

@@ -218,7 +218,7 @@ public class TutorialAdapter extends BaseAdapter {
 		File file = new File(filepath);
 		PackageManager packageManager = activity.getPackageManager();
 		Intent testIntent = new Intent(Intent.ACTION_VIEW);
-		testIntent.setType("application/pdf");
+		testIntent.setType("image/jpeg");
 		packageManager.queryIntentActivities(testIntent, PackageManager.MATCH_DEFAULT_ONLY);
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);

@@ -44,7 +44,7 @@ public class PreMainActivity extends Activity {
 			else
 			{
 				Toast.makeText(getApplicationContext(), R.string.alert_loading_data, Toast.LENGTH_LONG).show();
-				//finish();
+				finish();
 			}
 			
 		}

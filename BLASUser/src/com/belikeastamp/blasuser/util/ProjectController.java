@@ -114,6 +114,11 @@ public class ProjectController {
 		return (list.size() > 0) ? list.get(0).getRemoteId() : Long.valueOf(-1);
 	}
 	
+	public InputStream downloadFile(Long projectId) {
+		InputStream inputStream = getInputStreamFromUrl(EngineConfiguration.path + "download?type=prototype&correspondance="+projectId);	
+		return inputStream;
+
+	}
 	
 	private List<Project> JSON2Project(String json) {
 		// TODO Auto-generated method stub

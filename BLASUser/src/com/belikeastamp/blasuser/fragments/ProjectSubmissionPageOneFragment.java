@@ -3,6 +3,7 @@ package com.belikeastamp.blasuser.fragments;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.DialogFragment;
@@ -496,7 +497,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 		});
 
 
-		setDate(delay, event_date);
+		setDate(today, event_date);
 		event_hour.setText("00:00");
 
 		event_date.setOnClickListener(new OnClickListener() {  

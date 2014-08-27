@@ -13,11 +13,9 @@
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
 
-    
     <!-- Pre MAinActivity -->
-     <string name="alert_loading_data">Une petite erreur s\'est produite redémarrer l\'application</string>
-    
-    
+    <string name="alert_loading_data">Une petite erreur s\'est produite redémarrer l\'application</string>
+
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item>Accueil</item>
@@ -176,14 +174,21 @@
     <string name="confirm_email">Email contact</string>
     <string name="reg_failed">Echec de l\'enregistrement</string>
     <string name="reg_succed">Enregistrement effectué ! Let\'s GO !</string>
-	<string name="email_subject">[DWGetCreafty] Soumission de projet</string>
+    <string name="email_subject">[DWGetCreafty] Soumission de projet</string>
     <string name="email_body">Bonjour Rachel,\nCi-joint les détails du projet que j\'aimerais réaliser.\nInfos complémentaires: !!\nAmicalement.</string>
-    
+
     <!-- Saved Projects Details -->
     <string name="btn_modif">Modifier</string>
     <string name="btn_submit">Soumission</string>
     <string name="save_date">Date de sauvegarde</string>
-    
+
+    <!-- Submit Projects Details -->
+    <string name="prototype">Prototype</string>
+    <string name="no_prototype">pas encore de prototype</string>
+    <string name="btn_proto">Voir proto</string>
+    <string name="btn_ok_proto">Accepter proto</string>
+    <string name="btn_no_proto">Revoir proto</string>
+
     <!-- Workshops -->
     <string name="worksphop">Atelier</string>
     <string name="theme">Thème :</string>
@@ -229,6 +234,5 @@
     <string name="notif_accept">accepté</string>
     <string name="notif_inprogress">en cours</string>
     <string name="notif_dispo">disponible</string>
-    
-    
+
 </resources>
