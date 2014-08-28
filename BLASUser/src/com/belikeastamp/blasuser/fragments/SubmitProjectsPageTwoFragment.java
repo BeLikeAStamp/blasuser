@@ -1,7 +1,10 @@
 package com.belikeastamp.blasuser.fragments;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.ExecutionException;
@@ -9,7 +12,6 @@ import java.util.concurrent.ExecutionException;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -77,7 +79,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 
 		send_msg = (LinearLayout) getActivity().findViewById(R.id.send_msg);
 		send =  (Button) send_msg.findViewById(R.id.send);
-		message = (EditText) send_msg.findViewById(R.id.message);
+		message = (EditText) send_msg.findViewById(R.id.msg);
 
 		projectName.setText(project.getName());
 		type.setText(project.getType());
@@ -96,7 +98,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				protolink.setEnabled(false);
+				protolink.setVisibility(View.INVISIBLE);
 				Log.d("SubmitProjectDetails", "VOIR PROTO");
 				try {
 					proto_path = task.execute(project).get();
@@ -132,12 +134,12 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ok_proto.setEnabled(false);
-				no_proto.setEnabled(false);
+				ok_proto.setVisibility(View.INVISIBLE);
+				no_proto.setVisibility(View.INVISIBLE);
 				selected_status = DatabaseHandler.PROTO_DISMISSED;
 				send_msg.setVisibility(View.VISIBLE);
 				updatetask.execute(project);
-				
+
 			}		
 		});
 
@@ -146,8 +148,8 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				no_proto.setEnabled(false);
-				ok_proto.setEnabled(false);
+				no_proto.setVisibility(View.INVISIBLE);
+				ok_proto.setVisibility(View.INVISIBLE);
 				selected_status = DatabaseHandler.PROTO_ACCEPTED;
 				updatetask.execute(project);
 			}		
@@ -158,6 +160,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				sendEmail(project);
 				Log.d("SubmitProjectDetails", "NO PROTO -  SEND MESSAGE");
 			}		
 		});
@@ -195,13 +198,17 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 		case DatabaseHandler.PROTO_PENDING:
 			statut = R.drawable.step4;
 			break;
-		case DatabaseHandler.REAL_INPROGRESS:
+		case DatabaseHandler.PROTO_ACCEPTED:
 			statut = R.drawable.step5;
+			break;	
+		case DatabaseHandler.REAL_INPROGRESS:
+			statut = R.drawable.step6;
 			break;
 		case DatabaseHandler.REAL_DONE:
-			statut = R.drawable.step6;
+			statut = R.drawable.step7;
 			break;		
 		default:
+			statut = R.drawable.step0;
 			break;
 		}
 
@@ -291,4 +298,45 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 		}
 
 	}
+
+	private void sendEmail(Project p) {
+		// TODO Auto-generated method stub
+
+		if(message.getText().toString().length() == 0) {
+			message.setError(getActivity().getResources().getString(R.string.err_no_proto));
+		} else {
+
+			Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+			emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,  new String[]{getResources().getString(R.string.contact_email)});
+
+			String body = getActivity().getResources().getString(R.string.email_body_no_proto, message.getText().toString());
+			String msg = getActivity().getResources().getString(R.string.email_subject_no_proto );
+			String pj = createTempProjectFile(p);
+			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, msg);
+			emailIntent.setType("plain/text");
+			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
+			Log.d("FILE PATH", "=>"+pj);
+			emailIntent.putExtra(android.content.Intent.EXTRA_STREAM, Uri.parse("file://"+pj));
+			startActivity(emailIntent);
+
+		}
+	}
+	
+	private String createTempProjectFile(Project p) {
+		String projectFile = Environment.getExternalStorageDirectory().getPath()+"/project.txt"; 
+		
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(projectFile));
+			bw.append(p.toString());
+			bw.flush();bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return projectFile;
+	}
+	
+
+
 }

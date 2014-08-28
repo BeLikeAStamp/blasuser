@@ -326,8 +326,8 @@ public class ProjectSubmissionPageTwo extends Activity {
 		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,  new String[]{getResources().getString(R.string.contact_email)});
 
-		String body = getResources().getString(R.string.email_body);
-		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getResources().getString(R.string.email_subject));
+		String body = getResources().getString(R.string.email_body_submission);
+		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getResources().getString(R.string.email_subject_submission));
 		emailIntent.setType("plain/text");
 		emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
 

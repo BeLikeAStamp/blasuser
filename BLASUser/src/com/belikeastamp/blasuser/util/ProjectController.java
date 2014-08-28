@@ -35,6 +35,7 @@ public class ProjectController {
 	// JSON Node names
 	private static final String TAG_PJ = "projects";
 	private static final String TAG_ID = "id";
+	private static final String TAG_UID = "userId";
 	private static final String TAG_SDATE = "subDate";
 	private static final String TAG_NAME = "name";
 	private static final String TAG_TYPE = "type";
@@ -137,6 +138,7 @@ public class ProjectController {
 					JSONObject c = ws.getJSONObject(i);
 
 					String id = c.getString(TAG_ID);
+					String uid = c.getString(TAG_UID);
 					String subDate = c.getString(TAG_SDATE);
 					String name = c.getString(TAG_NAME);
 					String detail = c.getString(TAG_DETAIL);
@@ -152,6 +154,7 @@ public class ProjectController {
 
 					// adding each child node to HashMap key => value
 					hash.put(TAG_ID, id);
+					hash.put(TAG_UID, uid);
 					hash.put(TAG_SDATE, subDate);
 					hash.put(TAG_NAME, name);
 					hash.put(TAG_DETAIL, detail);
@@ -166,6 +169,7 @@ public class ProjectController {
 					Project p = new Project(name, subDate, Integer.valueOf(status), detail, type, orderDate, Integer.valueOf(quantity), perso);
 					
 					p.setRemoteId(Long.valueOf(id));
+					p.setUserId(Long.valueOf(uid));
 					p.setColors(colors);
 					projects.add(p);
 				}
@@ -229,7 +233,7 @@ public class ProjectController {
 
 
 	
-	private void buildPutURL(Project p, Long userId) {
+	private void buildPutURL(Project p, Long projectId) {
 
 		try {
 			URL url = new URL(EngineConfiguration.path + "rest/project"); 
@@ -241,8 +245,8 @@ public class ProjectController {
 			conn.setDoOutput(true);
 
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("userid", ""+userId));
-			params.add(new BasicNameValuePair("id", ""+p.getRemoteId()));
+			params.add(new BasicNameValuePair("userid", ""+p.getUserId()));
+			params.add(new BasicNameValuePair("id", ""+projectId));
 			params.add(new BasicNameValuePair("name", p.getName()));
 			params.add(new BasicNameValuePair("subdate", p.getSubDate()));
 			params.add(new BasicNameValuePair("detail", p.getDetail()));

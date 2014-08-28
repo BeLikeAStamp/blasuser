@@ -24,6 +24,7 @@ public class Project implements Serializable {
 	private int status;
 	private int quantity;
 	private Long remoteId;
+	private Long userId;
 
 	public Project() {}
 
@@ -119,6 +120,18 @@ public class Project implements Serializable {
 	public void setRemoteId(Long remoteId) {
 		this.remoteId = remoteId;
 	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+
 
 	public String getPerso() {
 		return perso;

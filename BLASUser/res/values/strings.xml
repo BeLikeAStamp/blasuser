@@ -57,8 +57,11 @@
     <string-array name="status_arrays">
         <item>Projet soumis</item>
         <item>Projet accepté</item>
+        <item>Projet refusé</item>
         <item>Prototype en cours</item>
         <item>Prototype en attente de validation</item>
+        <item>Prototype accepté</item>
+        <item>Prototype refusé</item>
         <item>Réalisation en cours</item>
         <item>Réalisation terminée</item>
     </string-array>
@@ -174,8 +177,8 @@
     <string name="confirm_email">Email contact</string>
     <string name="reg_failed">Echec de l\'enregistrement</string>
     <string name="reg_succed">Enregistrement effectué ! Let\'s GO !</string>
-    <string name="email_subject">[DWGetCreafty] Soumission de projet</string>
-    <string name="email_body">Bonjour Rachel,\nCi-joint les détails du projet que j\'aimerais réaliser.\nInfos complémentaires: !!\nAmicalement.</string>
+    <string name="email_subject_submission">[DWGetCreafty] Soumission de projet</string>
+    <string name="email_body_submission">Bonjour Rachel,\nCi-joint les détails du projet que j\'aimerais réaliser.\nInfos complémentaires: %1$s \nAmicalement.</string>
 
     <!-- Saved Projects Details -->
     <string name="btn_modif">Modifier</string>
@@ -188,7 +191,11 @@
     <string name="btn_proto">Voir proto</string>
     <string name="btn_ok_proto">Accepter proto</string>
     <string name="btn_no_proto">Revoir proto</string>
-
+    <string name="email_subject_no_proto">[DWGetCreafty] Révision de prototype</string>
+    <string name="email_body_no_proto">Bonjour Rachel,\nMerci pour ton travail.\nNéanmoins ce prototype ne me convient pas. Infos complémentaires : %1$s \nAmicalement.</string>
+	<string name="err_no_proto">"Merci de préciser le motif de la révision"</string>
+    <string name="load_existing_project">Entrez votre email de contact pour charger vos projets</string>
+    
     <!-- Workshops -->
     <string name="worksphop">Atelier</string>
     <string name="theme">Thème :</string>
