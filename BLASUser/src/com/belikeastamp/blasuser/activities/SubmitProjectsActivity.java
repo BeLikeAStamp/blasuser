@@ -32,7 +32,7 @@ public class SubmitProjectsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.submitproject_details);
 		setContentView(R.layout.activity_projects);
-		Project project = (Project) getIntent().getSerializableExtra("project");
+		//Project project = (Project) getIntent().getSerializableExtra("project");
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 

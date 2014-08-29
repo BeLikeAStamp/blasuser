@@ -19,19 +19,13 @@ public class WorkshopFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		globalVariable = (GlobalVariable) getActivity().getApplicationContext();
-		BaseAdapter adapter = new WorkshopAdapter(getActivity().getApplicationContext(), globalVariable.getData().getWorkshops());
+		BaseAdapter adapter = new WorkshopAdapter(getActivity(), globalVariable.getData().getWorkshops());
 		setListAdapter(adapter);
 	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// do something with the data
-		//SavedProjectsActivity
-
-		// TODO Auto-generated method stub
-		//Intent intent = new Intent(getActivity(),SavedProjectsActivity.class);
-		//intent.putExtra("project",workshops.get(position));
-		//startActivity(intent);
 
 	}
 }

@@ -66,9 +66,7 @@ public class SubmitProjectsFragment extends ListFragment {
 	public void displayDialogWindow()
 	{
 		final AlertDialog.Builder loginDialog = new AlertDialog.Builder(getActivity());
-		LayoutInflater factory = LayoutInflater.from(getActivity().getApplicationContext());
-		final View f = factory.inflate(R.layout.prompt_user_email, null);
-
+		final View f = getActivity().getLayoutInflater().inflate(R.layout.prompt_user_email, null);
 		loginDialog.setTitle(getActivity().getResources().getString(R.string.load_existing_project));
 		loginDialog.setView(f);
 

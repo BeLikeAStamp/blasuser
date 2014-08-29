@@ -103,6 +103,12 @@
         <item>age</item>
         <item>Tranche d\'age</item>
     </string-array>
+    <string-array name="expertise">
+        <item>Débutant</item>
+        <item>Faux débutant</item>
+        <item>Pratique régulière</item>
+        <item>Experte</item>
+    </string-array>
 
     <!-- FORMULAIRE -->
     <string name="project_explane">Bonjouuur ! Nous avons besoin de quelques précisions pour bien définir le projet : type de cartes, thème, couleurs, délais, personnalisation &#8230;</string>
@@ -193,9 +199,9 @@
     <string name="btn_no_proto">Revoir proto</string>
     <string name="email_subject_no_proto">[DWGetCreafty] Révision de prototype</string>
     <string name="email_body_no_proto">Bonjour Rachel,\nMerci pour ton travail.\nNéanmoins ce prototype ne me convient pas. Infos complémentaires : %1$s \nAmicalement.</string>
-	<string name="err_no_proto">"Merci de préciser le motif de la révision"</string>
+    <string name="err_no_proto">"Merci de préciser le motif de la révision"</string>
     <string name="load_existing_project">Entrez votre email de contact pour charger vos projets</string>
-    
+
     <!-- Workshops -->
     <string name="worksphop">Atelier</string>
     <string name="theme">Thème :</string>
@@ -205,6 +211,13 @@
     <string name="remaning_place">Places restantes :</string>
     <string name="btn_signin">S\'inscrire</string>
     <string name="btn_complet">Complet</string>
+    <string name="name_firstname">Nom et prénom</string>
+    <string name="phone_number">Numéro de tél</string>
+    <string name="level">Niveau d\'expertise</string>
+    <string name="nbr_participants">Accompagnateurs ?</string>
+    <string name="inscription">Inscription à l\'atelier \"%1$s\"</string>
+    <string name="btn_cancel">Annuler</string>
+    <string name="err_missing_info">"Merci de remplir ce champ"</string>
 
     <!-- Tutorials -->
     <string name="tutorial">Tutoriel</string>
