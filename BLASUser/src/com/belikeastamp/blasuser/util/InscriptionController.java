@@ -35,12 +35,14 @@ public class InscriptionController {
 	// JSON Node names
 	private static final String TAG_INSC = "Inscriptions";
 	private static final String TAG_ID = "id";
-	private static final String TAG_WID = "workshopid";
+	private static final String TAG_WID = "workshopId";
 	private static final String TAG_NAME = "name";
-	private static final String TAG_PHONE = "number";
+	private static final String TAG_PHONE = "phoneNumber";
 	private static final String TAG_EMAIL = "email";
 	private static final String TAG_EXPERT = "expertise";
-	private static final String TAG_PART = "participant";
+	private static final String TAG_DATE = "inscriptionDate";
+	private static final String TAG_PART = "partcipants";
+
 
 	public final ClientResource cr = new ClientResource(EngineConfiguration.path + "rest/inscription");
 
@@ -121,7 +123,8 @@ public class InscriptionController {
 					String phone = c.getString(TAG_PHONE);
 					String part = c.getString(TAG_PART);
 					String expert = c.getString(TAG_EXPERT);
-
+					String date = c.getString(TAG_DATE);
+					
 					// tmp hashmap for single contact
 					HashMap<String, String> hash = new HashMap<String, String>();
 
@@ -133,9 +136,10 @@ public class InscriptionController {
 					hash.put(TAG_PHONE, phone);
 					hash.put(TAG_PART, part);
 					hash.put(TAG_EXPERT, expert);
+					hash.put(TAG_DATE, date);
 					
 					// adding Inscription to contact Inscriptions list
-					Inscription new_ins = new Inscription(Long.valueOf(wid), name, phone, email, expert, Integer.valueOf(part));
+					Inscription new_ins = new Inscription(Long.valueOf(wid), name, phone, email, expert, date, Integer.valueOf(part));
 					new_ins.setId(Long.valueOf(id));
 					inscriptions.add(new_ins);
 				}
@@ -168,7 +172,7 @@ public class InscriptionController {
 			params.add(new BasicNameValuePair(TAG_PART, ""+ins.getPartcipants()));
 			params.add(new BasicNameValuePair(TAG_PHONE, ins.getPhoneNumber()));
 			params.add(new BasicNameValuePair(TAG_WID, ins.getWorkshopId().toString()));
-			
+			params.add(new BasicNameValuePair(TAG_DATE, ins.getInscriptionDate()));
 			
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(
@@ -213,7 +217,8 @@ public class InscriptionController {
 			params.add(new BasicNameValuePair(TAG_PART, ""+ins.getPartcipants()));
 			params.add(new BasicNameValuePair(TAG_PHONE, ins.getPhoneNumber()));
 			params.add(new BasicNameValuePair(TAG_WID, ins.getWorkshopId().toString()));
-
+			params.add(new BasicNameValuePair(TAG_DATE, ins.getInscriptionDate()));
+			
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(
 					new OutputStreamWriter(os, "UTF-8"));

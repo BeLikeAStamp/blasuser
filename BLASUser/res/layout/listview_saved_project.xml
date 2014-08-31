@@ -7,10 +7,10 @@
     <TextView
         android:id="@+id/name"
         style="@style/MediumLblue"
-        android:paddingRight="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:paddingRight="10dp"
         android:textStyle="bold" />
 
     <TextView
@@ -21,10 +21,8 @@
         android:layout_below="@id/name"
         android:layout_gravity="center"
         android:layout_marginTop="2dip"
-        android:gravity="right"
-         />
-    
-    
+        android:gravity="right" />
+
     <TextView
         android:id="@+id/date"
         style="@style/MediumHGray"
@@ -35,5 +33,15 @@
         android:layout_marginTop="2dip"
         android:gravity="right"
         android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/resume"
+        style="@style/btnStyleActionTurquoise2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/btn_resume"
+        android:textSize="16sp" />
 
 </RelativeLayout>

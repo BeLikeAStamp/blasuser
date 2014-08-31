@@ -6,22 +6,14 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
-import com.belikeastamp.blasuser.db.DatabaseHandler;
-import com.belikeastamp.blasuser.db.model.Project;
 import com.belikeastamp.blasuser.fragments.SubmitProjectsPageTwoFragment;
 
 public class SubmitProjectsActivity extends Activity {
 
-	
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mDrawerTitle;
@@ -30,14 +22,13 @@ public class SubmitProjectsActivity extends Activity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.submitproject_details);
 		setContentView(R.layout.activity_projects);
-		//Project project = (Project) getIntent().getSerializableExtra("project");
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.banniere));
 
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_navigation_drawer, //nav menu toggle icon
@@ -85,8 +76,5 @@ public class SubmitProjectsActivity extends Activity {
 		}
 		return false;
 	}
-	
-	
-	
 
 }

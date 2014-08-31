@@ -1,23 +1,20 @@
 package com.belikeastamp.blasuser.fragments;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.concurrent.ExecutionException;
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore.MediaColumns;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,18 +31,21 @@ import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.db.DatabaseHandler;
 import com.belikeastamp.blasuser.db.model.Project;
 import com.belikeastamp.blasuser.util.ProjectController;
+import com.belikeastamp.blasuser.util.asynctask.AsyncTaskManager;
+import com.belikeastamp.blasuser.util.asynctask.MyAbstractAsyncTask;
+import com.belikeastamp.blasuser.util.asynctask.OnTaskCompleteListener;
+import com.belikeastamp.blasuser.util.asynctask.Request4PrototypeTask;
 
-public class SubmitProjectsPageTwoFragment extends Fragment {
+public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCompleteListener {
 
+	private static final int PROTO = 0;
 	private TextView projectName, type, status, progress;
 	private EditText message;
 	private Button protolink, ok_proto, no_proto, send;
 	private LinearLayout valid_proto, send_msg;
 	private ImageView image;
-	private ProgressDialog prgDialog;
-	public static final int progress_bar_type = 0;
 	private String proto_path = null;
-	private Request4Prototype task;
+	private AsyncTaskManager mAsyncTaskManager;
 	private UpdateStatusTask updatetask;
 	private int selected_status;
 
@@ -55,7 +55,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.fragment_submit_project_details, container, false);
-		task = new Request4Prototype();
+		mAsyncTaskManager = new AsyncTaskManager(getActivity(), this);
 		updatetask = new UpdateStatusTask();
 		return rootView;
 	}
@@ -85,13 +85,11 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 		type.setText(project.getType());
 		status.setText(statusList[project.getStatus()]);
 
-		if(project.getStatus() == DatabaseHandler.PROJ_SUBMIT) { 
+		if(project.getStatus() == DatabaseHandler.PROTO_PENDING) { 
 			// RECUPERATION DE LIMAGE EN BACKGROUND
 			protolink.setVisibility(View.VISIBLE);
 
 		}
-
-
 
 		protolink.setOnClickListener(new View.OnClickListener() {
 
@@ -100,31 +98,12 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 				// TODO Auto-generated method stub
 				protolink.setVisibility(View.INVISIBLE);
 				Log.d("SubmitProjectDetails", "VOIR PROTO");
-				try {
-					proto_path = task.execute(project).get();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				//proto_path = task.execute(project).get();
+				Request4PrototypeTask request = new Request4PrototypeTask(getResources());
+				request.setProject(project);
+				request.setActivity(getActivity());
+				mAsyncTaskManager.setupTask(request);
 				valid_proto.setVisibility(View.VISIBLE);
-				if(proto_path != null) {
-					image.setVisibility(View.VISIBLE);
-					Bitmap bm;
-					BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
-
-					bm = BitmapFactory.decodeFile(proto_path,btmapOptions);
-
-					int width = 600;
-					int height = 600;
-					LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
-					parms.gravity = Gravity.CENTER;
-					image.setLayoutParams(parms);
-					image.setImageBitmap(bm);
-				}
 
 			}		
 		});
@@ -174,7 +153,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				StringBuffer text = new StringBuffer();
-				for (int i = 0 ; i < statusList.length ; i++ ) {
+				for (int i = 0 ; i < getResources().getStringArray(R.array.status_print_arrays).length ; i++ ) {
 					text.append(i+1+":"+statusList[i]+"\n");
 				}
 				Toast.makeText(getActivity().getApplicationContext(), text.toString(), Toast.LENGTH_LONG).show();
@@ -213,70 +192,6 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 		}
 
 		return statut;
-	}
-
-
-	private class Request4Prototype extends AsyncTask<Project, Void, String> {
-
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			prgDialog = new ProgressDialog(getActivity());
-			prgDialog.setMessage("Downloading file. Please wait...");
-			prgDialog.setIndeterminate(true);
-			prgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			prgDialog.setCancelable(false);
-			prgDialog.show();
-
-
-		}
-
-		@Override
-		protected String doInBackground(Project... params) {
-			// TODO Auto-generated method stub
-			Project p = params[0];
-			final ProjectController c = new ProjectController();
-
-			InputStream input = null;
-			int count = 0;
-			String filepath = null;
-
-
-			try {
-				input = c.downloadFile(p.getRemoteId());
-				filepath = Environment.getExternalStorageDirectory().getPath()+"/"+
-						p.getName()+".jpeg"; 
-				OutputStream output = new FileOutputStream(filepath);
-				//OutputStream output = new FileOutputStream();
-				byte data[] = new byte[1024];
-
-				while ((count = input.read(data)) != -1) {
-					// Write data to file
-					output.write(data, 0, count);
-				}
-				// Flush output
-				output.flush();
-				// Close streams
-				output.close();
-				input.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return filepath;
-		}
-
-		@Override
-		protected void onPostExecute(String file) {
-			// Dismiss the dialog after the Music file was downloaded
-			super.onPostExecute(file);
-			proto_path = file;
-			prgDialog.dismiss();
-		}
-
-
 	}
 
 	protected class UpdateStatusTask extends AsyncTask<Project, Void, Void> {
@@ -321,10 +236,10 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 
 		}
 	}
-	
+
 	private String createTempProjectFile(Project p) {
 		String projectFile = Environment.getExternalStorageDirectory().getPath()+"/project.txt"; 
-		
+
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(projectFile));
 			bw.append(p.toString());
@@ -333,10 +248,63 @@ public class SubmitProjectsPageTwoFragment extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return projectFile;
 	}
-	
 
+	@Override
+	public void onTaskComplete(MyAbstractAsyncTask task) {
+		// TODO Auto-generated method stub
+		if (task.isCancelled()) {
+			// Report about cancel
+			Toast.makeText(getActivity().getApplicationContext(),  getActivity().getResources().getString(R.string.task_cancelled), Toast.LENGTH_LONG)
+			.show();
+		} else {
+			// Get result
+			Boolean result = null;
+			try {
+				result = task.get();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// Report about result
+			Toast.makeText(getActivity().getApplicationContext(), getActivity().getResources().getString(R.string.task_completed, (result != null) ? result.toString() : "null"),
+					Toast.LENGTH_LONG).show();
+		}
+	}
 
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		Log.d("RESULT CODE", ""+resultCode);
+
+		if (resultCode == Activity.RESULT_OK) {
+
+			if (requestCode == PROTO) {
+				Uri selectedImageUri = data.getData();
+				String tempPath = getPath(selectedImageUri, getActivity());
+				Log.d("PROTO_PATH", "=> "+proto_path);
+				image.setVisibility(View.VISIBLE);
+				Bitmap bm;
+				BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
+				bm = BitmapFactory.decodeFile(tempPath, btmapOptions);
+				int width = 600;
+				int height = 600;
+				LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
+				parms.gravity = Gravity.CENTER;
+				image.setLayoutParams(parms);
+				image.setImageBitmap(bm);
+
+			}
+		}
+	}
+
+	public String getPath(Uri uri, Activity activity) {
+		String[] projection = { MediaColumns.DATA };
+		Cursor cursor =  activity.getContentResolver().query(uri, projection, null, null, null);
+		int column_index = cursor.getColumnIndexOrThrow(MediaColumns.DATA);
+		cursor.moveToFirst();
+		return cursor.getString(column_index);
+	}
 }

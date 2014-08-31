@@ -1,7 +1,5 @@
 package com.belikeastamp.blasuser.activities;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -9,34 +7,36 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.db.dao.Datasource;
-import com.belikeastamp.blasuser.db.model.Project;
-import com.belikeastamp.blasuser.db.model.Tutorial;
-import com.belikeastamp.blasuser.db.model.Workshop;
 import com.belikeastamp.blasuser.util.GlobalVariable;
-import com.belikeastamp.blasuser.util.ProjectController;
-import com.belikeastamp.blasuser.util.TutorialController;
-import com.belikeastamp.blasuser.util.WorkshopController;
+import com.belikeastamp.blasuser.util.asynctask.AsyncTaskManager;
+import com.belikeastamp.blasuser.util.asynctask.MyAbstractAsyncTask;
+import com.belikeastamp.blasuser.util.asynctask.OnTaskCompleteListener;
+import com.belikeastamp.blasuser.util.asynctask.Request4RemoteDataTask;
 
-public class PreMainActivity extends Activity {
-	public static final String CLOSE = "close";
+public class PreMainActivity extends Activity implements OnTaskCompleteListener {
 	private GlobalVariable globalVariable;
 	private Datasource datasource;
-	private Long userId = Long.valueOf(-1);
-	
+	private AsyncTaskManager mAsyncTaskManager;
+
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pre_activity_main);
+		setContentView(R.layout.pre_activity_main);	
+
+		getActionBar().setDisplayHomeAsUpEnabled(false);
+		getActionBar().setHomeButtonEnabled(false);
+		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.banniere));
+
+		mAsyncTaskManager = new AsyncTaskManager(this, this);
 		globalVariable = (GlobalVariable) getApplicationContext();
-		userId = getSharedPreferences("BLAS", MODE_PRIVATE).getLong("user_id", Long.valueOf(-1));
-		
+
 		if(isOnline()) {
-						
+
 			if(loadRemoteData() && loadLocalData()) {
 				Intent i = new Intent(PreMainActivity.this, MainActivity.class);
 				startActivity(i);
@@ -46,7 +46,7 @@ public class PreMainActivity extends Activity {
 				Toast.makeText(getApplicationContext(), R.string.alert_loading_data, Toast.LENGTH_LONG).show();
 				finish();
 			}
-			
+
 		}
 		else
 		{
@@ -81,22 +81,10 @@ public class PreMainActivity extends Activity {
 
 	private boolean loadRemoteData() {
 		// Projets soumis
-		
-		if(!userId.equals(Long.valueOf(-1))) new Request4Project().execute();
-		new Request4Tuto().execute();
-		new Request4Workshop().execute();
-		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if(globalVariable.getData().getWorkshops().size() == 0 
-				&& globalVariable.getData().getTutorials().size() == 0)
-			return false;
-		
+
+		Request4RemoteDataTask request = new Request4RemoteDataTask(getResources());
+		request.setActivity(PreMainActivity.this);
+		mAsyncTaskManager.setupTask(request);
 		return true;
 	}
 
@@ -110,64 +98,32 @@ public class PreMainActivity extends Activity {
 		}
 		return false;
 	}
-	
-	private class Request4Tuto extends AsyncTask<Void, Void, Void> {
 
-		@SuppressWarnings("unchecked")
-		@Override
-		protected Void doInBackground(Void... params) {
-			TutorialController c = new TutorialController();
 
-			try {
-				globalVariable.getData().setTutorials((List<Tutorial>) c.getAllTutorials());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-
-	}
-	
-	private class Request4Workshop extends AsyncTask<Void, Void, Void> {
-
-		@SuppressWarnings("unchecked")
-		@Override
-		protected Void doInBackground(Void... params) {
-			WorkshopController c = new WorkshopController();
-			try {
-				globalVariable.getData().setWorkshops((List<Workshop>) c.getAllWorkshops());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-
-	}
-	
-
-	private class Request4Project extends AsyncTask<Void, Void, Void> {
-
-		@SuppressWarnings("unchecked")
-		@Override
-		protected Void doInBackground(Void... params) {
-			
-			ProjectController c = new ProjectController();
-
-			try {
-				globalVariable.getData().setSubmitProjects((List<Project>)c.getAllProjects(userId));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-
-	}
-	
 	protected void onResume() {
 		super.onResume();
 	}
-	
+
+
+	@Override
+	public void onTaskComplete(MyAbstractAsyncTask task) {
+		// TODO Auto-generated method stub
+		if (task.isCancelled()) {
+			// Report about cancel
+			Toast.makeText(getApplicationContext(),  getResources().getString(R.string.task_cancelled), Toast.LENGTH_LONG)
+			.show();
+		} else {
+			// Get result
+			Boolean result = null;
+			try {
+				result = task.get();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// Report about result
+			Toast.makeText(getApplicationContext(), getResources().getString(R.string.task_completed, (result != null) ? result.toString() : "null"),
+					Toast.LENGTH_LONG).show();
+		}
+	}
+
 }

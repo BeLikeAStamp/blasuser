@@ -73,7 +73,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 	final static long WEEK = 604800000L;
 	private long today = System.currentTimeMillis();
 	private long delay = today + WEEK;
-	private File file = null;
+	private Uri fileUri = null;
 	private Long id;
  
 	@Override
@@ -131,9 +131,9 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
-				if(file != null)
-					globalVariable.setTrackFile(file);
+				
+				if(fileUri != null) globalVariable.setTrackFile(fileUri);
+					
 
 				if(!(infos.getText().toString().isEmpty()))
 					globalVariable.setInfos(infos.getText().toString());
@@ -267,8 +267,6 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 					File selectedFile = new File(path, String.valueOf(System
 							.currentTimeMillis()) + ".jpg");
 
-					file = f;
-
 					try {
 						fOut = new FileOutputStream(selectedFile);
 						bm.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
@@ -287,6 +285,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 				}
 			} else if (requestCode == ProjectSubmissionPageTwoFragment.SELECT_FILE) {
 				Uri selectedImageUri = data.getData();
+				globalVariable.setTrackFile(selectedImageUri);
 				String tempPath = getPath(selectedImageUri, getActivity());
 				Bitmap bm;
 				BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
@@ -297,12 +296,6 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 				parms.gravity = Gravity.CENTER;
 				fileView.setLayoutParams(parms);
 				fileView.setImageBitmap(bm);
-			    Uri selUri = Uri.withAppendedPath(selectedImageUri, "test");
-				Toast.makeText(getActivity().getApplicationContext(), 
-				     selUri.getPath(), 
-				     Toast.LENGTH_LONG).show();
-				//file = new File(data.getData().getPath());
-				file = new File(selectedImageUri.getPath());
 			}
 		}
 	}

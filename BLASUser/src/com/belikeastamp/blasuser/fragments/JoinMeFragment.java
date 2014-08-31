@@ -105,7 +105,7 @@ public class JoinMeFragment extends Fragment {
 
 
 		// Take the fields and format the message contents
-		String subject = "Join your team";
+		String subject = "[DWBeCrafty] Join your team";
 
 		String myMessage = formatMessage(name.getText().toString(), email.getText().toString(), message.getText().toString());
 

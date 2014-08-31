@@ -65,6 +65,15 @@
         <item>Réalisation en cours</item>
         <item>Réalisation terminée</item>
     </string-array>
+    <string-array name="status_print_arrays">
+        <item>Projet soumis</item>
+        <item>Projet accepté</item>
+        <item>Prototype en cours</item>
+        <item>Prototype en attente de validation</item>
+        <item>Prototype accepté</item>
+        <item>Réalisation en cours</item>
+        <item>Réalisation terminée</item>
+    </string-array>
     <string-array name="type_arrays">
         <item>Carte: Anniversaire de naissance</item>
         <item>Carte: Saint Valentin</item>
@@ -183,13 +192,14 @@
     <string name="confirm_email">Email contact</string>
     <string name="reg_failed">Echec de l\'enregistrement</string>
     <string name="reg_succed">Enregistrement effectué ! Let\'s GO !</string>
-    <string name="email_subject_submission">[DWGetCreafty] Soumission de projet</string>
+    <string name="email_subject_submission">[DWBeCreafty] Soumission de projet</string>
     <string name="email_body_submission">Bonjour Rachel,\nCi-joint les détails du projet que j\'aimerais réaliser.\nInfos complémentaires: %1$s \nAmicalement.</string>
 
     <!-- Saved Projects Details -->
     <string name="btn_modif">Modifier</string>
     <string name="btn_submit">Soumission</string>
     <string name="save_date">Date de sauvegarde</string>
+    <string name="btn_resume">Reprendre</string>
 
     <!-- Submit Projects Details -->
     <string name="prototype">Prototype</string>
@@ -197,7 +207,7 @@
     <string name="btn_proto">Voir proto</string>
     <string name="btn_ok_proto">Accepter proto</string>
     <string name="btn_no_proto">Revoir proto</string>
-    <string name="email_subject_no_proto">[DWGetCreafty] Révision de prototype</string>
+    <string name="email_subject_no_proto">[DWBeCreafty] Révision de prototype</string>
     <string name="email_body_no_proto">Bonjour Rachel,\nMerci pour ton travail.\nNéanmoins ce prototype ne me convient pas. Infos complémentaires : %1$s \nAmicalement.</string>
     <string name="err_no_proto">"Merci de préciser le motif de la révision"</string>
     <string name="load_existing_project">Entrez votre email de contact pour charger vos projets</string>
@@ -237,7 +247,7 @@
     <string name="email">Email</string>
     <string name="message">Message</string>
     <string name="btn_send">Envoyer</string>
-    <string name="messagebody_format">To: Rachel\n\n %1$s\n\n %2$s (%3$s)</string>
+    <string name="messagebody_format">Bonjour Rachel\n\n %1$s\n\n %2$s (%3$s)</string>
     <string name="empty_field">Merci de remplir ce champ :-)</string>
 
     <!-- Blog access -->
@@ -254,5 +264,11 @@
     <string name="notif_accept">accepté</string>
     <string name="notif_inprogress">en cours</string>
     <string name="notif_dispo">disponible</string>
+    
+    <!-- AsyncTask MAnagement -->
+    <string name="task_starting">Chargement des donées</string>
+    <string name="task_working">Merci de patienter</string>
+    <string name="task_cancelled">Abandonner</string>
+    <string name="task_completed">Chargement réussi</string>
 
 </resources>

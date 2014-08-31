@@ -22,7 +22,7 @@ public class SavedProjectsFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		globalVariable = (GlobalVariable) getActivity().getApplicationContext();
-		BaseAdapter adapter = new SavedProjectAdapter(getActivity().getApplicationContext(), globalVariable.getData().getSavedProjects());
+		BaseAdapter adapter = new SavedProjectAdapter(getActivity(), globalVariable.getData().getSavedProjects());
 		setListAdapter(adapter);
 	}
 

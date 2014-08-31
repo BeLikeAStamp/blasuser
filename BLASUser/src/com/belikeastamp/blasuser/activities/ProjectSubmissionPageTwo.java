@@ -1,9 +1,11 @@
 package com.belikeastamp.blasuser.activities;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.concurrent.ExecutionException;
+import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,6 +31,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -46,15 +49,19 @@ import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageTwoFragment;
 import com.belikeastamp.blasuser.util.CustomMultiPartEntity;
 import com.belikeastamp.blasuser.util.EngineConfiguration;
 import com.belikeastamp.blasuser.util.GlobalVariable;
-import com.belikeastamp.blasuser.util.ProjectController;
+import com.belikeastamp.blasuser.util.asynctask.AddProjectTask;
+import com.belikeastamp.blasuser.util.asynctask.AsyncTaskManager;
+import com.belikeastamp.blasuser.util.asynctask.MyAbstractAsyncTask;
+import com.belikeastamp.blasuser.util.asynctask.OnTaskCompleteListener;
 
-public class ProjectSubmissionPageTwo extends Activity {
+public class ProjectSubmissionPageTwo extends Activity implements OnTaskCompleteListener {
 	private static final int SEND_EMAIL = 0;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private Long projectId;
+	private AsyncTaskManager mAsyncTaskManager;
 	private GlobalVariable globalVariable;
 	boolean everything_ok = true;
 
@@ -62,6 +69,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_submission_page2);
 		globalVariable = (GlobalVariable) getApplicationContext();
+		mAsyncTaskManager = new AsyncTaskManager(this, this);
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -286,24 +294,19 @@ public class ProjectSubmissionPageTwo extends Activity {
 		p.setStatus(0);
 
 		// remote
-		AddProjectTask task = new AddProjectTask();
-		try {
-			projectId = task.execute(p).get();
-			p.setRemoteId(projectId);
+		AddProjectTask request = new AddProjectTask(getResources());
+		request.setActivity(ProjectSubmissionPageTwo.this);
+		request.setProject(p);
+		mAsyncTaskManager.setupTask(request);
 
-			if (!projectId.equals(Long.valueOf(-1)))
-			{
-				sendEmail(p);
-			}
-			else everything_ok = false;
+		projectId = globalVariable.getProjectId();
+		p.setRemoteId(projectId);
 
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!projectId.equals(Long.valueOf(-1)))
+		{
+			sendEmail(p);
 		}
+		else everything_ok = false;
 
 		// local 
 		if (everything_ok) {
@@ -323,23 +326,29 @@ public class ProjectSubmissionPageTwo extends Activity {
 
 	private void sendEmail(Project p) {
 		// TODO Auto-generated method stub
-		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,  new String[]{getResources().getString(R.string.contact_email)});
 
-		String body = getResources().getString(R.string.email_body_submission);
+		String pj = createTempProjectFile(p);
+		String body = getResources().getString(R.string.email_body_submission, globalVariable.getInfos());
+
+		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND_MULTIPLE);
+		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,  new String[]{getResources().getString(R.string.contact_email)});
 		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getResources().getString(R.string.email_subject_submission));
 		emailIntent.setType("plain/text");
 		emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
 
+		ArrayList<Uri> uris = new ArrayList<Uri>();
+		uris.add(Uri.parse("file://"+pj));
 		if (p.getTrackFile() != null) {
-			emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(p.getTrackFile().toString()));
+			uris.add(p.getTrackFile());
 		}
 
+		Log.d("URIS", uris.toString());
+		emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 		startActivityForResult(emailIntent, SEND_EMAIL);
 	}
 
 
-	private class AddProjectTask extends AsyncTask<Project, Void, Long> {
+	/*private class AddProjectTask extends AsyncTask<Project, Void, Long> {
 
 
 		@Override
@@ -358,7 +367,7 @@ public class ProjectSubmissionPageTwo extends Activity {
 
 			return pid;
 		}
-	}
+	}*/
 
 	public class SendHttpRequestTask extends AsyncTask<File, Integer, String> {
 
@@ -460,13 +469,52 @@ public class ProjectSubmissionPageTwo extends Activity {
 		case SEND_EMAIL: 
 			if(resultCode==Activity.RESULT_CANCELED){
 				everything_ok = false;
-			} 
+			}
+
 			break; 
 
 		default: 
 			break; 
 		} 
 	}
+
+	private String createTempProjectFile(Project p) {
+		String projectFile = Environment.getExternalStorageDirectory().getPath()+"/"+p.getName()+"_project.txt"; 
+
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(projectFile));
+			bw.append(p.toString());
+			bw.flush();bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return projectFile;
+	}
+
+	@Override
+	public void onTaskComplete(MyAbstractAsyncTask task) {
+		// TODO Auto-generated method stub
+		if (task.isCancelled()) {
+			// Report about cancel
+			Toast.makeText(getApplicationContext(),  getResources().getString(R.string.task_cancelled), Toast.LENGTH_LONG)
+			.show();
+		} else {
+			// Get result
+			Boolean result = null;
+			try {
+				result = task.get();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// Report about result
+			Toast.makeText(getApplicationContext(), getResources().getString(R.string.task_completed, (result != null) ? result.toString() : "null"),
+					Toast.LENGTH_LONG).show();
+		}
+
+	}
+
 
 }
 

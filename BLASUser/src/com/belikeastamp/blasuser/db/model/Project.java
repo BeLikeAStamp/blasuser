@@ -18,7 +18,7 @@ public class Project implements Serializable {
 	private String type;
 	private String orderDate;
 	private String path_to_prototype;
-	private File trackFile;
+	private Uri trackFile;
 	private String perso;
 	private String colors;
 	private int status;
@@ -149,12 +149,12 @@ public class Project implements Serializable {
 		this.colors = colors;
 	}
 
-	public File getTrackFile() {
+	public Uri getTrackFile() {
 		return trackFile;
 	}
 
-	public void setTrackFile(File path_to_track) {
-		this.trackFile = path_to_track;
+	public void setTrackFile(Uri uri) {
+		this.trackFile = uri;
 	}
 
 

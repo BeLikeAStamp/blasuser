@@ -9,6 +9,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.SumPathEffect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.adapter.NavDrawerListAdapter;
+import com.belikeastamp.blasuser.db.dao.Datasource;
 import com.belikeastamp.blasuser.fragments.HomeFragment;
 import com.belikeastamp.blasuser.fragments.JoinMeFragment;
 import com.belikeastamp.blasuser.fragments.ProjectSubmissionPageOneFragment;
@@ -32,13 +34,20 @@ import com.belikeastamp.blasuser.fragments.TutorialFragment;
 import com.belikeastamp.blasuser.fragments.WorkshopFragment;
 import com.belikeastamp.blasuser.model.NavDrawerItem;
 import com.belikeastamp.blasuser.util.GlobalVariable;
+import com.belikeastamp.blasuser.util.asynctask.AsyncTaskManager;
+import com.belikeastamp.blasuser.util.asynctask.MyAbstractAsyncTask;
+import com.belikeastamp.blasuser.util.asynctask.OnTaskCompleteListener;
+import com.belikeastamp.blasuser.util.asynctask.Request4RemoteDataTask;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnTaskCompleteListener {
+
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private GlobalVariable globalVariable;
-	
+	private AsyncTaskManager mAsyncTaskManager;
+	private Datasource datasource;
+
 	// nav drawer title
 	private CharSequence mDrawerTitle;
 
@@ -52,14 +61,13 @@ public class MainActivity extends Activity {
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
 
-	public static final String CLOSE = "close";
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		globalVariable = (GlobalVariable) getApplicationContext();
-		
+		mAsyncTaskManager = new AsyncTaskManager(this, this);
+
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -73,30 +81,47 @@ public class MainActivity extends Activity {
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
 		navDrawerItems = new ArrayList<NavDrawerItem>();
-		
+
+
+		// Download data
+		loadLocalData();
+		loadRemoteData();
+
 		int submit_prj = (globalVariable.getData().getSubmitProjects() != null) ? globalVariable.getData().getSubmitProjects().size() : 0;
 		int saved_prj = (globalVariable.getData().getSavedProjects() != null) ? globalVariable.getData().getSavedProjects().size() : 0;
 		int tutos_prj = (globalVariable.getData().getTutorials() != null) ? globalVariable.getData().getTutorials().size() : 0;
 		int works_prj = (globalVariable.getData().getWorkshops() != null) ? globalVariable.getData().getWorkshops().size() : 0;
-		
+
 		// adding nav drawer items to array
 		// Home
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-		// Find People
+		// NEW PROJ
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), true, ""+submit_prj));
-		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, ""+saved_prj));
-		// Pages
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1), true, ""+tutos_prj));
-		// What's hot, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, ""+works_prj));
-		// What's hot, We  will add a counter here
+		// SUBMIT PROJ
+		if (globalVariable.getData().getSubmitProjects().size() == 0) 
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+		else
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), true, ""+submit_prj));
+		// SAVED PROJ
+		if (globalVariable.getData().getSavedProjects().size() == 0) 
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
+		else
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, ""+saved_prj));
+		// TUTOS
+		if (globalVariable.getData().getTutorials().size() == 0) 
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+		else
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1), true, ""+tutos_prj));
+		// WORKSHOP
+		if (globalVariable.getData().getWorkshops().size() == 0) 
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
+		else
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, ""+works_prj));
+		// JOIN ME
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
-		// What's hot, We  will add a counter here
+		// BLOG
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1)));		
-		// What's hot, We  will add a counter here
+		// ACTUALISER
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons.getResourceId(8, -1)));		
 
 		// Recycle the typed array
@@ -113,7 +138,7 @@ public class MainActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.banniere));
-		
+
 
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_navigation_drawer, //nav menu toggle icon
@@ -222,7 +247,7 @@ public class MainActivity extends Activity {
 			Intent i2 = new Intent(MainActivity.this, PreMainActivity.class);
 			startActivity(i2);
 			break;
-			
+
 
 		default:
 			break;
@@ -267,6 +292,43 @@ public class MainActivity extends Activity {
 		super.onConfigurationChanged(newConfig);
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	public void onTaskComplete(MyAbstractAsyncTask task) {
+		if (task.isCancelled()) {
+			// Report about cancel
+			Toast.makeText(getApplicationContext(),  getResources().getString(R.string.task_cancelled), Toast.LENGTH_LONG)
+			.show();
+		} else {
+			// Get result
+			Boolean result = null;
+			try {
+				result = task.get();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// Report about result
+			Toast.makeText(getApplicationContext(), getResources().getString(R.string.task_completed, (result != null) ? result.toString() : "null"),
+					Toast.LENGTH_LONG).show();
+		}
+	}
+
+	private boolean loadLocalData() {
+		datasource = new Datasource(getApplicationContext());
+		datasource.open();
+		globalVariable.getData().setSavedProjects(datasource.getAllWaitingProjects());
+		datasource.close();
+		return true;
+	}
+
+	private boolean loadRemoteData() {
+		// Projets soumis
+
+		Request4RemoteDataTask request = new Request4RemoteDataTask(getResources());
+		request.setActivity(MainActivity.this);
+		mAsyncTaskManager.setupTask(request);
+		return true;
 	}
 
 }

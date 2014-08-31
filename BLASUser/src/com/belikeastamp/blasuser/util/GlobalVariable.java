@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import android.app.Application;
+import android.net.Uri;
 import android.util.SparseArray;
 
 import com.belikeastamp.blasuser.R;
@@ -23,12 +24,13 @@ public class GlobalVariable extends Application {
 	private String orderDate;
 	private int[] colorPanel;
 	private PersoSubject perso;
-	private File trackFile;
+	private Uri trackFile;
 	private String infos;
 	private Map<String,String> details;
 	private UploadedData data;
 	private String userEmail;
 	private Long userId;
+	private Long projectId;
 	
 	public GlobalVariable() {
 		super();
@@ -116,10 +118,10 @@ public class GlobalVariable extends Application {
 	public void setDetails(Map<String,String> details) {
 		this.details = details;
 	}
-	public File getTrackFile() {
+	public Uri getTrackFile() {
 		return trackFile;
 	}
-	public void setTrackFile(File trackFile) {
+	public void setTrackFile(Uri trackFile) {
 		this.trackFile = trackFile;
 	}
 
@@ -289,6 +291,12 @@ public class GlobalVariable extends Application {
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+	public Long getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 
 }

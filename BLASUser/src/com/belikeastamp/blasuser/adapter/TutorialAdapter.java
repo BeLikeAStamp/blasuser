@@ -1,19 +1,9 @@
 package com.belikeastamp.blasuser.adapter;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,18 +15,26 @@ import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.db.model.Tutorial;
-import com.belikeastamp.blasuser.util.TutorialController;
+import com.belikeastamp.blasuser.util.asynctask.AsyncTaskManager;
+import com.belikeastamp.blasuser.util.asynctask.Demand4TutoTask;
+import com.belikeastamp.blasuser.util.asynctask.DownloadTutoTask;
+import com.belikeastamp.blasuser.util.asynctask.MyAbstractAsyncTask;
+import com.belikeastamp.blasuser.util.asynctask.OnTaskCompleteListener;
 
-public class TutorialAdapter extends BaseAdapter {
+public class TutorialAdapter extends BaseAdapter implements OnTaskCompleteListener {
 
 	private List<Tutorial> list;
 	private Activity activity;
-	private ProgressDialog prgDialog;
-	public static final int progress_bar_type = 0;
-
+	//private ProgressDialog prgDialog;
+	//public static final int progress_bar_type = 0;
+	private AsyncTaskManager mAsyncTaskManager;
+	
+	
 	public TutorialAdapter (Activity activity, List<Tutorial> tutos) {
 		this.activity = activity;
 		this.list = tutos;
+		// Create manager and set this activity as context and listener
+		mAsyncTaskManager = new AsyncTaskManager(activity, this);
 	}
 
 
@@ -106,17 +104,21 @@ public class TutorialAdapter extends BaseAdapter {
 
 				Button b = (Button)v ;
 				Tutorial t = (Tutorial)b.getTag();
-				Long tutorialId = t.getId();
 
 				if(b.getText().toString().equals(activity.getApplicationContext().getResources().getString(R.string.btn_get_tuto))) {
 					// TELECH
-					new DownloadTutoTask().execute(t);
+					DownloadTutoTask downloadTask = new DownloadTutoTask(activity.getResources());
+					downloadTask.setTutorial(t);
+					downloadTask.setActivity(activity);
+					mAsyncTaskManager.setupTask(downloadTask);
 				}
 				else
 				{
 					// PLUSOYER
-					new Demand4TutoTask().execute(t);
-					Toast.makeText(activity.getApplicationContext(),  activity.getApplicationContext().getResources().getString(R.string.demand_return), Toast.LENGTH_SHORT).show();
+					Demand4TutoTask deamndeTuto = new Demand4TutoTask(activity.getResources());
+					deamndeTuto.setTutorial(t);
+					deamndeTuto.setActivity(activity);
+					mAsyncTaskManager.setupTask(deamndeTuto);
 				}
 
 				b.setEnabled(false);
@@ -126,107 +128,25 @@ public class TutorialAdapter extends BaseAdapter {
 		return rowView;
 	}
 
-
-	protected class Demand4TutoTask extends AsyncTask<Tutorial, Void, Void> {
-
-		@Override
-		protected Void doInBackground(Tutorial... params) {
-			final TutorialController c = new TutorialController();
-
-			Tutorial t = params[0];
-			Integer onDemand = t.getOnDemand()+1;
-			t.setOnDemand(onDemand);
-			try {
-				c.update(t);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}			
-
-			return null;
+	@Override
+	public void onTaskComplete(MyAbstractAsyncTask task) {
+		// TODO Auto-generated method stub
+		if (task.isCancelled()) {
+		    // Report about cancel
+		    Toast.makeText(activity.getApplicationContext(),  activity.getResources().getString(R.string.task_cancelled), Toast.LENGTH_LONG)
+			    .show();
+		} else {
+		    // Get result
+		    Boolean result = null;
+		    try {
+			result = task.get();
+		    } catch (Exception e) {
+			e.printStackTrace();
+		    }
+		    // Report about result
+		    Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.task_completed, (result != null) ? result.toString() : "null"),
+			    Toast.LENGTH_LONG).show();
 		}
-
-	}
-
-	protected class DownloadTutoTask extends AsyncTask<Tutorial, Void, String> {
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			prgDialog = new ProgressDialog(activity);
-			prgDialog.setMessage("Downloading file. Please wait...");
-			prgDialog.setIndeterminate(true);
-			prgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			prgDialog.setCancelable(false);
-			prgDialog.show();
-
-
-		}
-
-
-		@Override
-		protected String doInBackground(Tutorial... params) {
-			// TODO Auto-generated method stub
-			Tutorial t = params[0];
-			final TutorialController c = new TutorialController();
-			InputStream input = null;
-			int count = 0;
-			String filepath = null;
-
-			try {
-				input = c.downloadFile(t.getId());
-				/*PackageManager m = activity.getPackageManager();
-				String s = activity.getPackageName();
-				PackageInfo p = m.getPackageInfo(s, 0);
-				s = p.applicationInfo.dataDir;
-				String filepath = s+"/"+t.getFile()+".png" */
-
-				filepath = Environment.getExternalStorageDirectory().getPath()+"/"+t.getFile()+".jpeg"; 
-				OutputStream output = new FileOutputStream(filepath);
-				//OutputStream output = new FileOutputStream();
-				byte data[] = new byte[1024];
-
-				while ((count = input.read(data)) != -1) {
-					// Write data to file
-					output.write(data, 0, count);
-				}
-				// Flush output
-				output.flush();
-				// Close streams
-				output.close();
-				input.close();
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			return filepath;
-		}
-
-		@Override
-		protected void onPostExecute(String file) {
-			// Dismiss the dialog after the Music file was downloaded
-			super.onPostExecute(file);
-			prgDialog.dismiss();
-			showTutorial(file);
-		}
-	}
-
-	protected void showTutorial(String filepath){
-
-		File file = new File(filepath);
-		PackageManager packageManager = activity.getPackageManager();
-		Intent testIntent = new Intent(Intent.ACTION_VIEW);
-		testIntent.setType("image/jpeg");
-		packageManager.queryIntentActivities(testIntent, PackageManager.MATCH_DEFAULT_ONLY);
-		Intent intent = new Intent();
-		intent.setAction(Intent.ACTION_VIEW);
-		Uri uri = Uri.fromFile(file);
-		intent.setDataAndType(uri, "image/jpeg");
-		activity.startActivity(intent);
-
-
 	}
 
 }

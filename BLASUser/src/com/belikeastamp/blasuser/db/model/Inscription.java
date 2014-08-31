@@ -15,18 +15,20 @@ public class Inscription implements Serializable {
 	String phoneNumber;
 	String email;
 	String expertise;
+	String inscriptionDate;
 	int partcipants;
 	
 	public Inscription() {}
 	
 	public Inscription(Long workshopId, String name, String phoneNumber,
-			String email, String expertise, int partcipants) {
+			String email, String expertise, String inscriptionDate, int partcipants) {
 		super();
 		this.workshopId = workshopId;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.expertise = expertise;
+		this.inscriptionDate = inscriptionDate;
 		this.partcipants = partcipants;
 	}
 
@@ -89,6 +91,14 @@ public class Inscription implements Serializable {
 	}
 
 
+	public String getInscriptionDate() {
+		return inscriptionDate;
+	}
+
+	public void setInscriptionDate(String inscriptionDate) {
+		this.inscriptionDate = inscriptionDate;
+	}
+
 	public int getPartcipants() {
 		return partcipants;
 	}
@@ -100,11 +110,13 @@ public class Inscription implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Inscription [workshopId=" + workshopId + ", name=" + name
-				+ ", phoneNumber=" + phoneNumber + ", email=" + email
-				+ ", expertise=" + expertise + ", partcipants=" + partcipants
-				+ "]";
+		return "Inscription [id=" + id + ", workshopId=" + workshopId
+				+ ", name=" + name + ", phoneNumber=" + phoneNumber
+				+ ", email=" + email + ", expertise=" + expertise
+				+ ", inscriptionDate=" + inscriptionDate + ", partcipants="
+				+ partcipants + "]";
 	}
+
 	
 	
 }

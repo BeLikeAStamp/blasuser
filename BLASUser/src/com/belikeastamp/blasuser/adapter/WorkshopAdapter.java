@@ -6,7 +6,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.sax.StartElementListener;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
+import com.belikeastamp.blasuser.activities.MainActivity;
 import com.belikeastamp.blasuser.db.model.Inscription;
 import com.belikeastamp.blasuser.db.model.Workshop;
 import com.belikeastamp.blasuser.util.InscriptionController;
@@ -30,13 +34,15 @@ public class WorkshopAdapter extends BaseAdapter {
 	List<Workshop> list;
 	Activity activity;
 	Inscription inscription;
-	AddInscriprionTask task;
-
+	//AddInscriprionTask task;
+	private long today = System.currentTimeMillis();
+	
+	
 	public WorkshopAdapter (Activity activity, List<Workshop> workshops) {
 		this.activity = activity;
 		this.list = workshops;
 		this.inscription = new Inscription();
-		task = new AddInscriprionTask();
+		//task = new AddInscriprionTask();
 	}
 
 
@@ -168,8 +174,12 @@ public class WorkshopAdapter extends BaseAdapter {
 					inscription.setPhoneNumber(number.getText().toString());
 					inscription.setEmail(email.getText().toString());
 					inscription.setPartcipants(Integer.valueOf(participant.getText().toString()));
-					task.execute(inscription);
+					inscription.setInscriptionDate(getDate(today));
+					new AddInscriprionTask().execute(inscription);
+					Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.demand_return), Toast.LENGTH_SHORT).show();
 					dialog.dismiss();
+					
+					
 				}
 				else
 					Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.alertBox),Toast.LENGTH_SHORT).show();
@@ -208,6 +218,14 @@ public class WorkshopAdapter extends BaseAdapter {
 		dialog.show();
 	}
 
+	
+	private String getDate(long millisecond){  
+		int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR  
+				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH  
+				| DateUtils.FORMAT_ABBREV_WEEKDAY;  
+		String dateString = DateUtils.formatDateTime(activity.getApplicationContext(),millisecond, flags);  
+		return dateString;  
+	}
 
 	public class AddInscriprionTask extends AsyncTask<Inscription, Void, Void> {
 

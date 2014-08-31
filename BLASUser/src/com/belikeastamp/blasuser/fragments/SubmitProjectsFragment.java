@@ -14,8 +14,6 @@ import android.content.res.Resources.NotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -27,7 +25,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
-import com.belikeastamp.blasuser.activities.PreMainActivity;
 import com.belikeastamp.blasuser.activities.SubmitProjectsActivity;
 import com.belikeastamp.blasuser.adapter.SubmitProjectAdapter;
 import com.belikeastamp.blasuser.db.model.User;
