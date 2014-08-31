@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.belikeastamp.blasuser.R;
+import com.belikeastamp.blasuser.fragments.SubmitProjectsFragment;
 import com.belikeastamp.blasuser.fragments.SubmitProjectsPageTwoFragment;
 
 public class SubmitProjectsActivity extends Activity {
@@ -26,6 +27,7 @@ public class SubmitProjectsActivity extends Activity {
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.banniere));
@@ -54,8 +56,9 @@ public class SubmitProjectsActivity extends Activity {
 
 		if (savedInstanceState == null) {
 			// on first time display view for first nav item
+			
 			Fragment fragment = new SubmitProjectsPageTwoFragment();
-
+	
 			FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()
 			.replace(R.id.frame_container, fragment).commit();

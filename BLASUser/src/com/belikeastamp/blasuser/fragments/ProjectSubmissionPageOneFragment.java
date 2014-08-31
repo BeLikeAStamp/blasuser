@@ -281,6 +281,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	}
 
 	private void prepareLayout1() {
+		need_2perso = false;
 		myLayout = (LinearLayout) getView().findViewById(R.id.layout1);
 		gender1 = (Spinner) myLayout.findViewById(R.id.gender); 
 		name1 = (EditText) myLayout.findViewById(R.id.firstname);
@@ -577,6 +578,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	}			
 
 	private void prepareLayout3() {
+		need_2perso = false;
 		myLayout = (LinearLayout) getView().findViewById(R.id.layout3);
 		gender1 = (Spinner) myLayout.findViewById(R.id.gender1); 
 		name1 = (EditText) myLayout.findViewById(R.id.firstname1);
@@ -853,6 +855,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	private void prepareLayout6() {
 		// TODO Auto-generated method stub
+		need_2perso = false;
 		myLayout = (LinearLayout) getView().findViewById(R.id.layout6);
 		gender1 = (Spinner) myLayout.findViewById(R.id.gender1);
 		Spinner gender2 = (Spinner) myLayout.findViewById(R.id.gender2); 
@@ -1072,6 +1075,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 	private void prepareLayout7() {
 		// TODO Auto-generated method stub
+		need_2perso = false;
 		myLayout = (LinearLayout) getView().findViewById(R.id.layout7);
 		gender1 = (Spinner) myLayout.findViewById(R.id.gender);
 		Spinner occaz = (Spinner) myLayout.findViewById(R.id.occaz_type);
@@ -1239,7 +1243,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				globalVariable.addNewDetails("adresse", address.getText().toString());
+				globalVariable.addNewDetails("address", address.getText().toString());
 			}
 
 			@Override

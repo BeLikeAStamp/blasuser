@@ -200,7 +200,9 @@
     <string name="btn_submit">Soumission</string>
     <string name="save_date">Date de sauvegarde</string>
     <string name="btn_resume">Reprendre</string>
-
+    <string name="reload_advice">Si vous venez de sauvegarder un projet, penser à actualiser l\'application</string>
+    <string name="btn_reload">Actualiser</string>
+    
     <!-- Submit Projects Details -->
     <string name="prototype">Prototype</string>
     <string name="no_prototype">pas encore de prototype</string>
@@ -264,7 +266,7 @@
     <string name="notif_accept">accepté</string>
     <string name="notif_inprogress">en cours</string>
     <string name="notif_dispo">disponible</string>
-    
+
     <!-- AsyncTask MAnagement -->
     <string name="task_starting">Chargement des donées</string>
     <string name="task_working">Merci de patienter</string>

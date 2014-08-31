@@ -51,6 +51,7 @@ import com.belikeastamp.blasuser.util.EngineConfiguration;
 import com.belikeastamp.blasuser.util.GlobalVariable;
 import com.belikeastamp.blasuser.util.asynctask.AddProjectTask;
 import com.belikeastamp.blasuser.util.asynctask.AsyncTaskManager;
+import com.belikeastamp.blasuser.util.asynctask.GetProjectTask;
 import com.belikeastamp.blasuser.util.asynctask.MyAbstractAsyncTask;
 import com.belikeastamp.blasuser.util.asynctask.OnTaskCompleteListener;
 
@@ -61,7 +62,8 @@ public class ProjectSubmissionPageTwo extends Activity implements OnTaskComplete
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private Long projectId;
-	private AsyncTaskManager mAsyncTaskManager;
+	private AsyncTaskManager mAsyncTaskManagerAddProj;
+	private AsyncTaskManager mAsyncTaskManagerGetProjId;
 	private GlobalVariable globalVariable;
 	boolean everything_ok = true;
 
@@ -69,7 +71,8 @@ public class ProjectSubmissionPageTwo extends Activity implements OnTaskComplete
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_submission_page2);
 		globalVariable = (GlobalVariable) getApplicationContext();
-		mAsyncTaskManager = new AsyncTaskManager(this, this);
+		mAsyncTaskManagerAddProj = new AsyncTaskManager(this, this);
+		mAsyncTaskManagerGetProjId = new AsyncTaskManager(this, this);
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -285,8 +288,9 @@ public class ProjectSubmissionPageTwo extends Activity implements OnTaskComplete
 		datasource.addProjects(p);
 		datasource.close();
 
-		//Intent i = new Intent(ProjectSubmissionPageTwo.this, SavedProjectsActivity.class);
-		//startActivity(i);
+		Intent backhome = new Intent(ProjectSubmissionPageTwo.this, MainActivity.class);
+		startActivity(backhome);
+
 	}
 
 	private void remoteSubmission(Project p) {
@@ -294,80 +298,18 @@ public class ProjectSubmissionPageTwo extends Activity implements OnTaskComplete
 		p.setStatus(0);
 
 		// remote
-		AddProjectTask request = new AddProjectTask(getResources());
-		request.setActivity(ProjectSubmissionPageTwo.this);
-		request.setProject(p);
-		mAsyncTaskManager.setupTask(request);
+		AddProjectTask addproj = new AddProjectTask(getResources());
+		addproj.setActivity(ProjectSubmissionPageTwo.this);
+		addproj.setProject(p);
+		mAsyncTaskManagerAddProj.setupTask(addproj);
 
-		projectId = globalVariable.getProjectId();
-		p.setRemoteId(projectId);
-
-		if (!projectId.equals(Long.valueOf(-1)))
-		{
-			sendEmail(p);
-		}
-		else everything_ok = false;
-
-		// local 
-		if (everything_ok) {
-			Datasource datasource = new Datasource(getApplicationContext());
-			datasource.open();
-			Log.i("PROJECT TO SUBMIT",p.toString());
-			datasource.addProjects(p);
-			datasource.close();
-		}
-		else
-		{
-			Toast.makeText(getApplicationContext(), "Ca a merdé !!!", Toast.LENGTH_SHORT).show();
-		}
-
+		GetProjectTask getProjId = new GetProjectTask(getResources());
+		getProjId.setActivity(ProjectSubmissionPageTwo.this);
+		getProjId.setProject(p);
+		mAsyncTaskManagerGetProjId.setupTask(getProjId);
 
 	}
 
-	private void sendEmail(Project p) {
-		// TODO Auto-generated method stub
-
-		String pj = createTempProjectFile(p);
-		String body = getResources().getString(R.string.email_body_submission, globalVariable.getInfos());
-
-		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND_MULTIPLE);
-		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,  new String[]{getResources().getString(R.string.contact_email)});
-		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getResources().getString(R.string.email_subject_submission));
-		emailIntent.setType("plain/text");
-		emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
-
-		ArrayList<Uri> uris = new ArrayList<Uri>();
-		uris.add(Uri.parse("file://"+pj));
-		if (p.getTrackFile() != null) {
-			uris.add(p.getTrackFile());
-		}
-
-		Log.d("URIS", uris.toString());
-		emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-		startActivityForResult(emailIntent, SEND_EMAIL);
-	}
-
-
-	/*private class AddProjectTask extends AsyncTask<Project, Void, Long> {
-
-
-		@Override
-		protected Long doInBackground(Project... params) {
-			// TODO Auto-generated method stub
-			Log.d("Submission","AddProjectTask doInBackground");
-			Project p = params[0];
-			Long pid = null;
-			final ProjectController c = new ProjectController();
-			try {
-				c.create(p,globalVariable.getUserId());
-				pid = c.getProjectRemoteId(p.getName(), globalVariable.getUserId());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return pid;
-		}
-	}*/
 
 	public class SendHttpRequestTask extends AsyncTask<File, Integer, String> {
 
@@ -467,30 +409,15 @@ public class ProjectSubmissionPageTwo extends Activity implements OnTaskComplete
 		switch (requestCode) {
 
 		case SEND_EMAIL: 
-			if(resultCode==Activity.RESULT_CANCELED){
-				everything_ok = false;
-			}
+			Log.d("SEND_EMAIL", "ben alors ?");
+			Intent backhome = new Intent(ProjectSubmissionPageTwo.this, MainActivity.class);
+			startActivity(backhome);
 
 			break; 
 
 		default: 
 			break; 
 		} 
-	}
-
-	private String createTempProjectFile(Project p) {
-		String projectFile = Environment.getExternalStorageDirectory().getPath()+"/"+p.getName()+"_project.txt"; 
-
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(projectFile));
-			bw.append(p.toString());
-			bw.flush();bw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return projectFile;
 	}
 
 	@Override

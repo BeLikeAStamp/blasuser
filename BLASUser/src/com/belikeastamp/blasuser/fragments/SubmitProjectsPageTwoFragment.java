@@ -28,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
+import com.belikeastamp.blasuser.activities.MainActivity;
+import com.belikeastamp.blasuser.activities.SubmitProjectsActivity;
 import com.belikeastamp.blasuser.db.DatabaseHandler;
 import com.belikeastamp.blasuser.db.model.Project;
 import com.belikeastamp.blasuser.util.ProjectController;
@@ -131,6 +133,9 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 				ok_proto.setVisibility(View.INVISIBLE);
 				selected_status = DatabaseHandler.PROTO_ACCEPTED;
 				updatetask.execute(project);
+				
+				Intent i = new Intent(getActivity(), MainActivity.class);
+				getActivity().startActivity(i);
 			}		
 		});
 
@@ -141,6 +146,8 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 				// TODO Auto-generated method stub
 				sendEmail(project);
 				Log.d("SubmitProjectDetails", "NO PROTO -  SEND MESSAGE");
+				Intent i = new Intent(getActivity(), MainActivity.class);
+				getActivity().startActivity(i);
 			}		
 		});
 

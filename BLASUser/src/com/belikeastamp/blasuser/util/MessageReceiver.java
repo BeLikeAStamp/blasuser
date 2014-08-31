@@ -1,5 +1,6 @@
 package com.belikeastamp.blasuser.util;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,6 +15,7 @@ import android.util.SparseArray;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.activities.MainActivity;
+import com.belikeastamp.blasuser.activities.NotificationActivity;
 
 public class MessageReceiver extends BroadcastReceiver {
 
@@ -36,7 +38,7 @@ public class MessageReceiver extends BroadcastReceiver {
 		setSparseArrays(context);
 		
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-				new Intent(context, MainActivity.class), 0);
+				new Intent(context, NotificationActivity.class), 0);
 
 		Bundle pudsBundle = intent.getExtras();
 		Object[] pdus = (Object[]) pudsBundle.get("pdus");
@@ -48,7 +50,8 @@ public class MessageReceiver extends BroadcastReceiver {
 			String[] parts = messages.getMessageBody().split(";");
 			String content = context.getResources().getString(R.string.notif, part1.get(Integer.valueOf(parts[1])), 
 					part2.get(Integer.valueOf(parts[2])), parts[3]);
-
+			context.getSharedPreferences("BLAS", Activity.MODE_PRIVATE).edit().putString("notif_content", content).commit();
+			
 			// generation notification
 			NotificationCompat.Builder mBuilder =
 					new NotificationCompat.Builder(context)

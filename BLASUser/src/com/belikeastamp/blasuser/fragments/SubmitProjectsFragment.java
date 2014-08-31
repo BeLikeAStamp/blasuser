@@ -8,7 +8,10 @@ import java.util.concurrent.ExecutionException;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ListFragment;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.AsyncTask;
@@ -25,11 +28,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
+import com.belikeastamp.blasuser.activities.PreMainActivity;
 import com.belikeastamp.blasuser.activities.SubmitProjectsActivity;
 import com.belikeastamp.blasuser.adapter.SubmitProjectAdapter;
 import com.belikeastamp.blasuser.db.model.User;
 import com.belikeastamp.blasuser.util.GlobalVariable;
 import com.belikeastamp.blasuser.util.UserController;
+import com.belikeastamp.blasuser.util.asynctask.AsyncTaskManager;
 
 
 public class SubmitProjectsFragment extends ListFragment {
@@ -66,8 +71,7 @@ public class SubmitProjectsFragment extends ListFragment {
 		final View f = getActivity().getLayoutInflater().inflate(R.layout.prompt_user_email, null);
 		loginDialog.setTitle(getActivity().getResources().getString(R.string.load_existing_project));
 		loginDialog.setView(f);
-
-		Button submit = (Button)f.findViewById(R.id.submit);
+		
 		Spinner emailSpinner = (Spinner)f.findViewById(R.id.email);
 		
 		Account[] accounts = AccountManager.get(getActivity()).getAccountsByType("com.google");
@@ -96,16 +100,18 @@ public class SubmitProjectsFragment extends ListFragment {
 			}
 
 		});
-		submit.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
+		
+		loginDialog.setPositiveButton(getActivity().getResources().getString(R.string.btn_reload),new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
 				registration(globalVariable.getUserEmail());
+				Intent i2 = new Intent(getActivity(), PreMainActivity.class);
+				startActivity(i2);
 			}
 		});
 		
 		loginDialog.show();
+
+		
 	}
 	
 	private Boolean isRegistred() {
