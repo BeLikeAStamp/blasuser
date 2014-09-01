@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.belikeastamp.blasuser.R;
 import com.belikeastamp.blasuser.db.model.Project;
@@ -23,7 +24,8 @@ public class SavedProjectsPageTwoFragment extends Fragment {
 	private ImageView color1;
 	private ImageView color2;
 	private ImageView color3;
-
+	private Project project;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class SavedProjectsPageTwoFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		Project project = (Project) getActivity().getIntent().getSerializableExtra("project");
+		project = (Project) getActivity().getIntent().getSerializableExtra("project");
 
 		projectName = (TextView) getView().findViewById(R.id.project_name);
 		type = (TextView) getView().findViewById(R.id.card_type);
@@ -49,8 +51,16 @@ public class SavedProjectsPageTwoFragment extends Fragment {
 		color3 = (ImageView) getView().findViewById(R.id.selected_color3);
 
 		projectName.setText(project.getName());
-		type.setText(getActivity().getResources().getString(R.string.project_type)+" : \n"+project.getType());
-		detail.setText(getActivity().getResources().getString(R.string.personnalisation)+" : \n"+project.getPrintableDetails());
+		type.setText(project.getType());
+		detail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity().getApplicationContext(), project.getPrintableDetails(), Toast.LENGTH_LONG).show();
+			}
+		});
+		
 		nbrCards.setText(getActivity().getResources().getString(R.string.how_many_cards)+" : "+project.getQuantity());
 		orderDate.setText(getActivity().getResources().getString(R.string.save_date)+" : "+project.getOrderDate());
 

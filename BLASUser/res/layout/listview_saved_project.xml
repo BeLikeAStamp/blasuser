@@ -34,14 +34,23 @@
         android:gravity="right"
         android:textStyle="italic" />
 
-    <Button
-        android:id="@+id/resume"
-        style="@style/btnStyleActionTurquoise2"
+    <ImageView
+        android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:text="@string/btn_resume"
-        android:textSize="16sp" />
+        android:src="@drawable/ic_content_discard"
+        android:contentDescription="@string/btn_delete"/>
+
+    <ImageView
+        android:id="@+id/resume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/delete"
+        android:src="@drawable/ic_content_edit"
+        android:contentDescription="@string/btn_resume"
+        android:paddingRight="10dp" />
 
 </RelativeLayout>
