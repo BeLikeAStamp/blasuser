@@ -97,7 +97,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				protolink.setVisibility(View.INVISIBLE);
 				Log.d("SubmitProjectDetails", "VOIR PROTO");
 				//proto_path = task.execute(project).get();
@@ -114,7 +114,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				ok_proto.setVisibility(View.INVISIBLE);
 				no_proto.setVisibility(View.INVISIBLE);
 				selected_status = DatabaseHandler.PROTO_DISMISSED;
@@ -128,7 +128,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				no_proto.setVisibility(View.INVISIBLE);
 				ok_proto.setVisibility(View.INVISIBLE);
 				selected_status = DatabaseHandler.PROTO_ACCEPTED;
@@ -143,7 +143,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				sendEmail(project);
 				Log.d("SubmitProjectDetails", "NO PROTO -  SEND MESSAGE");
 				Intent i = new Intent(getActivity(), MainActivity.class);
@@ -158,7 +158,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				StringBuffer text = new StringBuffer();
 				for (int i = 0 ; i < getResources().getStringArray(R.array.status_print_arrays).length ; i++ ) {
 					text.append(i+1+":"+statusList[i]+"\n");
@@ -222,7 +222,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 	}
 
 	private void sendEmail(Project p) {
-		// TODO Auto-generated method stub
+		
 
 		if(message.getText().toString().length() == 0) {
 			message.setError(getActivity().getResources().getString(R.string.err_no_proto));
@@ -261,7 +261,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 
 	@Override
 	public void onTaskComplete(MyAbstractAsyncTask task) {
-		// TODO Auto-generated method stub
+		
 		if (task.isCancelled()) {
 			// Report about cancel
 			Toast.makeText(getActivity().getApplicationContext(),  getActivity().getResources().getString(R.string.task_cancelled), Toast.LENGTH_LONG)

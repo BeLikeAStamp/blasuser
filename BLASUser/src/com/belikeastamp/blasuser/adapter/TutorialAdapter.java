@@ -40,19 +40,19 @@ public class TutorialAdapter extends BaseAdapter implements OnTaskCompleteListen
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
+		
 		return list.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
@@ -65,7 +65,7 @@ public class TutorialAdapter extends BaseAdapter implements OnTaskCompleteListen
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
+		
 		View rowView = convertView;
 		Holder holder = new Holder();
 
@@ -99,7 +99,7 @@ public class TutorialAdapter extends BaseAdapter implements OnTaskCompleteListen
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 
 
 				Button b = (Button)v ;
@@ -130,7 +130,7 @@ public class TutorialAdapter extends BaseAdapter implements OnTaskCompleteListen
 
 	@Override
 	public void onTaskComplete(MyAbstractAsyncTask task) {
-		// TODO Auto-generated method stub
+		
 		if (task.isCancelled()) {
 		    // Report about cancel
 		    Toast.makeText(activity.getApplicationContext(),  activity.getResources().getString(R.string.task_cancelled), Toast.LENGTH_LONG)

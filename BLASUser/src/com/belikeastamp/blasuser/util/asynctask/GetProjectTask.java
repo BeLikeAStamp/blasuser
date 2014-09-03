@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -64,7 +65,7 @@ public class GetProjectTask extends MyAbstractAsyncTask {
 	}
 
 	private void sendEmail(Project p) {
-		// TODO Auto-generated method stub
+		
 
 		String pj = createTempProjectFile(p);
 		String body = activity.getResources().getString(R.string.email_body_submission, globalVariable.getInfos());
@@ -80,7 +81,7 @@ public class GetProjectTask extends MyAbstractAsyncTask {
 		if (p.getTrackFile() != null) {
 			uris.add(p.getTrackFile());
 		}
-
+			
 		Log.d("URIS", uris.toString());
 		emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 		activity.startActivityForResult(emailIntent, SEND_EMAIL);

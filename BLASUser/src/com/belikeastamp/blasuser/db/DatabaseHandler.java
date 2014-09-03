@@ -31,7 +31,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public static final String P_STATUS = "project_status";
 	public static final String P_PROTO = "proto";
 	public static final String P_FILE = "file";
-
+	public static final String P_UID = "user_id";
+	
+	
 	public static final int PROJ_WAIT = -1;
 	public static final int PROJ_SUBMIT = 0;
 	public static final int PROJ_ACCEPTED = 1;
@@ -66,7 +68,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
+		
 		Log.d("Handler", "onCreate");
 		String CREATE_PROJECTS_TABLE = "CREATE TABLE " + TABLE_PROJECTS 
 				+ "("
@@ -80,14 +82,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ P_COLORS + " TEXT NOT NULL,"
 				+ P_REMOTEID + " INTEGER,"
 				+ P_PROTO + " TEXT,"
-				+ P_FILE + " TEXT"
+				+ P_FILE + " TEXT,"
+				+ P_UID + " TEXT NOT NULL"
 				+ ")";
 		db.execSQL(CREATE_PROJECTS_TABLE);
 	}
 	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
+		
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROJECTS);
 
 		// Create tables again

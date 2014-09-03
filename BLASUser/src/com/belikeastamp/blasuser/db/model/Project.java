@@ -12,23 +12,35 @@ public class Project implements Serializable {
 	 */
 	private static final long serialVersionUID = -8213396978710850752L;
 
-	private String name;
-	private String detail;
-	private String subDate;
-	private String type;
-	private String orderDate;
-	private String path_to_prototype;
-	private Uri trackFile;
-	private String perso;
-	private String colors;
-	private int status;
-	private int quantity;
+	private String name = "";
+	private String detail= "";
+	private String subDate= "";
+	private String type= "";
+	private String orderDate= "";
+	private String path_to_prototype= "";
+	private Uri trackFile = null;
+	private String perso= "";
+	private String colors= "";
+	private int status = 0;
+	private int quantity = 0;
 	private Long remoteId;
 	private Long userId;
 
 	public Project() {}
 
+	public Project(Project p) {
+		this.name = p.getName();
+		this.subDate = p.getSubDate();
+		this.status = p.getStatus();
+		this.detail = p.getDetail();
+		this.type = p.getType();
+		this.orderDate = p.getOrderDate();
+		this.quantity = p.getQuantity();
+		this.remoteId = p.getRemoteId();
+		this.colors = p.getColors();
+		this.userId = p.getUserId();
 
+	}
 
 	public Project(String project_name, String sub_date, int project_status,
 			String detail, String type, String order_date, int nbr_cards, String perso) {
@@ -163,16 +175,17 @@ public class Project implements Serializable {
 		String s = getDetail().replace(", ", "\n");
 		return s;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Project [name=" + name + "\nsubDate=" + subDate + "\ndetail="
-				+ detail + "\ntype=" + type
-				+ "\norderDate=" + orderDate + "\nperso=" + perso + "\ncolors="
-				+ colors + "\nstatus=" + status + "\nquantity=" + quantity
-				+ "\nremoteId=" + remoteId + "]";
+		return "Project [name=" + name + ", detail=" + detail + ", subDate="
+				+ subDate + ", type=" + type + ", orderDate=" + orderDate
+				+ ", path_to_prototype=" + path_to_prototype + ", trackFile="
+				+ trackFile + ", perso=" + perso + ", colors=" + colors
+				+ ", status=" + status + ", quantity=" + quantity
+				+ ", remoteId=" + remoteId + ", userId=" + userId + "]";
 	}
-
+	
 	
 	
 }

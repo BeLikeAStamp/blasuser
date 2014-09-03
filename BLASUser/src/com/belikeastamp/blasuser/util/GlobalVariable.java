@@ -221,6 +221,7 @@ public class GlobalVariable extends Application {
 		colorName.put(R.color.smoky_slate,"smoky_slate");
 		colorName.put(R.color.soft_suede,"soft_suede");
 		colorName.put(R.color.very_vanilla,"very_vanilla");
+		colorName.put(R.color.bgcol,"empty");
 
 		reverseColorMap = new HashMap<String, Integer>();
 
@@ -278,7 +279,7 @@ public class GlobalVariable extends Application {
 		reverseColorMap.put("smoky_slate",R.color.smoky_slate);
 		reverseColorMap.put("soft_suede",R.color.soft_suede);
 		reverseColorMap.put("very_vanilla",R.color.very_vanilla);
-
+		reverseColorMap.put("empty",R.color.bgcol);
 	}
 	public String getUserEmail() {
 		return userEmail;

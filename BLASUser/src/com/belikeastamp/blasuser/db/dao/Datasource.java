@@ -48,6 +48,7 @@ public class Datasource {
 		values.put(DatabaseHandler.P_NBRCARDS, project.getQuantity());
 		values.put(DatabaseHandler.P_COLORS, project.getColors());
 		values.put(DatabaseHandler.P_REMOTEID, project.getRemoteId());
+		values.put(DatabaseHandler.P_UID, project.getUserId());
 		values.put(DatabaseHandler.P_PROTO, project.getPath_to_prototype());
 		if(project.getTrackFile() != null) values.put(DatabaseHandler.P_FILE, project.getTrackFile().toString());
 		
@@ -69,6 +70,7 @@ public class Datasource {
 				DatabaseHandler.P_COLORS,
 				DatabaseHandler.P_PROTO,
 				DatabaseHandler.P_FILE,
+				DatabaseHandler.P_UID,
 		}, DatabaseHandler.P_NAME + "=?",
 		new String[] { name }, null, null, null, null);
 		if (cursor != null)
@@ -165,7 +167,7 @@ public class Datasource {
 		project.setQuantity(cursor.getInt(6));
 		project.setRemoteId(cursor.getLong(8));
 		project.setColors(cursor.getString(7));
-
+		project.setUserId(Long.valueOf(cursor.getString(11)));
 		return project;
 	}
 	
@@ -190,6 +192,7 @@ public class Datasource {
 				DatabaseHandler.P_NBRCARDS,
 				DatabaseHandler.P_REMOTEID,
 				DatabaseHandler.P_COLORS,
+				DatabaseHandler.P_UID,
 		}, DatabaseHandler.P_NAME + "=?",
 		new String[] { name }, null, null, null, null);
 		

@@ -28,7 +28,7 @@ public class DownloadTutoTask extends MyAbstractAsyncTask {
 
 	@Override
 	protected Boolean doInBackground(Object... params) {
-		// TODO Auto-generated method stub
+		
 		Tutorial t = this.tuto;
 		final TutorialController c = new TutorialController();
 		InputStream input = null;

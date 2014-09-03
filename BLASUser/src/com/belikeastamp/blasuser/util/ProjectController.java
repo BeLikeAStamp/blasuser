@@ -122,7 +122,7 @@ public class ProjectController {
 	}
 	
 	private List<Project> JSON2Project(String json) {
-		// TODO Auto-generated method stub
+		
 		List<Project> projects = new ArrayList<Project>();
 
 		if (json != null) {
@@ -196,7 +196,7 @@ public class ProjectController {
 			conn.setDoOutput(true);
 
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("userid", ""+userId));
+			params.add(new BasicNameValuePair("userid", ""+p.getUserId()));
 			params.add(new BasicNameValuePair("name", p.getName()));
 			params.add(new BasicNameValuePair("subdate", p.getSubDate()));
 			params.add(new BasicNameValuePair("detail", p.getDetail()));
@@ -327,8 +327,8 @@ public class ProjectController {
 			result.append(URLEncoder.encode(pair.getName(), "UTF-8"));
 			result.append("=");
 			result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
+			
 		}
-
 		return result.toString();
 	}
 

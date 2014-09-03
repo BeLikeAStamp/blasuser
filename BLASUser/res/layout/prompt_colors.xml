@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <GridView
+        android:id="@+id/color_grid1"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/gridview_height"
+        android:background="#FAFAFA"
+        android:gravity="center_horizontal"
+        android:numColumns="10"
+        android:paddingBottom="10dp" >
+    </GridView>
+
+    <LinearLayout
+        android:id="@+id/color_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FAFAFA"
+        android:padding="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/mselected_color1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/selected_colors" />
+
+        <ImageView
+            android:id="@+id/mselected_color2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/selected_colors" />
+
+        <ImageView
+            android:id="@+id/mselected_color3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/selected_colors" />
+    </LinearLayout>
+
+</LinearLayout>

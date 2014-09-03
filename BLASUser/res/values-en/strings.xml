@@ -1,6 +1,130 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- A CHANGER !!! -->
+    <string name="contact_email">andronekomimi@gmail.com</string>
+    <string name="app_name_short">DWBC</string>
+    <string name="app_name">Don\'t Worry, Be Crafty!</string>
+    <string name="welcome">Welcome</string>
+    <string name="loading">Loading data &#8230;</string>
+    <string name="cxn_alert">Network informations</string>
+    <string name="no_connection">No connection to the network for the moment.\nPlease try again later</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+    <!-- Pre MAinActivity -->
+    <string name="alert_loading_data">A small error appears, please restart the application</string>
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>Home</item>
+        <item>New project</item>
+        <item>Submited projects</item>
+        <item>Saved projects</item>
+        <item>Tutos</item>
+        <item>Parties</item>
+        <item>Join me!</item>
+        <item>Blog</item>
+        <item>Update</item>
+    </string-array>
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <!-- NE PAS TRADUIRE -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_newproject</item>
+        <item>@drawable/ic_submittedproject</item>
+        <item>@drawable/ic_savedproject</item>
+        <item>@drawable/ic_tutorial</item>
+        <item>@drawable/ic_workshop</item>
+        <item>@drawable/ic_join</item>
+        <item>@drawable/ic_blog</item>
+        <item>@drawable/ic_actualiser</item>
+    </array>
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+    <!-- NE PAS TRADUIRE -->
+    <!-- Home View -->
+    <string name="btn_welcome">Home</string>
+    <string name="presentation1">Hi everyone !\nMy name is Rachel and I\'m really happy to welcome you on this brand new application.</string>
+    <!-- ARRAYS -->
+    <string-array name="status_arrays">
+        <item>Submited projects</item>
+        <item>Accepted projects</item>
+        <item>Rejected projects</item>
+        <item>Prototype in progress</item>
+        <item>Prototype waiting for validation</item>
+        <item>Prototype accepted</item>
+        <item>Prototype rejected</item>
+        <item>Work on going</item>
+        <item>Work completed</item>
+    </string-array>
+    <string-array name="status_print_arrays">
+        <item>Submited projects</item>
+        <item>Accepted projects</item>
+        <item>Prototype in progress</item>
+        <item>Prototype waiting for validation</item>
+        <item>Prototype accepted</item>
+        <item>Work on going</item>
+        <item>Work completed</item>
+    </string-array>
+    <string-array name="type_arrays">
+        <item>Card: Birthday</item>
+        <item>Card: Valentine\'s day</item>
+        <item>Card: Halloween</item>
+        <item>Card: Thanks</item>
+        <item>Card: Congratulations</item>
+        <item>Card: New Year\'s eve</item>
+        <item>Card: Father\'s day</item>
+        <item>Card: Mother\'s day</item>
+        <item>Card: Ephemeride</item>
+        <item>Card: Get well</item>
+        <item>Card: Wedding anniversary</item>
+        <item>Invitations:  Wedding</item>
+        <item>Invitations:  Birth</item>
+        <item>Invitations: Occasions</item>
+    </string-array>
+    <string-array name="occasion_arrays">
+        <item>Housewarming</item>
+        <item>Anniversary</item>
+        <item>Licence</item>
+        <item>Exam</item>
+        <item>Pregnancy</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="gender_arrays">
+        <item>Lady</item>
+        <item>Gent</item>
+        <item>Family</item>
+        <item>Group</item>
+    </string-array>
+    <string-array name="baby_arrays">
+        <item>Girl</item>
+        <item>Boy</item>
+    </string-array>
+    <string-array name="age_arrays">
+        <item>age</item>
+        <item>Age groupe</item>
+    </string-array>
+    <string-array name="expertise">
+        <item>Beginners</item>
+        <item>Fake beginners</item>
+        <item>Regular practice</item>
+        <item>Expert</item>
+    </string-array>
+    <!-- FORMULAIRE -->
+    <string name="project_explane">Hiiiiiiiiiii ! We need some details to define precisely your project : type of card, theme, colors, deadlines, personalization &#8230;</string>
+    <string name="project_name">Project\'s name</string>
+    <string name="project_type">Project\'s type</string>
+    <string name="event_date">Date</string>
+    <string name="nbr_years">Wedding anniversary</string>
+    <string name="birthday">Birthday</string>
+    <string name="people">Who or for who?</string>
+    <string name="person1">Person 1</string>
+    <string name="person2">Person 2</string>
+    <string name="to_put_on_card">Display on the card</string>
+    <string name="card_theme">Thematic</string>
+    <string name="card_style">Style</string>
+    <string name="project_order">Delivery</string>
     <string name="how_many_cards">How many cards</string>
     <string name="un">1</string>
     <string name="zero">0</string>
@@ -8,7 +132,7 @@
     <string name="continu">Continue</string>
     <string name="mission_impossible">Deeply sorry we only have 4 hands :(</string>
     <string name="infos_manquantes">Sorry but we need more details :)</string>
-    <string name="back_in_time">Sadly we don\'t go back in time &#8230; ;-)</string>
+    <string name="back_in_time">Sadly we don\'t go back in time... ;-)</string>
     <string name="zero_card">No card at all !?</string>
     <string name="anonymous_card">Anonymous card</string>
     <string name="personalized_card">Nominal card</string>
@@ -48,7 +172,8 @@
     <string name="kg">kg</string>
     <string name="address">Address</string>
     <string name="occaz">Occasion</string>
-    <string name="add_baby">Add a baby</string> <!-- Submission Dialog -->
+    <string name="add_baby">Add a baby</string>
+    <!-- Submission Dialog -->
     <string name="alert_check">Ultimate check !</string>
     <string name="alert_dialog_send">Submission</string>
     <string name="alert_dialog_rec">Save</string>
@@ -59,14 +184,19 @@
     <string name="reg_failed">Submission failed</string>
     <string name="reg_succed">Submission succeeded ! Let\'s GO !</string>
     <string name="email_subject_submission">[DWBeCreafty] Projects submission</string>
-    <string name="email_body_submission">Hi Rachel,\nAttach to this email the details of the project that I want to create. \nComplementary informations: %1$s \nCheers.</string> <!-- Saved Projects Details -->
+    <string name="email_body_submission">Hi Rachel,\nAttach to this email the details of the project that I want to create. \nComplementary informations: %1$s \nCheers.</string>
+    <!-- Saved Projects Details -->
     <string name="btn_modif">Modify</string>
     <string name="btn_submit">Submission</string>
     <string name="save_date">Backup date</string>
     <string name="btn_resume">Resume</string>
     <string name="reload_advice">If you\'ve just saved a projet, think about updating the app</string>
     <string name="btn_reload">Update</string>
-    <string name="btn_delete">Delete</string>
+    <string name="btn_delete">Supprimer</string>
+    <string name="modif_prj">Project modification</string>
+    <string name="modif_advice">If you want to modify the project name, the project type or the personal details, please delete the current project and create a new one</string>
+    <string name="see_details">Clic to see personal details</string>
+    
     <!-- Submit Projects Details -->
     <string name="prototype">Prototype</string>
     <string name="no_prototype">no prototype for the moment</string>
@@ -76,7 +206,8 @@
     <string name="email_subject_no_proto">[DWBeCreafty] Prototype review</string>
     <string name="email_body_no_proto">Hi Rachel,\nThank you very much for your work on this project.\nNevertheless I don\'t like that much this prototype. Complementary informations : %1$s \nCheers.</string>
     <string name="err_no_proto">"Tell me why this prototype doesn\'t suit you and how we can improve it"</string>
-    <string name="load_existing_project">Enter you email to load your projects</string> <!-- Workshops -->
+    <string name="load_existing_project">Enter you email to load your projects</string>
+    <!-- Workshops -->
     <string name="worksphop">Parties</string>
     <string name="theme">Theme :</string>
     <string name="town">City :</string>
@@ -91,7 +222,8 @@
     <string name="nbr_participants">Friends coming with you ?</string>
     <string name="inscription">Registration to the party \"%1$s\"</string>
     <string name="btn_cancel">Cancel</string>
-    <string name="err_missing_info">"Please fill this field"</string> <!-- Tutorials -->
+    <string name="err_missing_info">"Please fill this field"</string>
+    <!-- Tutorials -->
     <string name="tutorial">Tutorials</string>
     <string name="title">Title :</string>
     <string name="availability">Availability :</string>
@@ -99,7 +231,8 @@
     <string name="not_available">On demand</string>
     <string name="btn_get_tuto">Download</string>
     <string name="btn_demand">Ask</string>
-    <string name="demand_return">Thank ! Your request has been correctly taken into account. </string> <!-- Join Me ! -->
+    <string name="demand_return">Thank ! Your request has been correctly taken into account. </string>
+    <!-- Join Me ! -->
     <string name="stampingup">Stampin\'Up</string>
     <string name="stampingup1">Stampin\'Up exists for 25 years in United-states, and for 5 years in France and in Europe. Currently, more than 40,000 demonstrators from all 50 states and Puerto Rico, Canada, Australia, New Zealand, Germany, Austria, France, Netherlands, and the United Kingdom teach the art of rubber stamping and share their enthusiasm for rubber stamping, scrapbooking, and card making..</string>
     <string name="join_my_team">To join me in this great adventure</string>
@@ -108,16 +241,20 @@
     <string name="message">Message</string>
     <string name="btn_send">Send</string>
     <string name="messagebody_format">Hi Rachel \n\n %1$s\n\n %2$s (%3$s)</string>
-    <string name="empty_field">Please fill this field :-)</string> <!-- Blog access -->
-    <string name="blog">http://dontworrybecrafty.com/</string> <!-- Quitter l'appli -->
-    <string name="see_u_soon">Happy Crafting ! Bisous Bisous</string> <!-- Notification -->
+    <string name="empty_field">Please fill this field :-)</string>
+    <!-- Blog access -->
+    <string name="blog">http://dontworrybecrafty.com/</string>
+    <!-- Quitter l'appli -->
+    <string name="see_u_soon">Happy Crafting ! Bisous Bisous</string>
+    <!-- Notification -->
     <string name="notif">Great news ! Your %1$s is %2$s for the project %3$s !</string>
     <string name="notif_proj">project</string>
     <string name="notif_proto">prototype</string>
     <string name="notif_real">result</string>
     <string name="notif_accept">accepted</string>
     <string name="notif_inprogress">in progress</string>
-    <string name="notif_dispo">available</string> <!-- AsyncTask MAnagement -->
+    <string name="notif_dispo">available</string>
+    <!-- AsyncTask Management -->
     <string name="task_starting">Loading data</string>
     <string name="task_working">Wait please, I promise it worth it</string>
     <string name="task_cancelled">Cancel</string>

@@ -47,7 +47,7 @@ public class JoinMeFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				if(checkEntries()) {
 					sendContact(v);
 				}
@@ -61,7 +61,7 @@ public class JoinMeFragment extends Fragment {
 
 
 	private boolean checkEntries() {
-		// TODO Auto-generated method stub
+		
 		boolean everythin_good = true;
 		String msg = "";
 		int ret = 0;

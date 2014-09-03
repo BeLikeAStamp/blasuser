@@ -25,7 +25,7 @@ public class Request4RemoteDataTask extends MyAbstractAsyncTask {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Boolean doInBackground(Object... params) {
-		// TODO Auto-generated method stub
+		
 		ProjectController pc = new ProjectController();
 		WorkshopController wc = new WorkshopController();
 		TutorialController tc = new TutorialController();

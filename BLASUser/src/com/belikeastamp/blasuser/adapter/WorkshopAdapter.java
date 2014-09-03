@@ -48,19 +48,19 @@ public class WorkshopAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
+		
 		return list.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
@@ -75,7 +75,7 @@ public class WorkshopAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
+		
 		View rowView = convertView;
 		Holder holder = new Holder();
 
@@ -116,7 +116,7 @@ public class WorkshopAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				displayDialogWindow(w);
 			}
 		});
@@ -156,7 +156,7 @@ public class WorkshopAdapter extends BaseAdapter {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
+				
 				inscription.setExpertise((String)arg0.getSelectedItem());
 			}
 
@@ -167,7 +167,7 @@ public class WorkshopAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				if(checkEntries()) {
 					inscription.setWorkshopId(w.getId());
 					inscription.setName(name.getText().toString());
@@ -186,7 +186,7 @@ public class WorkshopAdapter extends BaseAdapter {
 			}
 
 			private boolean checkEntries() {
-				// TODO Auto-generated method stub
+				
 				boolean everything_ok = true;
 
 				if (name.getText().length() == 0) {

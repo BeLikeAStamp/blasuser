@@ -30,7 +30,7 @@ public class Request4PrototypeTask extends MyAbstractAsyncTask {
 
 	@Override
 	protected Boolean doInBackground(Object... params) {
-		// TODO Auto-generated method stub
+		
 		Project p = this.project;
 		final ProjectController c = new ProjectController();
 		

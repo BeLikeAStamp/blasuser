@@ -3,9 +3,11 @@ package com.belikeastamp.blasuser.activities;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -17,7 +19,7 @@ public class SavedProjectsActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
-
+	private static final int SEND_EMAIL = 0;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,6 +75,25 @@ public class SavedProjectsActivity extends Activity {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		 
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (requestCode) {
+
+		case SEND_EMAIL: 
+			Log.d("SEND_EMAIL", "ben alors ?");
+			Intent backhome = new Intent(SavedProjectsActivity.this, MainActivity.class);
+			startActivity(backhome);
+
+			break; 
+
+		default: 
+			break; 
+		} 
 	}
 }
 

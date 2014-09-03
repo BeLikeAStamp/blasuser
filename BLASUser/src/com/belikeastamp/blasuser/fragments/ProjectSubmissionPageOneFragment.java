@@ -132,20 +132,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.setProjectName(project_name.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -310,20 +310,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.name", name1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -332,20 +332,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.age", age1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -413,20 +413,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("2.name", name2.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -435,20 +435,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("2.age", age2.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -457,20 +457,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.name", name1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -479,20 +479,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.age", age1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -538,7 +538,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 					@Override
 					public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-						// TODO Auto-generated method stub
+						
 						final Calendar c = Calendar.getInstance();
 						c.set(Calendar.HOUR_OF_DAY, hourOfDay);
 						c.set(Calendar.MINUTE, minute);
@@ -556,20 +556,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("address", address.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -624,20 +624,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.name", name1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -646,20 +646,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.age", age1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -669,20 +669,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("occasion", other_occaz.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -745,20 +745,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("2.name", name2.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -767,20 +767,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("2.age", age2.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -789,20 +789,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.name", name1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -811,20 +811,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.age", age1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -833,20 +833,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("nbr_years", nbr_years.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -854,7 +854,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	}
 
 	private void prepareLayout6() {
-		// TODO Auto-generated method stub
+		
 		need_2perso = false;
 		myLayout = (LinearLayout) getView().findViewById(R.id.layout6);
 		gender1 = (Spinner) myLayout.findViewById(R.id.gender1);
@@ -907,7 +907,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				perso2.setVisibility(View.VISIBLE);
 				add_baby.setVisibility(View.GONE);
 				globalVariable.addNewDetails("2.age", "0");
@@ -929,20 +929,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.name", name1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -963,20 +963,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("2.name", name2.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -985,20 +985,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.height", taille1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -1008,20 +1008,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("2.height", taille2.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -1030,20 +1030,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.weigth", poids1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -1052,20 +1052,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("2.weigth", poids2.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -1074,7 +1074,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 	}
 
 	private void prepareLayout7() {
-		// TODO Auto-generated method stub
+		
 		need_2perso = false;
 		myLayout = (LinearLayout) getView().findViewById(R.id.layout7);
 		gender1 = (Spinner) myLayout.findViewById(R.id.gender);
@@ -1108,20 +1108,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.name", name1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -1130,20 +1130,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("1.age", age1.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -1167,20 +1167,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("occasion", other_occaz.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -1224,7 +1224,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 					@Override
 					public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-						// TODO Auto-generated method stub
+						
 						final Calendar c = Calendar.getInstance();
 						c.set(Calendar.HOUR_OF_DAY, hourOfDay);
 						c.set(Calendar.MINUTE, minute);
@@ -1242,20 +1242,20 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.addNewDetails("address", address.getText().toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -1536,7 +1536,7 @@ public class ProjectSubmissionPageOneFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
+			
 			ImageView i = (ImageView) v;
 			i.setBackgroundResource(android.R.color.transparent);
 			switch(i.getId()) {

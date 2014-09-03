@@ -112,7 +112,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				selectImage();
 			}
 		});
@@ -130,7 +130,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				
 				if(fileUri != null) globalVariable.setTrackFile(fileUri);
 					
@@ -341,8 +341,6 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 		boolean everythin_good = true;
 		String msg = "";
 
-		Log.i("checkEntries", "card num = "+everythin_good);
-
 		if(Integer.valueOf(card_num.getText().toString()) == 0)
 		{
 			everythin_good = false;
@@ -411,13 +409,13 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.setUserEmail((String)arg0.getSelectedItem());
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
+				
 			}
 
 		});
@@ -425,14 +423,14 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 
 
 	private Boolean isRegistred() {
-		// TODO Auto-generated method stub
+		
 		id = getActivity().getSharedPreferences("BLAS", getActivity().MODE_PRIVATE).getLong("user_id", Long.valueOf(-1));
 		Log.d("Submission", "USER ID "+id);
 		return (!(id.equals(Long.valueOf(-1))));
 	}
 
 	private void registration(String email) {
-		// TODO Auto-generated method stub
+		
 		Log.d("Submission","go to AddUserTask");
 		User user =  new User(email);
 		try {
@@ -440,6 +438,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 			if(new AddUserTask().execute(user).get())
 			{
 				Toast.makeText(getActivity().getApplicationContext(), R.string.reg_succed, Toast.LENGTH_SHORT).show();
+				globalVariable.setUserId(id);
 				getActivity().getSharedPreferences("BLAS", getActivity().MODE_PRIVATE).edit().putLong("user_id", id).commit();
 			}
 			else
@@ -462,7 +461,7 @@ public class ProjectSubmissionPageTwoFragment extends Fragment {
 
 		@Override
 		protected Boolean doInBackground(User... params) {
-			// TODO Auto-generated method stub
+			
 			Log.d("Submission","AddUserTask doInBackground");
 
 			User u = params[0];

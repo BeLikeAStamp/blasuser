@@ -199,12 +199,13 @@
     <string name="btn_modif">Modifier</string>
     <string name="btn_submit">Soumission</string>
     <string name="save_date">Date de sauvegarde</string>
+    <string name="order_date">Date de livraison</string>
     <string name="btn_resume">Reprendre</string>
     <string name="reload_advice">Si vous venez de sauvegarder un projet, penser à actualiser l\'application</string>
     <string name="btn_reload">Actualiser</string>
     <string name="btn_delete">Supprimer</string>
     <string name="modif_prj">Modification du projet</string> <!-- TRADUIRE -->
-    <string name="modif_advice">Pour modifier le nom du projet, son type ou les détails personnalisés, merci du supprimer le projet et le recréer</string> <!-- TRADUIRE -->
+    <string name="modif_advice">Pour modifier le nom du projet, son type ou les détails personnalisés, merci de supprimer le projet et le recréer</string> <!-- TRADUIRE -->
     <string name="see_details">Cliquer pour voir les données personnalisées</string>
     
     <!-- Submit Projects Details -->

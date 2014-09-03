@@ -34,7 +34,7 @@ public class MessageReceiver extends BroadcastReceiver {
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		// TODO Auto-generated method stub
+		
 		setSparseArrays(context);
 		
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,

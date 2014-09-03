@@ -107,7 +107,7 @@ public class PreMainActivity extends Activity implements OnTaskCompleteListener 
 
 	@Override
 	public void onTaskComplete(MyAbstractAsyncTask task) {
-		// TODO Auto-generated method stub
+		
 		if (task.isCancelled()) {
 			// Report about cancel
 			Toast.makeText(getApplicationContext(),  getResources().getString(R.string.task_cancelled), Toast.LENGTH_LONG)

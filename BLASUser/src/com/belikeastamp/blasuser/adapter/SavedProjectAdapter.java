@@ -39,19 +39,19 @@ public class SavedProjectAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
+		
 		return list.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
@@ -66,7 +66,7 @@ public class SavedProjectAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
+		
 		View rowView = convertView;
 		Holder holder = new Holder();
 
@@ -102,7 +102,7 @@ public class SavedProjectAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				deleteProject();
 				Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.demand_return), Toast.LENGTH_SHORT).show();
 			}
@@ -112,7 +112,7 @@ public class SavedProjectAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				//Toast.makeText(activity.getApplicationContext(), "Désolé cette fonctionnalité n'est pas encore disponible.", Toast.LENGTH_SHORT).show();;
 				displayDialogWindow();
 			}

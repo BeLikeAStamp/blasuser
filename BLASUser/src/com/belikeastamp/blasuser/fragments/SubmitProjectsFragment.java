@@ -90,13 +90,13 @@ public class SubmitProjectsFragment extends ListFragment {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				// TODO Auto-generated method stub
+				
 				globalVariable.setUserEmail((String)arg0.getSelectedItem());
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
+				
 			}
 
 		});
@@ -115,14 +115,14 @@ public class SubmitProjectsFragment extends ListFragment {
 	}
 	
 	private Boolean isRegistred() {
-		// TODO Auto-generated method stub
+		
 		id = getActivity().getSharedPreferences("BLAS", getActivity().MODE_PRIVATE).getLong("user_id", Long.valueOf(-1));
 		Log.d("Submission", "USER ID "+id);
 		return (!(id.equals(Long.valueOf(-1))));
 	}
 	
 	private void registration(String email) {
-		// TODO Auto-generated method stub
+		
 		Log.d("Submission","go to AddUserTask");
 		User user =  new User(email);
 		try {
@@ -152,7 +152,7 @@ public class SubmitProjectsFragment extends ListFragment {
 
 		@Override
 		protected Boolean doInBackground(User... params) {
-			// TODO Auto-generated method stub
+			
 			Log.d("Submission","AddUserTask doInBackground");
 
 			User u = params[0];

@@ -34,7 +34,7 @@ public class ColorPickerAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

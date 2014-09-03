@@ -1,12 +1,8 @@
 package com.belikeastamp.blasuser.activities;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -28,10 +24,8 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -217,7 +211,7 @@ public class ProjectSubmissionPageTwo extends Activity implements OnTaskComplete
 					data.getProjectType(), data.getOrderDate(),
 					Integer.valueOf(data.getNumberOfCards()),
 					(data.getPerso() == null ? "anonymous" : data.getPerso().toString()));
-
+			p.setUserId(data.getUserId());
 			p.setColors(colorsBuffer.toString());
 			if(data.getTrackFile() != null) p.setTrackFile(data.getTrackFile());
 
@@ -356,7 +350,7 @@ public class ProjectSubmissionPageTwo extends Activity implements OnTaskComplete
 
 					@Override
 					public void transferred(long num) {
-						// TODO Auto-generated method stub
+						
 						publishProgress((int) ((num / (float) totalSize) * 100));
 					}
 				});
@@ -403,7 +397,7 @@ public class ProjectSubmissionPageTwo extends Activity implements OnTaskComplete
 
 	@Override 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub 
+		 
 		super.onActivityResult(requestCode, resultCode, data);
 
 		switch (requestCode) {
@@ -422,7 +416,7 @@ public class ProjectSubmissionPageTwo extends Activity implements OnTaskComplete
 
 	@Override
 	public void onTaskComplete(MyAbstractAsyncTask task) {
-		// TODO Auto-generated method stub
+		
 		if (task.isCancelled()) {
 			// Report about cancel
 			Toast.makeText(getApplicationContext(),  getResources().getString(R.string.task_cancelled), Toast.LENGTH_LONG)
