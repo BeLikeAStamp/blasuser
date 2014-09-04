@@ -48,9 +48,9 @@
     <string name="presentation1">Hi everyone !\nMy name is Rachel and I\'m really happy to welcome you on this brand new application.</string>
     <!-- ARRAYS -->
     <string-array name="status_arrays">
-        <item>Submited projects</item>
-        <item>Accepted projects</item>
-        <item>Rejected projects</item>
+        <item>Submited project</item>
+        <item>Accepted project</item>
+        <item>Rejected project</item>
         <item>Prototype in progress</item>
         <item>Prototype waiting for validation</item>
         <item>Prototype accepted</item>
@@ -250,7 +250,7 @@
     <string name="notif">Great news ! Your %1$s is %2$s for the project %3$s !</string>
     <string name="notif_proj">project</string>
     <string name="notif_proto">prototype</string>
-    <string name="notif_real">result</string>
+    <string name="notif_real">realization</string>
     <string name="notif_accept">accepted</string>
     <string name="notif_inprogress">in progress</string>
     <string name="notif_dispo">available</string>
