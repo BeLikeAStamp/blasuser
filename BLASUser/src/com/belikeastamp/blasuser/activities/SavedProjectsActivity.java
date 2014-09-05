@@ -19,7 +19,8 @@ public class SavedProjectsActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
-	private static final int SEND_EMAIL = 0;
+	public static final int SEND_EMAIL = 0;
+	public static final int RELOAD = 1;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,9 +89,7 @@ public class SavedProjectsActivity extends Activity {
 			Log.d("SEND_EMAIL", "ben alors ?");
 			Intent backhome = new Intent(SavedProjectsActivity.this, MainActivity.class);
 			startActivity(backhome);
-
 			break; 
-
 		default: 
 			break; 
 		} 

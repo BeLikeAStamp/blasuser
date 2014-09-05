@@ -8,9 +8,7 @@ import java.util.concurrent.ExecutionException;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ListFragment;
-import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
@@ -22,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -34,7 +31,6 @@ import com.belikeastamp.blasuser.adapter.SubmitProjectAdapter;
 import com.belikeastamp.blasuser.db.model.User;
 import com.belikeastamp.blasuser.util.GlobalVariable;
 import com.belikeastamp.blasuser.util.UserController;
-import com.belikeastamp.blasuser.util.asynctask.AsyncTaskManager;
 
 
 public class SubmitProjectsFragment extends ListFragment {

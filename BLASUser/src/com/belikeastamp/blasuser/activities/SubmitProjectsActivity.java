@@ -3,9 +3,11 @@ package com.belikeastamp.blasuser.activities;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -79,5 +81,26 @@ public class SubmitProjectsActivity extends Activity {
 		}
 		return false;
 	}
+	
+	@Override 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		 
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.d("XXX", "ICI");
+		switch (requestCode) {
 
+		case MainActivity.RELOAD: 
+			Log.d("RELOAD", "ben alors ?");
+			Intent goodIntent = new Intent(SubmitProjectsActivity.this, MainActivity.class);
+			startActivityForResult(goodIntent, MainActivity.RELOAD);
+			break; 
+		case MainActivity.SEND_MAIL: 
+			Log.d("SEND_EMAIL", "ben alors ?");
+			Intent backhome = new Intent(SubmitProjectsActivity.this, MainActivity.class);
+			startActivity(backhome);
+			break; 	
+		default: 
+			break; 
+		} 
+	}
 }

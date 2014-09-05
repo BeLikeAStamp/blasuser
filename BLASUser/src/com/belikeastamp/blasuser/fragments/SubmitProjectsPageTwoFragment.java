@@ -40,13 +40,12 @@ import com.belikeastamp.blasuser.util.asynctask.Request4PrototypeTask;
 
 public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCompleteListener {
 
-	private static final int PROTO = 0;
+	private static final int FRAGMENTID = 2;
 	private TextView projectName, type, status, progress;
 	private EditText message;
 	private Button protolink, ok_proto, no_proto, send;
 	private LinearLayout valid_proto, send_msg;
 	private ImageView image;
-	private String proto_path = null;
 	private AsyncTaskManager mAsyncTaskManager;
 	private UpdateStatusTask updatetask;
 	private int selected_status;
@@ -104,6 +103,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 				Request4PrototypeTask request = new Request4PrototypeTask(getResources());
 				request.setProject(project);
 				request.setActivity(getActivity());
+				request.setImage(image);
 				mAsyncTaskManager.setupTask(request);
 				valid_proto.setVisibility(View.VISIBLE);
 
@@ -134,8 +134,10 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 				selected_status = DatabaseHandler.PROTO_ACCEPTED;
 				updatetask.execute(project);
 				
+				Toast.makeText(getActivity().getApplicationContext(), getActivity().getResources().getString(R.string.demand_return), Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(getActivity(), MainActivity.class);
-				getActivity().startActivity(i);
+				i.putExtra("reload", FRAGMENTID);
+				startActivityForResult(i, MainActivity.RELOAD);
 			}		
 		});
 
@@ -145,9 +147,6 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 			public void onClick(View v) {
 				
 				sendEmail(project);
-				Log.d("SubmitProjectDetails", "NO PROTO -  SEND MESSAGE");
-				Intent i = new Intent(getActivity(), MainActivity.class);
-				getActivity().startActivity(i);
 			}		
 		});
 
@@ -239,7 +238,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
 			Log.d("FILE PATH", "=>"+pj);
 			emailIntent.putExtra(android.content.Intent.EXTRA_STREAM, Uri.parse("file://"+pj));
-			startActivity(emailIntent);
+			startActivityForResult(emailIntent, MainActivity.SEND_MAIL);
 
 		}
 	}
@@ -279,34 +278,7 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 					Toast.LENGTH_LONG).show();
 		}
 	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-
-		Log.d("RESULT CODE", ""+resultCode);
-
-		if (resultCode == Activity.RESULT_OK) {
-
-			if (requestCode == PROTO) {
-				Uri selectedImageUri = data.getData();
-				String tempPath = getPath(selectedImageUri, getActivity());
-				Log.d("PROTO_PATH", "=> "+proto_path);
-				image.setVisibility(View.VISIBLE);
-				Bitmap bm;
-				BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
-				bm = BitmapFactory.decodeFile(tempPath, btmapOptions);
-				int width = 600;
-				int height = 600;
-				LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
-				parms.gravity = Gravity.CENTER;
-				image.setLayoutParams(parms);
-				image.setImageBitmap(bm);
-
-			}
-		}
-	}
-
+	
 	public String getPath(Uri uri, Activity activity) {
 		String[] projection = { MediaColumns.DATA };
 		Cursor cursor =  activity.getContentResolver().query(uri, projection, null, null, null);
@@ -314,4 +286,5 @@ public class SubmitProjectsPageTwoFragment extends Fragment implements OnTaskCom
 		cursor.moveToFirst();
 		return cursor.getString(column_index);
 	}
+	
 }

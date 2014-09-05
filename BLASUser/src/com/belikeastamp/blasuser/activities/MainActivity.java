@@ -40,14 +40,15 @@ import com.belikeastamp.blasuser.util.asynctask.OnTaskCompleteListener;
 import com.belikeastamp.blasuser.util.asynctask.Request4RemoteDataTask;
 
 public class MainActivity extends Activity implements OnTaskCompleteListener {
-
+	public static final int RELOAD = 1;
+	public static final int SEND_MAIL = 2;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private GlobalVariable globalVariable;
 	private AsyncTaskManager mAsyncTaskManager;
 	private Datasource datasource;
-
+	
 	// nav drawer title
 	private CharSequence mDrawerTitle;
 
@@ -66,6 +67,7 @@ public class MainActivity extends Activity implements OnTaskCompleteListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		globalVariable = (GlobalVariable) getApplicationContext();
+		
 		mAsyncTaskManager = new AsyncTaskManager(this, this);
 
 		mTitle = mDrawerTitle = getTitle();
@@ -157,10 +159,11 @@ public class MainActivity extends Activity implements OnTaskCompleteListener {
 				invalidateOptionsMenu();
 			}
 		};
-		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
+		mDrawerLayout.setDrawerListener(mDrawerToggle);		
+		
 		if (savedInstanceState == null) {
 			// on first time display view for first nav item
+			Log.d("WHERE AM I", "savedInstanceState == null");
 			displayView(0);
 		}
 	}
@@ -331,4 +334,22 @@ public class MainActivity extends Activity implements OnTaskCompleteListener {
 		return true;
 	}
 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data); 
+        System.out.println("REQUEST CODE:" + requestCode);
+        switch (requestCode) {
+        case RELOAD : 
+            if (resultCode == RESULT_OK) {
+            	Log.d("WHERE AM I", "RELOAD RESULT_OK");
+            	int toOpen = getIntent().getExtras().getInt("reload",0);
+				displayView(toOpen);
+            } 
+            break; 
+        default: 
+            break; 
+        } 
+    } 
+	
+	
+	
 }

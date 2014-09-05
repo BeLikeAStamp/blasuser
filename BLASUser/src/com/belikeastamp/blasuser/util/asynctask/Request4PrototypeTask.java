@@ -9,9 +9,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.belikeastamp.blasuser.db.model.Project;
 import com.belikeastamp.blasuser.util.ProjectController;
@@ -21,6 +27,8 @@ public class Request4PrototypeTask extends MyAbstractAsyncTask {
 	private static final int PROTO = 0;
 	private Project project = null;
 	private String filepath = null;
+	private ImageView image = null;
+	
 	Activity activity;
 	
 	public Request4PrototypeTask(Resources resources) {
@@ -69,7 +77,8 @@ public class Request4PrototypeTask extends MyAbstractAsyncTask {
 	@Override
 	protected void onPostExecute(Boolean result) {
 		super.onPostExecute(result);
-		showPrototype(filepath);
+		//showPrototype(filepath);
+		updateImage(filepath);
 	}
 	
 	protected void showPrototype(String filepath){
@@ -87,8 +96,30 @@ public class Request4PrototypeTask extends MyAbstractAsyncTask {
 
 	}
 	
+	protected void updateImage(String path) {
+	
+		image.setVisibility(View.VISIBLE);
+		Bitmap bm;
+		BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
+		bm = BitmapFactory.decodeFile(path, btmapOptions);
+		int width = 600;
+		int height = 600;
+		LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
+		parms.gravity = Gravity.CENTER;
+		image.setLayoutParams(parms);
+		image.setImageBitmap(bm);
+
+	}
 
 	public void setActivity(Activity a) {
 		this.activity = a;
+	}
+
+	public ImageView getImage() {
+		return image;
+	}
+
+	public void setImage(ImageView image) {
+		this.image = image;
 	}
 }
